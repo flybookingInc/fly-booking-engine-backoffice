@@ -57,60 +57,42 @@ export const constantRouterMap: AppRouteRecordRaw[] = [
 
 export const asyncRouterMap: AppRouteRecordRaw[] = [
   {
-    path: '/level',
+    path: '/settings',
     component: Layout,
-    redirect: '/level/menu1/menu1-1/menu1-1-1',
-    name: 'Level',
+    redirect: '/settings/properties',
+    name: 'Settings',
     meta: {
-      title: t('router.level'),
-      icon: 'carbon:skill-level-advanced'
+      title: t('router.settings'),
+      icon: 'ant-design:dashboard-filled',
+      alwaysShow: true
     },
     children: [
       {
-        path: 'menu1',
-        name: 'Menu1',
-        component: getParentLayout(),
-        redirect: '/level/menu1/menu1-1/menu1-1-1',
+        path: 'properties',
+        component: () => import('@/views/Settings/Properties.vue'),
+        name: 'Properties',
         meta: {
-          title: t('router.menu1')
-        },
-        children: [
-          {
-            path: 'menu1-1',
-            name: 'Menu11',
-            component: getParentLayout(),
-            redirect: '/level/menu1/menu1-1/menu1-1-1',
-            meta: {
-              title: t('router.menu11'),
-              alwaysShow: true
-            },
-            children: [
-              {
-                path: 'menu1-1-1',
-                name: 'Menu111',
-                component: () => import('@/views/Level/Menu111.vue'),
-                meta: {
-                  title: t('router.menu111')
-                }
-              }
-            ]
-          },
-          {
-            path: 'menu1-2',
-            name: 'Menu12',
-            component: () => import('@/views/Level/Menu12.vue'),
-            meta: {
-              title: t('router.menu12')
-            }
-          }
-        ]
+          title: t('router.views.properties.pageTitle'),
+          noCache: true,
+          affix: true
+        }
       },
       {
-        path: 'menu2',
-        name: 'Menu2',
-        component: () => import('@/views/Level/Menu2.vue'),
+        path: 'users',
+        component: () => import('@/views/Settings/Users.vue'),
+        name: 'Users',
         meta: {
-          title: t('router.menu2')
+          title: t('router.views.users.pageTitle'),
+          noCache: false
+        }
+      },
+      {
+        path: 'roles',
+        component: () => import('@/views/Settings/Roles.vue'),
+        name: 'Roles',
+        meta: {
+          title: t('router.views.roles.pageTitle'),
+          noCache: false
         }
       }
     ]

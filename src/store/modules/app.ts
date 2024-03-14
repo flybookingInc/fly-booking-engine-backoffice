@@ -170,6 +170,9 @@ export const useAppStore = defineStore('app', {
     },
     getFooter(): boolean {
       return this.footer
+    },
+    getAppTitle(): string {
+      return this.title
     }
   },
   actions: {

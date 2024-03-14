@@ -9,11 +9,12 @@ import { useAppStore } from '@/store/modules/app'
 import { usePermissionStore } from '@/store/modules/permission'
 import { useRouter } from 'vue-router'
 import type { RouteLocationNormalizedLoaded, RouteRecordRaw } from 'vue-router'
-import { UserType } from '@/api/login/types'
+import { UserLoginType, UserType } from '@/api/login/types'
 import { useValidator } from '@/hooks/web/useValidator'
 import { Icon } from '@/components/Icon'
 import { useUserStore } from '@/store/modules/user'
 import { BaseButton } from '@/components/Button'
+import { getCurrentUser } from '@/utils/firebase'
 
 const { required } = useValidator()
 
@@ -51,19 +52,17 @@ const schema = reactive<FormSchema[]>([
   {
     field: 'username',
     label: t('login.username'),
-    // value: 'admin',
     component: 'Input',
     colProps: {
       span: 24
     },
     componentProps: {
-      placeholder: 'admin or test'
+      placeholder: ''
     }
   },
   {
     field: 'password',
     label: t('login.password'),
-    // value: 'admin',
     component: 'InputPassword',
     colProps: {
       span: 24
@@ -72,7 +71,7 @@ const schema = reactive<FormSchema[]>([
       style: {
         width: '100%'
       },
-      placeholder: 'admin or test'
+      placeholder: ''
     }
   },
   {
@@ -226,11 +225,11 @@ const signIn = async () => {
   await formRef?.validate(async (isValid) => {
     if (isValid) {
       loading.value = true
-      const formData = await getFormData<UserType>()
+      const formData = await getFormData<UserLoginType>()
 
       try {
         const res = await loginApi(formData)
-
+        await getCurrentUser() // wait until firebase login is done
         if (res) {
           // 是否记住我
           if (unref(remember)) {
@@ -242,7 +241,6 @@ const signIn = async () => {
             userStore.setLoginInfo(undefined)
           }
           userStore.setRememberMe(unref(remember))
-          userStore.setUserInfo(res.data)
           // 是否使用动态路由
           if (appStore.getDynamicRouter) {
             getRole()
@@ -270,8 +268,8 @@ const getRole = async () => {
   }
   const res =
     appStore.getDynamicRouter && appStore.getServerDynamicRouter
-      ? await getAdminRoleApi(params)
-      : await getTestRoleApi(params)
+      ? await getAdminRoleApi(params) // 根據角色，返回動態後台路由列表
+      : await getTestRoleApi(params) // 返回固定的路由列表
   if (res) {
     const routers = res.data || []
     userStore.setRoleRouters(routers)

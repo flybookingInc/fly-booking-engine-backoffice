@@ -1,64 +1,52 @@
 import { MockMethod } from 'vite-plugin-mock'
 import { SUCCESS_CODE } from '@/constants'
+import { Layout } from '@/utils/routerHelper'
+import { useI18n } from '@/hooks/web/useI18n'
+// import PropertiesVue from '@/views/Settings/Properties.vue'
+// import Users from '@/views/Settings/Users.vue'
+// import Roles from '@/views/Settings/Roles.vue'
 
+const { t } = useI18n()
 const timeout = 1000
 
 const adminList = [
   {
-    path: '/level',
-    component: '#',
-    redirect: '/level/menu1/menu1-1/menu1-1-1',
-    name: 'Level',
+    path: '/settings',
+    component: Layout,
+    redirect: '/settings/properties',
+    name: 'Settings',
     meta: {
-      title: 'router.level',
-      icon: 'carbon:skill-level-advanced'
+      title: t('router.settings'),
+      icon: 'ant-design:dashboard-filled',
+      alwaysShow: true
     },
     children: [
       {
-        path: 'menu1',
-        name: 'Menu1',
-        component: '##',
-        redirect: '/level/menu1/menu1-1/menu1-1-1',
+        path: 'properties',
+        component: 'Views/Settings/Properties',
+        name: 'Properties',
         meta: {
-          title: 'router.menu1'
-        },
-        children: [
-          {
-            path: 'menu1-1',
-            name: 'Menu11',
-            component: '##',
-            redirect: '/level/menu1/menu1-1/menu1-1-1',
-            meta: {
-              title: 'router.menu11',
-              alwaysShow: true
-            },
-            children: [
-              {
-                path: 'menu1-1-1',
-                name: 'Menu111',
-                component: 'views/Level/Menu111',
-                meta: {
-                  title: 'router.menu111'
-                }
-              }
-            ]
-          },
-          {
-            path: 'menu1-2',
-            name: 'Menu12',
-            component: 'views/Level/Menu12',
-            meta: {
-              title: 'router.menu12'
-            }
-          }
-        ]
+          title: t('router.views.properties.pageTitle'),
+          noCache: true,
+          affix: true
+        }
       },
       {
-        path: 'menu2',
-        name: 'Menu2Demo',
-        component: 'views/Level/Menu2',
+        path: 'users',
+        component: 'Views/Settings/Users',
+        name: 'Users',
         meta: {
-          title: 'router.menu2'
+          title: t('router.views.users.pageTitle'),
+          noCache: false
+        }
+      },
+      {
+        path: 'roles',
+        component: 'Views/Settings/Roles',
+        name: 'Roles',
+        meta: {
+          title: t('router.views.roles.pageTitle'),
+          noCache: false
         }
       }
     ]
@@ -66,12 +54,10 @@ const adminList = [
 ]
 
 const testList: string[] = [
-  '/level',
-  '/level/menu1',
-  '/level/menu1/menu1-1',
-  '/level/menu1/menu1-1/menu1-1-1',
-  '/level/menu1/menu1-2',
-  '/level/menu2'
+  '/settings',
+  '/settings/properties',
+  '/settings/users',
+  '/settings/roles'
 ]
 
 export default [

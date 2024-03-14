@@ -1,3 +1,5 @@
+import { RoleEnum, AppRoleEnum } from '@/enums/roleEnum'
+
 export type UserLoginType = {
   username: string
   password: string
@@ -5,8 +7,18 @@ export type UserLoginType = {
 
 export type UserType = {
   username: string
-  password: string
-  role: string
-  roleId: string
-  permissions: string | string[]
+  properties: propertyMetaType[]
+}
+
+export type propertyMetaType = {
+  GroupId?: string
+  propertyId: string
+  roles: RoleEnum[]
+  permissions: string[]
+}
+
+export type AppMetaType = {
+  appId: string
+  roles: AppRoleEnum[]
+  permissions: string[]
 }

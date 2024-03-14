@@ -1,16 +1,28 @@
 import request from '@/axios'
-import type { UserType } from './types'
+import { UserCredential, getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth'
+import { UserLoginType } from './types'
 
 interface RoleParams {
   roleName: string
 }
 
-export const loginApi = (data: UserType): Promise<IResponse<UserType>> => {
-  return request.post({ url: '/mock/user/login', data })
+export const loginApi = (data: UserLoginType): Promise<UserCredential> => {
+  // return request.post({ url: '/mock/user/login', data })
+  try {
+    return signInWithEmailAndPassword(getAuth(), data.username, data.password)
+    // const token = await UserCredential.user.getIdToken()
+  } catch (error) {
+    return Promise.reject(error)
+  }
 }
 
-export const loginOutApi = (): Promise<IResponse> => {
-  return request.get({ url: '/mock/user/loginOut' })
+export const loginOutApi = (): Promise<void> => {
+  // return request.get({ url: '/mock/user/loginOut' })
+  try {
+    return signOut(getAuth())
+  } catch (error) {
+    return Promise.reject(error)
+  }
 }
 
 export const getAdminRoleApi = (

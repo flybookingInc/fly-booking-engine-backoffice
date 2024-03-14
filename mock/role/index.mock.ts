@@ -2,6 +2,7 @@ import { MockMethod } from 'vite-plugin-mock'
 import { SUCCESS_CODE } from '@/constants'
 import { Layout } from '@/utils/routerHelper'
 import { useI18n } from '@/hooks/web/useI18n'
+import { RoleEnum } from '@/enums/roleEnum'
 // import PropertiesVue from '@/views/Settings/Properties.vue'
 // import Users from '@/views/Settings/Users.vue'
 // import Roles from '@/views/Settings/Roles.vue'
@@ -68,9 +69,10 @@ export default [
     timeout,
     response: ({ query }) => {
       const { roleName } = query
+      console.log('roleName=', roleName)
       return {
         code: SUCCESS_CODE,
-        data: roleName === 'admin' ? adminList : testList
+        data: roleName === RoleEnum.SUPERADMIN || roleName === RoleEnum.ADMIN ? adminList : testList
       }
     }
   }

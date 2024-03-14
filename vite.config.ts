@@ -34,7 +34,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     plugins: [
       Vue({
         script: {
-          // 开启defineModel
+          // 開啓defineModel
           defineModel: true
         }
       }),
@@ -59,7 +59,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         : undefined,
       EslintPlugin({
         cache: false,
-        include: ['src/**/*.vue', 'src/**/*.ts', 'src/**/*.tsx'] // 检查的文件
+        include: ['src/**/*.vue', 'src/**/*.ts', 'src/**/*.tsx'] // 檢查的文件
       }),
       VueI18nPlugin({
         runtimeOnly: true,
@@ -78,6 +78,8 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
             mockPath: 'mock',
             localEnabled: !isBuild,
             prodEnabled: isBuild,
+            supportTs: true, // 打開後，可以讀取 ts 文件模塊。 請注意，打開後將無法監視.js 文件。
+            watchFiles: true, // 監視文件更改
             injectCode: `
           import { setupProdMockServer } from '../mock/_createProductionServer'
 
@@ -118,7 +120,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       drop: env.VITE_DROP_DEBUGGER === 'true' ? ['debugger'] : undefined
     },
     build: {
-      target: 'es2015',
+      target: 'esnext',
       outDir: env.VITE_OUT_DIR || 'dist',
       sourcemap: env.VITE_SOURCEMAP === 'true',
       // brotliSize: false,
@@ -138,7 +140,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     server: {
       port: 3005,
       proxy: {
-        // 选项写法
+        // 選項寫法
         '/api': {
           target: 'http://127.0.0.1:8000',
           changeOrigin: true,

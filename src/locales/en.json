@@ -46,6 +46,7 @@
     "collapse": "Collapse",
     "collapseDes": "Expand and zoom the menu bar",
     "columnSetting": "Column setting",
+    "confirm": "Confirm",
     "delCancel": "Cancel",
     "delMessage": "Delete the selected data?",
     "delNoData": "Please select the data to delete",
@@ -118,6 +119,8 @@
     "echartDes": "Based on the secondary packaging components of eckarts, the width is adaptive. The corresponding chart can be displayed by passing in the options and height attributes."
   },
   "error": {
+    "loginError": "Login error",
+    "loginErrorMessage": "Email or password is wrong.",
     "logoutFail": "Logout failed.",
     "networkError": "Sorry, the server reported an error.",
     "noPermission": "Sorry, you don't have permission to access this page.",

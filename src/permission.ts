@@ -1,12 +1,13 @@
 import router from './router'
-import { useAppStoreWithOut } from '@/store/modules/app'
+import { useAppStore } from '@/store/modules/app'
 import type { RouteRecordRaw } from 'vue-router'
 import { useTitle } from '@/hooks/web/useTitle'
 import { useNProgress } from '@/hooks/web/useNProgress'
 import { usePermissionStoreWithOut } from '@/store/modules/permission'
 import { usePageLoading } from '@/hooks/web/usePageLoading'
 import { NO_REDIRECT_WHITE_LIST } from '@/constants'
-import { useUserStoreWithOut } from '@/store/modules/user'
+import { useUserStore } from '@/store/modules/user'
+import { store } from '@/store'
 
 const { start, done } = useNProgress()
 
@@ -16,9 +17,9 @@ router.beforeEach(async (to, from, next) => {
   start()
   loadStart()
   const permissionStore = usePermissionStoreWithOut()
-  const appStore = useAppStoreWithOut()
-  const userStore = useUserStoreWithOut()
-  if (userStore.userInfo) {
+  const appStore = useAppStore(store)
+  const userStore = useUserStore(store)
+  if (userStore.getUserInfo) {
     if (to.path === '/login') {
       next({ path: '/' })
     } else {
@@ -27,10 +28,10 @@ router.beforeEach(async (to, from, next) => {
         return
       }
 
-      // 开发者可根据实际情况进行修改
+      // 開發者可根據實際情況進行修改
       const roleRouters = userStore.getRoleRouters || []
 
-      // 是否使用动态路由
+      // 是否使用動態路由
       if (appStore.getDynamicRouter) {
         appStore.serverDynamicRouter
           ? await permissionStore.generateRoutes('server', roleRouters as AppCustomRouteRecordRaw[])
@@ -40,7 +41,7 @@ router.beforeEach(async (to, from, next) => {
       }
 
       permissionStore.getAddRouters.forEach((route) => {
-        router.addRoute(route as unknown as RouteRecordRaw) // 动态添加可访问路由表
+        router.addRoute(route as unknown as RouteRecordRaw) // 動態添加可訪問路由表
       })
       const redirectPath = from.query.redirect || to.path
       const redirect = decodeURIComponent(redirectPath as string)
@@ -52,13 +53,13 @@ router.beforeEach(async (to, from, next) => {
     if (NO_REDIRECT_WHITE_LIST.indexOf(to.path) !== -1) {
       next()
     } else {
-      next(`/login?redirect=${to.path}`) // 否则全部重定向到登录页
+      next(`/login?redirect=${to.path}`) // 否則全部重定向到登錄頁
     }
   }
 })
 
 router.afterEach((to) => {
   useTitle(to?.meta?.title as string)
-  done() // 结束Progress
+  done() // 結束Progress
   loadDone()
 })

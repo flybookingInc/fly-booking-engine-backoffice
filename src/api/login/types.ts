@@ -11,7 +11,7 @@ export type UserType = {
 }
 
 export type propertyMetaType = {
-  GroupId?: string
+  groupId?: string
   propertyId: string
   roles: RoleEnum[]
   permissions: string[]

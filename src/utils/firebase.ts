@@ -21,11 +21,13 @@ declare global {
 let app: FirebaseApp
 let appCheck: AppCheck | undefined
 const user = ref<Nullable<User>>(null)
-const userStore = useUserStore(store)
 
 // const dataStore = useReservationsStore(store);
 
 const initFirebase = () => {
+  console.log('initFirebase')
+  const userStore = useUserStore(store)
+  console.log('Firebase inited')
   const FIREBASE_CONFIG = {
     apiKey: import.meta.env.VITE_FIREBASE_API_KEY as string,
     authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN as string,

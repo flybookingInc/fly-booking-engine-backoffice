@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import LayoutVue from '@/layout/Layout.vue'
 import type {
   Router,
   RouteLocationNormalized,
@@ -11,7 +12,7 @@ import { omit, cloneDeep } from 'lodash-es'
 const modules = import.meta.glob('../views/**/*.{vue,tsx}')
 
 /* Layout */
-export const Layout = () => import('@/layout/Layout.vue')
+export const Layout = LayoutVue
 
 export const getParentLayout = () => {
   return () =>

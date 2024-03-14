@@ -10,12 +10,13 @@ import { useI18n } from '@/hooks/web/useI18n'
 import { Icon } from '@/components/Icon'
 import { useAppStore } from '@/store/modules/app'
 import { useDesign } from '@/hooks/web/useDesign'
+import { store } from '@/store'
 
 const { getPrefixCls } = useDesign()
 
 const prefixCls = getPrefixCls('breadcrumb')
 
-const appStore = useAppStore()
+const appStore = useAppStore(store)
 
 // 面包屑图标
 const breadcrumbIcon = computed(() => appStore.getBreadcrumbIcon)

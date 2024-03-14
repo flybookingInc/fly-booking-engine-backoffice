@@ -8,95 +8,91 @@ import { ElMessageBox } from 'element-plus'
 import { useI18n } from '@/hooks/web/useI18n'
 import { loginOutApi } from '@/api/login'
 import { useTagsViewStore } from './tagsView'
+import { computed, ref } from 'vue'
 
 import { User } from 'firebase/auth'
 import router from '@/router'
 
-interface UserState {
-  userInfo: UserType | undefined
-  tokenKey: string
-  token: string
-  roleRouters?: string[] | AppCustomRouteRecordRaw[]
-  rememberMe: boolean
-  loginInfo?: UserLoginType
-  currentPropertylId?: string
-}
+export const useUserStore = defineStore(
+  'userStore',
+  () => {
+    // states
 
-export const useUserStore = defineStore('user', {
-  state: (): UserState => {
-    return {
-      userInfo: undefined,
-      tokenKey: 'Authorization',
-      token: '',
-      roleRouters: undefined,
-      rememberMe: true,
-      loginInfo: undefined,
-      currentPropertylId: undefined // 當前Property Id，該帳號可能有多個property權限，目前選擇的property
-    }
-  },
-  getters: {
-    getTokenKey(): string {
-      return this.tokenKey
-    },
-    getToken(): string {
-      return this.token
-    },
-    getUserInfo(): UserType | undefined {
-      return this.userInfo
-    },
-    getRoleRouters(): string[] | AppCustomRouteRecordRaw[] | undefined {
-      return this.roleRouters
-    },
-    getRememberMe(): boolean {
-      return this.rememberMe
-    },
-    getLoginInfo(): UserLoginType | undefined {
-      return this.loginInfo
-    },
-    getUserRoles(): string[] {
-      const roles =
-        this.userInfo?.properties.forEach((item) => {
-          item.propertyId === this.currentPropertylId
-          return item.roles
-        }) || []
+    const userInfo = ref<Nullable<UserType>>(null)
+    const tokenKey = ref<string>('Authorization') // header's token key
+    const token = ref<Nullable<string>>(null) // token, this value will be the condition of login status
+    const roleRouters = ref<Nullable<string[] | AppCustomRouteRecordRaw[]>>(null)
+    const rememberMe = ref<boolean>(true)
+    const loginInfo = ref<Nullable<UserLoginType>>(null)
+    const currentPropertylId = ref<Nullable<string>>(null) // 當前Property Id，該帳號可能有多個property權限，目前選擇的property
+
+    // getters
+
+    const getTokenKey = computed((): string => {
+      return tokenKey.value
+    })
+    const getToken = computed((): Nullable<string> => {
+      return token.value
+    })
+    const getUserInfo = computed((): Nullable<UserType> => {
+      return userInfo.value
+    })
+    const getRoleRouters = computed((): Nullable<string[] | AppCustomRouteRecordRaw[]> => {
+      return roleRouters.value
+    })
+    const getRememberMe = computed((): boolean => {
+      return rememberMe.value
+    })
+    const getLoginInfo = computed((): Nullable<UserLoginType> => {
+      return loginInfo.value
+    })
+    const getUserRoles = computed((): string[] => {
+      let roles: string[] = []
+      userInfo.value?.properties.forEach((item) => {
+        if (item.propertyId === currentPropertylId.value) {
+          roles = item.roles as string[]
+        }
+      })
+      console.log('inside getUserRoles=', roles)
       return roles
-    },
-    getUserPermissions(): string[] {
+    })
+    const getUserPermissions = computed((): string[] => {
       const permissions =
-        this.userInfo?.properties.forEach((item) => {
-          item.propertyId === this.currentPropertylId
+        userInfo.value?.properties.forEach((item) => {
+          item.propertyId === currentPropertylId.value
           return item.permissions
         }) || []
       return permissions
-    },
-    getUserProperties(): string[] {
-      return this.userInfo?.properties.map((item) => item.propertyId) || []
+    })
+    const getUserProperties = computed((): string[] => {
+      return userInfo.value?.properties.map((item) => item.propertyId) || []
+    })
+
+    // actions
+
+    const setTokenKey = (tokenKeyValue: string) => {
+      tokenKey.value = tokenKeyValue
     }
-  },
-  actions: {
-    setTokenKey(tokenKey: string) {
-      this.tokenKey = tokenKey
-    },
-    setToken(token: string) {
-      this.token = token
-    },
-    setUserInfo(userInfo?: UserType) {
-      this.userInfo = userInfo
-    },
-    setRoleRouters(roleRouters: string[] | AppCustomRouteRecordRaw[]) {
-      this.roleRouters = roleRouters
-    },
-    setCurrentHotelId(hotelId: string | undefined) {
-      if (hotelId === undefined) {
-        this.currentPropertylId = undefined
+    const setToken = (tokenValue: string) => {
+      token.value = tokenValue
+    }
+    const setUserInfo = (userInfoValue: Nullable<UserType>) => {
+      userInfo.value = userInfoValue
+    }
+    const setRoleRouters = (roleRoutersValue: Nullable<string[] | AppCustomRouteRecordRaw[]>) => {
+      roleRouters.value = roleRoutersValue
+    }
+    const setCurrentPropertyId = (propertyId: Nullable<string>) => {
+      if (propertyId === null) {
+        currentPropertylId.value = null
         return
       }
-      if (!this.getUserProperties.includes(hotelId)) {
+      if (!getUserProperties.value.includes(propertyId)) {
         throw new Error('無此飯店權限')
       }
-      this.currentPropertylId = hotelId
-    },
-    logoutConfirm() {
+      currentPropertylId.value = propertyId
+    }
+    const logoutConfirm = () => {
       const { t } = useI18n()
       ElMessageBox.confirm(t('common.loginOutMessage'), t('common.reminder'), {
         confirmButtonText: t('common.ok'),
@@ -105,63 +101,65 @@ export const useUserStore = defineStore('user', {
       })
         .then(async () => {
           loginOutApi().then(() => {
-            this.reset()
+            reset()
           })
         })
         .catch(() => {
           ElMessageBox.prompt(t('error.logoutFail'))
         })
-    },
-    reset() {
+    }
+    const reset = () => {
       const tagsViewStore = useTagsViewStore()
       tagsViewStore.delAllViews()
-      this.setToken('')
-      this.setUserInfo(undefined)
-      this.setCurrentHotelId(undefined)
-      this.setRoleRouters([])
+      setToken('')
+      setUserInfo(null)
+      setCurrentPropertyId(null)
+      setRoleRouters([])
       router.replace('/login')
-    },
-    logout() {
-      this.logoutConfirm()
-    },
-    setRememberMe(rememberMe: boolean) {
-      this.rememberMe = rememberMe
-    },
-    setLoginInfo(loginInfo: UserLoginType | undefined) {
-      this.loginInfo = loginInfo
-    },
-    async afterLoginAction(): Promise<void> {
+    }
+    const logout = () => {
+      logoutConfirm()
+    }
+    const setRememberMe = (rememberMeValue: boolean) => {
+      rememberMe.value = rememberMeValue
+    }
+    const setLoginInfo = (loginInfoValue: Nullable<UserLoginType>) => {
+      loginInfo.value = loginInfoValue
+    }
+    const afterLoginAction = async (): Promise<void> => {
       const appStore = useAppStore()
       const { setStorage } = useStorage('localStorage')
 
       // get user info
-      const userInfo = await this.getUserInfoAction()
+      const userInfo = await getUserInfoAction()
+      console.log('userInfo=', userInfo)
+      if (userInfo && userInfo.properties.length > 0) {
+        setCurrentPropertyId(userInfo.properties[0].propertyId)
+      }
+      console.log('currentPropertylId.value=', currentPropertylId.value)
       setStorage(appStore.getAppTitle, userInfo)
-    },
-    async getUserInfoAction(): Promise<UserType | null> {
+    }
+    const getUserInfoAction = async (): Promise<Nullable<UserType>> => {
       const user = await getCurrentUser() // wait for firebase auth to get current user.
       if (!user) return null
-      this.token = await user.getIdToken()
-      const userInfo = await this.getUserInfo(user)
-      this.setUserInfo(userInfo)
-      if (userInfo.properties.length > 0 && !this.currentPropertylId) {
-        this.setCurrentHotelId(userInfo.properties[0].propertyId)
-      }
+      token.value = await user.getIdToken()
+      const userInfo = await fetchUserInfo(user)
+      setUserInfo(userInfo)
       return userInfo
-    },
+    }
     // 設定firebase auth狀態改變時的處理函式，inject到 @/utils/firebase.ts setupOnAuthStateChanged 函數中
-    async handleAuthStateChanged(_user: User | null) {
-      await this.afterLoginAction()
-    },
+    const handleAuthStateChanged = async (_user: Nullable<User>) => {
+      await afterLoginAction()
+    }
     /**
      * @description: Get user information and save to store
      */
-    async getUserInfo(user: User): Promise<UserType> {
+    const fetchUserInfo = async (user: User): Promise<UserType> => {
       const idTokenResult = await user.getIdTokenResult()
       if (!idTokenResult) {
         throw new Error('user not login')
       }
-      this.setToken(idTokenResult.token)
+      setToken(idTokenResult.token)
       const userInfo: UserType = {
         username: user.email as string,
         properties: idTokenResult.claims.properties as propertyMetaType[]
@@ -169,10 +167,42 @@ export const useUserStore = defineStore('user', {
 
       return userInfo
     }
-  },
-  persist: true
-})
 
+    return {
+      userInfo,
+      tokenKey,
+      token,
+      roleRouters,
+      rememberMe,
+      loginInfo,
+      currentPropertylId,
+      getTokenKey,
+      getToken,
+      getUserInfo,
+      getRoleRouters,
+      getRememberMe,
+      getLoginInfo,
+      getUserRoles,
+      getUserPermissions,
+      getUserProperties,
+      setTokenKey,
+      setToken,
+      setUserInfo,
+      setRoleRouters,
+      setCurrentPropertyId,
+      logoutConfirm,
+      reset,
+      logout,
+      setRememberMe,
+      setLoginInfo,
+      afterLoginAction,
+      getUserInfoAction,
+      handleAuthStateChanged,
+      fetchUserInfo
+    }
+  },
+  { persist: true }
+)
 export const useUserStoreWithOut = () => {
   return useUserStore(store)
 }

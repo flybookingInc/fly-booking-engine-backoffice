@@ -2,14 +2,14 @@
 import { reactive, ref, watch, onMounted, unref } from 'vue'
 import { Form, FormSchema } from '@/components/Form'
 import { useI18n } from '@/hooks/web/useI18n'
-import { ElCheckbox, ElLink } from 'element-plus'
+import { ElCheckbox, ElLink, ElMessageBox } from 'element-plus'
 import { useForm } from '@/hooks/web/useForm'
 import { loginApi, getTestRoleApi, getAdminRoleApi } from '@/api/login'
 import { useAppStore } from '@/store/modules/app'
 import { usePermissionStore } from '@/store/modules/permission'
 import { useRouter } from 'vue-router'
 import type { RouteLocationNormalizedLoaded, RouteRecordRaw } from 'vue-router'
-import { UserLoginType, UserType } from '@/api/login/types'
+import { UserLoginType } from '@/api/login/types'
 import { useValidator } from '@/hooks/web/useValidator'
 import { Icon } from '@/components/Icon'
 import { useUserStore } from '@/store/modules/user'
@@ -219,7 +219,7 @@ watch(
   }
 )
 
-// 登录
+// 登錄
 const signIn = async () => {
   const formRef = await getElFormExpose()
   await formRef?.validate(async (isValid) => {
@@ -229,30 +229,43 @@ const signIn = async () => {
 
       try {
         const res = await loginApi(formData)
+        console.log('res=', res)
         await getCurrentUser() // wait until firebase login is done
         if (res) {
-          // 是否记住我
+          // 是否記住我
           if (unref(remember)) {
             userStore.setLoginInfo({
               username: formData.username,
               password: formData.password
             })
           } else {
-            userStore.setLoginInfo(undefined)
+            userStore.setLoginInfo(null)
           }
           userStore.setRememberMe(unref(remember))
-          // 是否使用动态路由
+          // 是否使用動態路由
+          console.log('appStore.getDynamicRouter', appStore.getDynamicRouter)
           if (appStore.getDynamicRouter) {
             getRole()
           } else {
             await permissionStore.generateRoutes('static').catch(() => {})
             permissionStore.getAddRouters.forEach((route) => {
-              addRoute(route as RouteRecordRaw) // 动态添加可访问路由表
+              addRoute(route as RouteRecordRaw) // 動態添加可訪問路由表
             })
             permissionStore.setIsAddRouters(true)
             push({ path: redirect.value || permissionStore.addRouters[0].path })
           }
         }
+      } catch (err) {
+        if (
+          (err as unknown as Error).message.includes('auth/invalid-email') ||
+          (err as unknown as Error).message.includes('auth/user-not-found') ||
+          (err as unknown as Error).message.includes('auth/wrong-password')
+        ) {
+          ElMessageBox.alert(t('error.loginErrorMessage'), t('error.loginError'), {
+            confirmButtonText: t('common.confirm')
+          })
+        }
+        console.log('err=', err)
       } finally {
         loading.value = false
       }
@@ -260,12 +273,14 @@ const signIn = async () => {
   })
 }
 
-// 获取角色信息
+// 獲取角色信息
 const getRole = async () => {
-  const formData = await getFormData<UserType>()
+  // const formData = await getFormData<UserType>()
   const params = {
-    roleName: formData.username
+    roleName: userStore.getUserRoles.length > 0 ? userStore.getUserRoles[0] : ''
   }
+  console.log('userStore.getUserRoles=', userStore.getUserRoles)
+  console.log('route', await getAdminRoleApi(params))
   const res =
     appStore.getDynamicRouter && appStore.getServerDynamicRouter
       ? await getAdminRoleApi(params) // 根據角色，返回動態後台路由列表
@@ -278,14 +293,14 @@ const getRole = async () => {
       : await permissionStore.generateRoutes('frontEnd', routers).catch(() => {})
 
     permissionStore.getAddRouters.forEach((route) => {
-      addRoute(route as RouteRecordRaw) // 动态添加可访问路由表
+      addRoute(route as RouteRecordRaw) // 動態添加可訪問路由表
     })
     permissionStore.setIsAddRouters(true)
     push({ path: redirect.value || permissionStore.addRouters[0].path })
   }
 }
 
-// 去注册页面
+// 去註冊頁面
 const toRegister = () => {
   emit('to-register')
 }

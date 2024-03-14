@@ -93,7 +93,7 @@ export const useTagsViewStore = defineStore('tagsView', {
       const userStore = useUserStoreWithOut()
 
       // const affixTags = this.visitedViews.filter((tag) => tag.meta.affix)
-      this.visitedViews = userStore.getUserInfo
+      this.visitedViews = userStore.userInfo
         ? this.visitedViews.filter((tag) => tag?.meta?.affix)
         : []
     },

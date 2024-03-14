@@ -13,7 +13,7 @@ import { User } from 'firebase/auth'
 import router from '@/router'
 
 interface UserState {
-  userInfo?: UserType
+  userInfo: UserType | undefined
   tokenKey: string
   token: string
   roleRouters?: string[] | AppCustomRouteRecordRaw[]

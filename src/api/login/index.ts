@@ -16,12 +16,14 @@ export const loginApi = (data: UserLoginType): Promise<UserCredential> => {
   }
 }
 
-export const loginOutApi = (): Promise<void> => {
+export const loginOutApi = async (): Promise<boolean> => {
   // return request.get({ url: '/mock/user/loginOut' })
   try {
-    return signOut(getAuth())
+    signOut(getAuth())
+    return true
   } catch (error) {
-    return Promise.reject(error)
+    console.log(error)
+    return false
   }
 }
 

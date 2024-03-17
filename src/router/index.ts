@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 import type { App } from 'vue'
-import { Layout, getParentLayout } from '@/utils/routerHelper'
+import { Layout } from '@/utils/routerHelper'
 import { useI18n } from '@/hooks/web/useI18n'
 
 const { t } = useI18n()
@@ -10,7 +10,7 @@ export const constantRouterMap: AppRouteRecordRaw[] = [
   {
     path: '/',
     component: Layout,
-    redirect: '/level',
+    redirect: '/settings',
     name: 'Root',
     meta: {
       hidden: true
@@ -53,155 +53,50 @@ export const constantRouterMap: AppRouteRecordRaw[] = [
       noTagsView: true
     }
   }
-  // {
-  //   path: '/',
-  //   component: Layout,
-  //   redirect: '/settings',
-  //   name: 'Root',
-  //   meta: {
-  //     hidden: true
-  //   }
-  // },
-  // {
-  //   path: '/redirect',
-  //   component: Layout,
-  //   name: 'Redirect',
-  //   children: [
-  //     {
-  //       path: '/redirect/:path(.*)',
-  //       name: 'Redirect',
-  //       component: () => import('@/views/Redirect/Redirect.vue'),
-  //       meta: {}
-  //     }
-  //   ],
-  //   meta: {
-  //     hidden: true,
-  //     noTagsView: true
-  //   }
-  // },
-  // {
-  //   path: '/login',
-  //   component: () => import('@/views/Login/Login.vue'),
-  //   name: 'Login',
-  //   meta: {
-  //     hidden: true,
-  //     title: t('router.login'),
-  //     noTagsView: true
-  //   }
-  // },
-  // {
-  //   path: '/404',
-  //   component: () => import('@/views/Error/404.vue'),
-  //   name: 'NoFind',
-  //   meta: {
-  //     hidden: true,
-  //     title: '404',
-  //     noTagsView: true
-  //   }
-  // }
 ]
 
 export const asyncRouterMap: AppRouteRecordRaw[] = [
   {
-    path: '/level',
+    path: '/settings',
     component: Layout,
-    redirect: '/level/menu1/menu1-1/menu1-1-1',
-    name: 'Level',
+    redirect: '/settings/properties',
+    name: 'Settings',
     meta: {
-      title: t('router.level'),
-      icon: 'carbon:skill-level-advanced'
+      title: t('router.settings'),
+      icon: 'ant-design:dashboard-filled'
+      // alwaysShow: true
     },
     children: [
       {
-        path: 'menu1',
-        name: 'Menu1',
-        component: getParentLayout(),
-        redirect: '/level/menu1/menu1-1/menu1-1-1',
+        path: 'properties',
+        component: () => import('@/views/Settings/Properties.vue'),
+        name: 'Properties',
         meta: {
-          title: t('router.menu1')
-        },
-        children: [
-          {
-            path: 'menu1-1',
-            name: 'Menu11',
-            component: getParentLayout(),
-            redirect: '/level/menu1/menu1-1/menu1-1-1',
-            meta: {
-              title: t('router.menu11'),
-              alwaysShow: true
-            },
-            children: [
-              {
-                path: 'menu1-1-1',
-                name: 'Menu111',
-                component: () => import('@/views/Level/Menu111.vue'),
-                meta: {
-                  title: t('router.menu111')
-                }
-              }
-            ]
-          },
-          {
-            path: 'menu1-2',
-            name: 'Menu12',
-            component: () => import('@/views/Level/Menu12.vue'),
-            meta: {
-              title: t('router.menu12')
-            }
-          }
-        ]
+          title: t('router.views.properties.pageTitle')
+          // noCache: true,
+          // affix: true
+        }
       },
       {
-        path: 'menu2',
-        name: 'Menu2Demo',
-        component: () => import('@/views/Level/Menu2.vue'),
+        path: 'users',
+        component: () => import('@/views/Settings/Users.vue'),
+        name: 'Users',
         meta: {
-          title: t('router.menu2')
+          title: t('router.views.users.pageTitle')
+          // noCache: false
+        }
+      },
+      {
+        path: 'roles',
+        component: () => import('@/views/Settings/Roles.vue'),
+        name: 'Roles',
+        meta: {
+          title: t('router.views.roles.pageTitle')
+          // noCache: false
         }
       }
     ]
   }
-  // {
-  //   path: '/settings',
-  //   component: Layout,
-  //   redirect: '/settings/properties',
-  //   name: 'Settings',
-  //   meta: {
-  //     title: t('router.settings'),
-  //     icon: 'ant-design:dashboard-filled',
-  //     alwaysShow: true
-  //   },
-  //   children: [
-  //     {
-  //       path: 'properties',
-  //       component: () => import('@/views/Settings/Properties.vue'),
-  //       name: 'Properties',
-  //       meta: {
-  //         title: t('router.views.properties.pageTitle'),
-  //         noCache: true,
-  //         affix: true
-  //       }
-  //     },
-  //     {
-  //       path: 'users',
-  //       component: () => import('@/views/Settings/Users.vue'),
-  //       name: 'Users',
-  //       meta: {
-  //         title: t('router.views.users.pageTitle'),
-  //         noCache: false
-  //       }
-  //     },
-  //     {
-  //       path: 'roles',
-  //       component: () => import('@/views/Settings/Roles.vue'),
-  //       name: 'Roles',
-  //       meta: {
-  //         title: t('router.views.roles.pageTitle'),
-  //         noCache: false
-  //       }
-  //     }
-  //   ]
-  // }
 ]
 
 const router = createRouter({

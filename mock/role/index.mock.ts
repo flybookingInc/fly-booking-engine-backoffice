@@ -1,6 +1,6 @@
 import { MockMethod } from 'vite-plugin-mock'
 import { SUCCESS_CODE } from '@/constants'
-import { Layout } from '@/utils/routerHelper'
+// import { Layout } from '@/utils/routerHelper'
 import { useI18n } from '@/hooks/web/useI18n'
 import { RoleEnum } from '@/enums/roleEnum'
 // import PropertiesVue from '@/views/Settings/Properties.vue'
@@ -13,7 +13,7 @@ const timeout = 1000
 const adminList = [
   {
     path: '/settings',
-    component: Layout,
+    component: '#',
     redirect: '/settings/properties',
     name: 'Settings',
     meta: {
@@ -24,7 +24,7 @@ const adminList = [
     children: [
       {
         path: 'properties',
-        component: 'Views/Settings/Properties',
+        component: 'views/Settings/Properties',
         name: 'Properties',
         meta: {
           title: t('router.views.properties.pageTitle'),
@@ -34,7 +34,7 @@ const adminList = [
       },
       {
         path: 'users',
-        component: 'Views/Settings/Users',
+        component: 'views/Settings/Users',
         name: 'Users',
         meta: {
           title: t('router.views.users.pageTitle'),
@@ -43,7 +43,7 @@ const adminList = [
       },
       {
         path: 'roles',
-        component: 'Views/Settings/Roles',
+        component: 'views/Settings/Roles',
         name: 'Roles',
         meta: {
           title: t('router.views.roles.pageTitle'),

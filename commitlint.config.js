@@ -6,20 +6,21 @@ module.exports = {
       'always',
       [
         'feat', // 新功能(feature)
-        'fix', // 修补bug
-        'docs', // 文档(documentation)
-        'style', // 格式、样式(不影响代码运行的变动)
-        'refactor', // 重构(即不是新增功能，也不是修改BUG的代码)
-        'perf', // 优化相关，比如提升性能、体验
-        'test', // 添加测试
-        'ci', // 持续集成修改
-        'chore', // 构建过程或辅助工具的变动
-        'revert', // 回滚到上一个版本
-        'workflow', // 工作流改进
-        'mod', // 不确定分类的修改
-        'wip', // 开发中
-        'types', // 类型修改
-        'release' // 版本发布
+        'fix', // 修補bug
+        'docs', // 文檔(documentation)
+        'style', // 格式、樣式(不影響代碼運行的變動)
+        'refactor', // 重構(即不是新增功能，也不是修改BUG的代碼)
+        'perf', // 優化相關，比如提升性能、體驗
+        'test', // 添加測試
+        'ci', // 持續集成修改
+        'build', // 編譯相關的修改，對項目構建或者依賴的改動
+        'chore', // 構建過程或輔助工具的變動
+        'revert', // 回滾到上一個版本
+        'workflow', // 工作流改進
+        'mod', // 不確定分類的修改
+        'wip', // 開發中
+        'types', // 類型修改
+        'release' // 版本發佈
       ]
     ],
     'subject-full-stop': [0, 'never'],

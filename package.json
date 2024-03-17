@@ -1,9 +1,9 @@
 {
-  "name": "vue-element-plus-admin",
-  "version": "2.5.6",
-  "description": "一套基于vue3、element-plus、typesScript、vite4的后台集成方案。",
-  "author": "Archer <502431556@qq.com>",
-  "private": false,
+  "name": "fly-booking-engine-admin",
+  "version": "0.0.1",
+  "description": "Fly Booking Engine Admin",
+  "author": "Joshhsiao <joshhsiao@gmail.com>",
+  "private": true,
   "scripts": {
     "i": "pnpm install",
     "dev": "pnpm vite --mode base",

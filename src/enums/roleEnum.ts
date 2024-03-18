@@ -1,13 +1,16 @@
 export enum RoleEnum {
-  // super admin
   SUPERADMIN = 'superAdmin',
-  // hotel's admin
-  ADMIN = 'admin'
+  ADMIN = 'admin',
+  USER = 'user',
+  VIEWER = 'viewer',
+  FINANCE = 'finance'
 }
 
 export enum AppRoleEnum {
-  // API user
   API = 'api',
-  // normal
-  NORMAL = 'normal'
+  USER = 'user',
+  VIEWER = 'viewer',
+  FINANCE = 'finance',
+  ADMIN = 'admin',
+  OWENER = 'owner'
 }

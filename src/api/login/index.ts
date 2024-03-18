@@ -1,6 +1,7 @@
 import request from '@/axios'
 import { UserCredential, getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth'
 import { UserLoginType } from './types'
+import { AxiosResponse } from 'axios'
 
 interface RoleParams {
   roleName: string
@@ -29,10 +30,10 @@ export const loginOutApi = async (): Promise<boolean> => {
 
 export const getAdminRoleApi = (
   params: RoleParams
-): Promise<IResponse<AppCustomRouteRecordRaw[]>> => {
+): Promise<AxiosResponse<AppCustomRouteRecordRaw[]>> => {
   return request.get({ url: '/mock/role/list', params })
 }
 
-export const getTestRoleApi = (params: RoleParams): Promise<IResponse<string[]>> => {
+export const getTestRoleApi = (params: RoleParams): Promise<AxiosResponse<string[]>> => {
   return request.get({ url: '/mock/role/list2', params })
 }

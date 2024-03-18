@@ -125,6 +125,7 @@
     "networkError": "Sorry, the server reported an error.",
     "noPermission": "Sorry, you don't have permission to access this page.",
     "pageError": "Sorry, the page you visited does not exist.",
+    "propertyIdIsNull": "Property ID can't be null",
     "returnToHome": "Return to home"
   },
   "exampleDemo": {
@@ -370,6 +371,12 @@
       "roles": {
         "pageTitle": "Role Management"
       },
+      "settings": {
+        "properties": {
+          "add_property": "Add",
+          "title": "Property List"
+        }
+      },
       "users": {
         "pageTitle": "User Management"
       }
@@ -428,6 +435,19 @@
     "tagsViewIcon": "Tags view icon",
     "theme": "Theme",
     "uniqueOpened": "Unique opened"
+  },
+  "settings": {
+    "property": {
+      "additional_photos": "Additional Photos",
+      "address": "Address",
+      "available_languages": "Available Languages",
+      "currency": "Currency",
+      "description": "Description",
+      "email": "Email",
+      "hotel_id": "Hotel ID",
+      "name": "Hotel Name",
+      "phone": "Phone"
+    }
   },
   "size": {
     "default": "Default",

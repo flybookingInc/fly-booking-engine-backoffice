@@ -1,6 +1,7 @@
 import service from './service'
 import { CONTENT_TYPE } from '@/constants'
 import { useUserStoreWithOut } from '@/store/modules/user'
+import { AxiosResponse } from 'axios'
 
 const request = (option: AxiosConfig) => {
   const { url, method, params, data, headers, responseType } = option
@@ -20,17 +21,17 @@ const request = (option: AxiosConfig) => {
 }
 
 export default {
-  get: <T = any>(option: AxiosConfig) => {
-    return request({ method: 'get', ...option }) as Promise<IResponse<T>>
+  get: (option: AxiosConfig) => {
+    return request({ method: 'get', ...option }) as Promise<AxiosResponse>
   },
-  post: <T = any>(option: AxiosConfig) => {
-    return request({ method: 'post', ...option }) as Promise<IResponse<T>>
+  post: (option: AxiosConfig) => {
+    return request({ method: 'post', ...option }) as Promise<AxiosResponse>
   },
-  delete: <T = any>(option: AxiosConfig) => {
-    return request({ method: 'delete', ...option }) as Promise<IResponse<T>>
+  delete: (option: AxiosConfig) => {
+    return request({ method: 'delete', ...option }) as Promise<AxiosResponse>
   },
-  put: <T = any>(option: AxiosConfig) => {
-    return request({ method: 'put', ...option }) as Promise<IResponse<T>>
+  put: (option: AxiosConfig) => {
+    return request({ method: 'put', ...option }) as Promise<AxiosResponse>
   },
   cancelRequest: (url: string | string[]) => {
     return service.cancelRequest(url)

@@ -1,15 +1,15 @@
-import { AxiosResponse, InternalAxiosRequestConfig } from './types'
+import { InternalAxiosRequestConfig } from './types'
+import type { AxiosResponse } from 'axios'
 import { ElMessage } from 'element-plus'
 import qs from 'qs'
-import { SUCCESS_CODE, TRANSFORM_REQUEST_DATA } from '@/constants'
+import { TRANSFORM_REQUEST_DATA } from '@/constants'
 import { useUserStoreWithOut } from '@/store/modules/user'
 import { objToFormData } from '@/utils'
+import { t } from '@/hooks/web/useI18n'
 
 const defaultRequestInterceptors = (config: InternalAxiosRequestConfig) => {
-  if (
-    config.method === 'post' &&
-    config.headers['Content-Type'] === 'application/x-www-form-urlencoded'
-  ) {
+  if (config.method === 'post' && config.headers['Content-Type'] === 'application/json') {
+    // use application/json as default post content type
     config.data = qs.stringify(config.data)
   } else if (
     TRANSFORM_REQUEST_DATA &&
@@ -34,19 +34,20 @@ const defaultRequestInterceptors = (config: InternalAxiosRequestConfig) => {
   return config
 }
 
-const defaultResponseInterceptors = (response: AxiosResponse) => {
-  if (response?.config?.responseType === 'blob') {
-    // 如果是文件流，直接过
-    return response
-  } else if (response.data.code === SUCCESS_CODE) {
-    return response.data
-  } else {
-    ElMessage.error(response?.data?.message)
-    if (response?.data?.code === 401) {
+const defaultResponseInterceptors = (response: AxiosResponse): AxiosResponse => {
+  if (response.status >= 300) {
+    // show error message notification when request failed
+    if (response?.data?.message) {
+      ElMessage.error(response?.data?.message)
+    } else {
+      ElMessage.error(t('error.networkError'))
+    }
+    if (response?.status === 401) {
       const userStore = useUserStoreWithOut()
       userStore.logout()
     }
   }
+  return response
 }
 
 export { defaultResponseInterceptors, defaultRequestInterceptors }

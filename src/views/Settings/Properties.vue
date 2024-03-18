@@ -1,6 +1,7 @@
 <template>
-  <div>
-    <h1>Properties</h1>
-  </div>
+  <property-list />
 </template>
-<script setup lang="ts"></script>
+
+<script setup lang="ts">
+import { PropertyList } from '@/components/Property'
+</script>

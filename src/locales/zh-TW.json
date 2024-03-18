@@ -125,6 +125,7 @@
     "networkError": "抱歉，服務器報告錯誤。",
     "noPermission": "抱歉，您無權訪問此頁面。",
     "pageError": "抱歉，您訪問的頁面不存在。",
+    "propertyIdIsNull": "屬性 ID 不能為空",
     "returnToHome": "返回首頁"
   },
   "exampleDemo": {
@@ -370,6 +371,12 @@
       "roles": {
         "pageTitle": "角色管理"
       },
+      "settings": {
+        "properties": {
+          "add_property": "添加",
+          "title": "房產清單"
+        }
+      },
       "users": {
         "pageTitle": "使用者管理"
       }
@@ -428,6 +435,19 @@
     "tagsViewIcon": "標籤頁圖標",
     "theme": "主題",
     "uniqueOpened": "菜單手風琴"
+  },
+  "settings": {
+    "property": {
+      "additional_photos": "附加照片",
+      "address": "地址",
+      "available_languages": "可用語言",
+      "currency": "貨幣",
+      "description": "描述",
+      "email": "電子郵件",
+      "hotel_id": "飯店ID",
+      "name": "飯店名稱",
+      "phone": "電話"
+    }
   },
   "size": {
     "default": "默認",

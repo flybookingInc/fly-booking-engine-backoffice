@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { store } from '../index'
 import { useAppStore } from '@/store/modules/app'
 import { useStorage } from '@/hooks/web/useStorage'
-import { UserLoginType, UserType, propertyMetaType } from '@/api/login/types'
+import { UserLoginType, UserMeta, UserType } from '@/api/login/types'
 import { getCurrentUser } from '@/utils/firebase'
 import { ElMessageBox } from 'element-plus'
 import { useI18n } from '@/hooks/web/useI18n'
@@ -48,7 +48,7 @@ export const useUserStore = defineStore(
     })
     const getUserRoles = computed((): string[] => {
       let roles: string[] = []
-      userInfo.value?.properties.forEach((item) => {
+      userInfo.value?.meta.properties.forEach((item) => {
         if (item.propertyId === currentPropertylId.value) {
           roles = item.roles as string[]
         }
@@ -58,14 +58,14 @@ export const useUserStore = defineStore(
     })
     const getUserPermissions = computed((): string[] => {
       const permissions =
-        userInfo.value?.properties.forEach((item) => {
+        userInfo.value?.meta.properties.forEach((item) => {
           item.propertyId === currentPropertylId.value
           return item.permissions
         }) || []
       return permissions
     })
     const getUserProperties = computed((): string[] => {
-      return userInfo.value?.properties.map((item) => item.propertyId) || []
+      return userInfo.value?.meta.properties.map((item) => item.propertyId) || []
     })
 
     // actions
@@ -133,10 +133,9 @@ export const useUserStore = defineStore(
       // get user info
       const userInfo = await getUserInfoAction()
       console.log('userInfo=', userInfo)
-      if (userInfo && userInfo.properties.length > 0) {
-        setCurrentPropertyId(userInfo.properties[0].propertyId)
+      if (userInfo && userInfo.meta.properties.length > 0) {
+        setCurrentPropertyId(userInfo.meta.properties[0].propertyId)
       }
-      console.log('currentPropertylId.value=', currentPropertylId.value)
       setStorage(appStore.getAppTitle, userInfo)
     }
     const getUserInfoAction = async (): Promise<Nullable<UserType>> => {
@@ -162,7 +161,7 @@ export const useUserStore = defineStore(
       setToken(idTokenResult.token)
       const userInfo: UserType = {
         username: user.email as string,
-        properties: idTokenResult.claims.properties as propertyMetaType[]
+        meta: idTokenResult.claims as UserMeta
       }
 
       return userInfo

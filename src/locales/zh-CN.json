@@ -125,6 +125,7 @@
     "networkError": "抱歉，服务器报告错误。",
     "noPermission": "抱歉，您无权访问此页面。",
     "pageError": "抱歉，您访问的页面不存在。",
+    "propertyIdIsNull": "属性 ID 不能为空",
     "returnToHome": "返回首页"
   },
   "exampleDemo": {
@@ -370,6 +371,12 @@
       "roles": {
         "pageTitle": "角色管理"
       },
+      "settings": {
+        "properties": {
+          "add_property": "添加",
+          "title": "房产清单"
+        }
+      },
       "users": {
         "pageTitle": "用户管理"
       }
@@ -428,6 +435,19 @@
     "tagsViewIcon": "标签页图标",
     "theme": "主题",
     "uniqueOpened": "菜单手风琴"
+  },
+  "settings": {
+    "property": {
+      "additional_photos": "附加照片",
+      "address": "地址",
+      "available_languages": "可用语言",
+      "currency": "货币",
+      "description": "描述",
+      "email": "电子邮件",
+      "hotel_id": "酒店ID",
+      "name": "酒店名称",
+      "phone": "电话"
+    }
   },
   "size": {
     "default": "默认",

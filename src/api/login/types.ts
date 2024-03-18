@@ -7,6 +7,11 @@ export type UserLoginType = {
 
 export type UserType = {
   username: string
+  meta: UserMeta
+}
+
+export type UserMeta = {
+  app: AppMetaType[]
   properties: propertyMetaType[]
 }
 

@@ -13,7 +13,7 @@ const timeout = 1000
 const adminList = [
   {
     path: '/settings',
-    redirect: '/settings/properties/property-list',
+    redirect: '/settings/properties/list',
     component: '#',
     name: 'Settings',
     meta: {
@@ -26,7 +26,7 @@ const adminList = [
         path: 'properties',
         name: 'Properties',
         component: '##',
-        redirect: '/settings/properties/property-list',
+        redirect: '/settings/properties/list',
         meta: {
           title: t('router.views.properties.pageTitle')
           // noCache: true,
@@ -34,7 +34,7 @@ const adminList = [
         },
         children: [
           {
-            path: 'property-list',
+            path: 'list',
             name: 'PropertyList',
             component: 'views/Settings/Properties/PropertyList',
             meta: {
@@ -44,13 +44,27 @@ const adminList = [
             }
           },
           {
-            path: 'property-add',
+            path: 'add',
             name: 'PropertyAdd',
             component: 'views/Settings/Properties/PropertyAdd',
             meta: {
               title: t('router.views.propertyAdd.pageTitle'),
               noCache: true,
-              affix: true
+              affix: true,
+              noTagsView: true,
+              hidden: true
+            }
+          },
+          {
+            path: 'update',
+            name: 'PropertyUpdate',
+            component: 'views/Settings/Properties/PropertyUpdate',
+            meta: {
+              title: t('router.views.propertyAdd.pageTitle'),
+              noCache: true,
+              affix: true,
+              noTagsView: true,
+              hidden: true
             }
           }
         ]

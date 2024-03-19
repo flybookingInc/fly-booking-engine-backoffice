@@ -58,7 +58,7 @@ export const constantRouterMap: AppRouteRecordRaw[] = [
 export const asyncRouterMap: AppRouteRecordRaw[] = [
   {
     path: '/settings',
-    redirect: '/settings/properties/property-list',
+    redirect: '/settings/properties/list',
     component: Layout,
     name: 'Settings',
     meta: {
@@ -71,7 +71,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
         path: 'properties',
         name: 'Properties',
         component: getParentLayout(),
-        redirect: '/settings/properties/property-list',
+        redirect: '/settings/properties/list',
         meta: {
           title: t('router.views.properties.pageTitle')
           // noCache: true,
@@ -79,7 +79,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
         },
         children: [
           {
-            path: 'property-list',
+            path: 'list',
             name: 'PropertyList',
             component: () => import('@/views/Settings/Properties/PropertyList.vue'),
             meta: {
@@ -89,7 +89,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
             }
           },
           {
-            path: 'property-add',
+            path: 'add',
             name: 'PropertyAdd',
             component: () => import('@/views/Settings/Properties/PropertyAdd.vue'),
             meta: {

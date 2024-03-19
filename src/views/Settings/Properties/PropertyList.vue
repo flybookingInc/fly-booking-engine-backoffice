@@ -123,15 +123,15 @@ const getList = async () => {
 getList()
 
 const addAction = () => {
-  push('/settings/property-add')
+  push('/settings/properties/add')
 }
 
 const updateAction = (row: HotelListRowData) => {
-  push(`/settings/property-update?propertyId=${row.hotelId}`)
+  push(`/settings/properties/update?propertyId=${row.hotelId}`)
 }
 
 const updatePhotoAction = (row: HotelListRowData) => {
-  push(`/settings/property-photo-update?propertyId=${row.hotelId}`)
+  push(`/settings/properties/photo-update?propertyId=${row.hotelId}`)
 }
 
 const deleteAction = async (row: HotelListRowData) => {

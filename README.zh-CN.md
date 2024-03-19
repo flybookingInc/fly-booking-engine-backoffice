@@ -7,62 +7,62 @@
 
 [English](./README.md) | **中文**
 
-## 介绍
+## 介紹
 
-vue-element-plus-admin 是一个基于 `element-plus` 免费开源的中后台模版。使用了最新的`vue3`，`vite4`，`TypeScript`等主流技术开发，开箱即用的中后台前端解决方案，可以用来作为项目的启动模版，也可用于学习参考。并且时刻关注着最新技术动向，尽可能的第一时间更新。
+vue-element-plus-admin 是一個基於 `element-plus` 免費開源的中後台模版。使用了最新的`vue3`，`vite4`，`TypeScript`等主流技術開發，開箱即用的中後台前端解決方案，可以用來作為項目的啓動模版，也可用於學習參考。並且時刻關注着最新技術動向，儘可能的第一時間更新。
 
-vue-element-plus-admin 的定位是后台集成方案，不太适合当基础模板来进行二次开发。因为集成了很多你可能用不到的功能，会造成不少的代码冗余。如果你的项目不关注这方面的问题，也可以直接基于它进行二次开发。
+vue-element-plus-admin 的定位是後台集成方案，不太適合當基礎模板來進行二次開發。因為集成了很多你可能用不到的功能，會造成不少的代碼冗餘。如果你的項目不關注這方面的問題，也可以直接基於它進行二次開發。
 
-如需要基础模版，请切换到 `tempalte` 分支，`tempalte` 只简单集成了一些如：布局、动态菜单等常用布局功能，更适合开发者进行二次开发。
+如需要基礎模版，請切換到 `tempalte` 分支，`tempalte` 只簡單集成了一些如：佈局、動態菜單等常用佈局功能，更適合開發者進行二次開發。
 
 ## 特性
 
-- **最新技术栈**：使用 Vue3/vite4 等前端前沿技术开发
-- **TypeScript**: 应用程序级 JavaScript 的语言
-- **主题**: 可配置的主题
-- **国际化**：内置完善的国际化方案
-- **自定义数据** 内置 Mock 数据方案
-- **权限** 内置完善的动态路由权限生成方案
-- **组件** 二次封装了多个常用的组件
-- **示例** 内置丰富的示例
+- **最新技術棧**：使用 Vue3/vite4 等前端前沿技術開發
+- **TypeScript**: 應用程序級 JavaScript 的語言
+- **主題**: 可配置的主題
+- **國際化**：內置完善的國際化方案
+- **自定義數據** 內置 Mock 數據方案
+- **權限** 內置完善的動態路由權限生成方案
+- **組件** 二次封裝了多個常用的組件
+- **示例** 內置豐富的示例
 
-## 预览
+## 預覽
 
-- [vue-element-plus-admin](https://element-plus-admin.cn/) - 完整版 github 站点
-- [vue-element-plus-admin](https://kailong110120130.gitee.io/vue-element-plus-admin) - 完整版 gitee 站点
+- [vue-element-plus-admin](https://element-plus-admin.cn/) - 完整版 github 站點
+- [vue-element-plus-admin](https://kailong110120130.gitee.io/vue-element-plus-admin) - 完整版 gitee 站點
 
-帐号：**admin/admin test/test**
+帳號：**admin/admin test/test**
 
-`admin` 帐号用于模拟服务端控制权限，服务端返回什么就渲染什么
+`admin` 帳號用於模擬服務端控制權限，服務端返回什麼就渲染什麼
 
-`test` 帐号用于模拟前端控制权限，服务端只返回需要显示的菜单 key，前端进行匹配渲染
+`test` 帳號用於模擬前端控制權限，服務端只返回需要顯示的菜單 key，前端進行匹配渲染
 
-## 文档
+## 文檔
 
-[文档地址 Github](https://element-plus-admin-doc.cn/)
+[文檔地址 Github](https://element-plus-admin-doc.cn/)
 
-[文档地址 Gitee](https://kailong110120130.gitee.io/vue-element-plus-admin-doc)
+[文檔地址 Gitee](https://kailong110120130.gitee.io/vue-element-plus-admin-doc)
 
-## 前序准备
+## 前序準備
 
-- [node](http://nodejs.org/) 和 [git](https://git-scm.com/) - 项目开发环境
+- [node](http://nodejs.org/) 和 [git](https://git-scm.com/) - 項目開發環境
 - [Vite4](https://vitejs.dev/) - 熟悉 vite 特性
-- [Vue3](https://v3.vuejs.org/) - 熟悉 Vue 基础语法
-- [TypeScript](https://www.typescriptlang.org/) - 熟悉 `TypeScript` 基本语法
-- [Es6+](http://es6.ruanyifeng.com/) - 熟悉 es6 基本语法
+- [Vue3](https://v3.vuejs.org/) - 熟悉 Vue 基礎語法
+- [TypeScript](https://www.typescriptlang.org/) - 熟悉 `TypeScript` 基本語法
+- [Es6+](http://es6.ruanyifeng.com/) - 熟悉 es6 基本語法
 - [Vue-Router-Next](https://next.router.vuejs.org/) - 熟悉 vue-router 基本使用
 - [Element-Plus](https://element-plus.org/) - element-plus 基本使用
-- [Mock.js](https://github.com/nuysoft/Mock) - mockjs 基本语法
+- [Mock.js](https://github.com/nuysoft/Mock) - mockjs 基本語法
 
-## 安装和使用
+## 安裝和使用
 
-- 获取代码
+- 獲取代碼
 
 ```bash
 git clone https://github.com/kailong321200875/vue-element-plus-admin.git
 ```
 
-- 安装依赖
+- 安裝依賴
 
 ```bash
 cd vue-element-plus-admin
@@ -71,7 +71,7 @@ pnpm install
 
 ```
 
-- 运行
+- 運行
 
 ```bash
 pnpm run dev
@@ -83,50 +83,50 @@ pnpm run dev
 pnpm run build:pro
 ```
 
-## 更新日志
+## 更新日誌
 
-[更新日志](./CHANGELOG.md)
+[更新日誌](./CHANGELOG.md)
 
-## 如何贡献
+## 如何貢獻
 
-你可以[提一个 issue](https://github.com/kailong321200875/vue-element-plus-admin/issues/new) 或者提交一个 Pull Request。
+你可以[提一個 issue](https://github.com/kailong321200875/vue-element-plus-admin/issues/new) 或者提交一個 Pull Request。
 
 **Pull Request:**
 
-1. Fork 代码
-2. 创建自己的分支: `git checkout -b feat/xxxx`
+1. Fork 代碼
+2. 創建自己的分支: `git checkout -b feat/xxxx`
 3. 提交你的修改: `git commit -am 'feat(function): add xxxxx'`
 4. 推送您的分支: `git push origin feat/xxxx`
 5. 提交 `pull request`
 
-## Git 贡献提交规范
+## Git 貢獻提交規範
 
 - `feat` 新功能
-- `fix` 修补 bug
-- `docs` 文档
-- `style` 格式、样式(不影响代码运行的变动)
-- `refactor` 重构(即不是新增功能，也不是修改 BUG 的代码)
-- `perf` 优化相关，比如提升性能、体验
-- `test` 添加测试
-- `build` 编译相关的修改，对项目构建或者依赖的改动
-- `ci` 持续集成修改
-- `chore` 构建过程或辅助工具的变动
-- `revert` 回滚到上一个版本
-- `workflow` 工作流改进
-- `mod` 不确定分类的修改
-- `wip` 开发中
-- `types` 类型
+- `fix` 修補 bug
+- `docs` 文檔
+- `style` 格式、樣式(不影響代碼運行的變動)
+- `refactor` 重構(即不是新增功能，也不是修改 BUG 的代碼)
+- `perf` 優化相關，比如提升性能、體驗
+- `test` 添加測試
+- `build` 編譯相關的修改，對項目構建或者依賴的改動
+- `ci` 持續集成修改
+- `chore` 構建過程或輔助工具的變動
+- `revert` 回滾到上一個版本
+- `workflow` 工作流改進
+- `mod` 不確定分類的修改
+- `wip` 開發中
+- `types` 類型
 
-## 浏览器支持
+## 瀏覽器支持
 
-本地开发推荐使用 `Chrome 80+` 浏览器
+本地開發推薦使用 `Chrome 80+` 瀏覽器
 
-支持现代浏览器, 不支持 IE
+支持現代瀏覽器, 不支持 IE
 
 | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/archive/internet-explorer_9-11/internet-explorer_9-11_48x48.png" alt=" Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>IE | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt=" Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari |
 | :-: | :-: | :-: | :-: | :-: |
 | not support | last 2 versions | last 2 versions | last 2 versions | last 2 versions |
 
-## 许可证
+## 許可證
 
 [MIT](./LICENSE)

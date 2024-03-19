@@ -368,6 +368,12 @@
       "properties": {
         "pageTitle": "Property Management"
       },
+      "propertyAdd": {
+        "pageTitle": "Create Property"
+      },
+      "propertyList": {
+        "pageTitle": "Property List"
+      },
       "roles": {
         "pageTitle": "Role Management"
       },
@@ -445,6 +451,7 @@
       "description": "Description",
       "email": "Email",
       "hotel_id": "Hotel ID",
+      "image": "Image",
       "name": "Hotel Name",
       "phone": "Phone"
     }

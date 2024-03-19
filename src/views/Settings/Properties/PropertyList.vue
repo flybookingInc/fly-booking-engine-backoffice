@@ -26,7 +26,7 @@ import { ref, reactive } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useI18n } from '@/hooks/web/useI18n'
 import { useUserStore } from '@/store/modules/user'
-import { HotelListRowData } from './types'
+import { HotelListRowData } from '@/types/views/settings/property'
 import { useRouter } from 'vue-router'
 import { HotelDetails } from '@/types/stores/property'
 import { deletePropertyApi, getPropertiesApi } from '@/api/setting/property'
@@ -151,3 +151,4 @@ const deleteAction = async (row: HotelListRowData) => {
   }
 }
 </script>
+../../../components/Property/src/types

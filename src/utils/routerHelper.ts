@@ -9,7 +9,7 @@ import type {
 import { isUrl } from '@/utils/is'
 import { omit, cloneDeep } from 'lodash-es'
 
-const modules = import.meta.glob('../views/**/*.{vue,tsx}')
+const modules = import.meta.glob('../{views,components}/**/*.{vue,tsx}')
 
 /* Layout */
 export const Layout = LayoutVue

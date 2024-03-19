@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PropertyForm } from '@/components/Property'
+import { PropertyForm } from '@/views/Settings/Properties/Components'
 import { ContentDetailWrap } from '@/components/ContentDetailWrap'
 import { ref, unref } from 'vue'
 import { ElButton } from 'element-plus'
@@ -22,7 +22,7 @@ const save = async () => {
 
 <template>
   <ContentDetailWrap title="新增" @back="push('/settings/hotel')">
-    <HotelForm ref="formRef" />
+    <PropertyForm ref="formRef" />
 
     <template #header>
       <ElButton @click="go(-1)">

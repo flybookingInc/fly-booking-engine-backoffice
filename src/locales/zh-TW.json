@@ -368,6 +368,12 @@
       "properties": {
         "pageTitle": "物業管理"
       },
+      "propertyAdd": {
+        "pageTitle": "創建財產"
+      },
+      "propertyList": {
+        "pageTitle": "房產清單"
+      },
       "roles": {
         "pageTitle": "角色管理"
       },
@@ -445,6 +451,7 @@
       "description": "描述",
       "email": "電子郵件",
       "hotel_id": "飯店ID",
+      "image": "影像",
       "name": "飯店名稱",
       "phone": "電話"
     }

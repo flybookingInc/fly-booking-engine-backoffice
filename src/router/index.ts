@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 import type { App } from 'vue'
-import { Layout } from '@/utils/routerHelper'
+import { Layout, getParentLayout } from '@/utils/routerHelper'
 import { useI18n } from '@/hooks/web/useI18n'
 
 const { t } = useI18n()
@@ -58,8 +58,8 @@ export const constantRouterMap: AppRouteRecordRaw[] = [
 export const asyncRouterMap: AppRouteRecordRaw[] = [
   {
     path: '/settings',
+    redirect: '/settings/properties/property-list',
     component: Layout,
-    redirect: '/settings/properties',
     name: 'Settings',
     meta: {
       title: t('router.settings'),
@@ -69,13 +69,36 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
     children: [
       {
         path: 'properties',
-        component: () => import('@/views/Settings/Properties.vue'),
         name: 'Properties',
+        component: getParentLayout(),
+        redirect: '/settings/properties/property-list',
         meta: {
           title: t('router.views.properties.pageTitle')
           // noCache: true,
           // affix: true
-        }
+        },
+        children: [
+          {
+            path: 'property-list',
+            name: 'PropertyList',
+            component: () => import('@/views/Settings/Properties/PropertyList.vue'),
+            meta: {
+              title: t('router.views.propertyList.pageTitle'),
+              noCache: true,
+              affix: true
+            }
+          },
+          {
+            path: 'property-add',
+            name: 'PropertyAdd',
+            component: () => import('@/views/Settings/Properties/PropertyAdd.vue'),
+            meta: {
+              title: t('router.views.propertyAdd.pageTitle'),
+              noCache: true,
+              affix: true
+            }
+          }
+        ]
       },
       {
         path: 'users',

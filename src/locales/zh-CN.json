@@ -368,6 +368,12 @@
       "properties": {
         "pageTitle": "物业管理"
       },
+      "propertyAdd": {
+        "pageTitle": "创建财产"
+      },
+      "propertyList": {
+        "pageTitle": "房产清单"
+      },
       "roles": {
         "pageTitle": "角色管理"
       },
@@ -445,6 +451,7 @@
       "description": "描述",
       "email": "电子邮件",
       "hotel_id": "酒店ID",
+      "image": "图像",
       "name": "酒店名称",
       "phone": "电话"
     }

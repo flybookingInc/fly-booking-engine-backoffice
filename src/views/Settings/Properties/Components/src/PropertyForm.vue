@@ -6,9 +6,10 @@ import { useValidator } from '@/hooks/web/useValidator'
 import { HotelDetails } from '@/types/stores/property'
 import { getPropertyApi, postPropertyApi, putPropertyApi } from '@/api/setting/property'
 import { ElMessage } from 'element-plus'
-import { t } from '@/hooks/web/useI18n'
+import { useI18n } from '@/hooks/web/useI18n'
 import { GetPropertyRequest } from '@/types/api/property/getProperty'
 
+const { t } = useI18n()
 const { required } = useValidator()
 
 interface Props {
@@ -49,7 +50,7 @@ const schema = reactive<FormSchema[]>([
   },
   {
     field: 'image',
-    label: 'Image',
+    label: t('settings.property.image'),
     component: 'Input',
     formItemProps: {
       rules: [required()]

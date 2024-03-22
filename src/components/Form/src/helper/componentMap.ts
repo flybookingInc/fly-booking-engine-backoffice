@@ -22,6 +22,7 @@ import {
 } from 'element-plus'
 import { InputPassword } from '@/components/InputPassword'
 import { Editor } from '@/components/Editor'
+import { DynamicInput } from '@/components/DynamicInput'
 import { ComponentName } from '../types'
 
 const componentMap: Recordable<Component, ComponentName> = {
@@ -47,7 +48,8 @@ const componentMap: Recordable<Component, ComponentName> = {
   InputPassword: InputPassword,
   Editor: Editor,
   TreeSelect: ElTreeSelect,
-  Upload: ElUpload
+  Upload: ElUpload,
+  DynamicInput: DynamicInput
 }
 
 export { componentMap }

@@ -36,6 +36,9 @@
     "weeklyUserActivity": "每週用户活躍量"
   },
   "common": {
+    "active": "開啟",
+    "add": "添加",
+    "add_new_line": "新增行",
     "back": "返回",
     "cancel": "取消",
     "closeAll": "關閉全部標籤頁",
@@ -53,11 +56,14 @@
     "delOk": "確定",
     "delSuccess": "刪除成功",
     "delWarning": "提示",
+    "delete": "刪除",
+    "delete_line": "刪除行",
     "document": "項目文檔",
     "doneLabel": "結束",
     "endTimeText": "結束時間",
     "expand": "展開",
     "fullscreen": "全屏",
+    "inactive": "關閉",
     "inputText": "請輸入",
     "login": "登錄",
     "loginOut": "退出系統",
@@ -117,6 +123,36 @@
   "echartDemo": {
     "echart": "圖表",
     "echartDes": "基於 echarts 二次封裝組件，自適應寬度，只需傳入 options 與 height 屬性即可展示對應的圖表。"
+  },
+  "enum": {
+    "timeInterval": {
+      "per_day": "每天",
+      "per_eight_hour": "每八小時",
+      "per_eleven_hour": "每十一小時",
+      "per_five_hour": "每五小時",
+      "per_five_minute": "每五分鐘",
+      "per_fivteen_minute": "每十五分鐘",
+      "per_four_hour": "每四小時",
+      "per_hour": "每小時",
+      "per_minute": "每分鐘",
+      "per_month": "每月",
+      "per_nine_hour": "每九小時",
+      "per_seven_hour": "每七小時",
+      "per_six_hour": "每六小時",
+      "per_ten_hour": "每十小時",
+      "per_ten_minute": "每十分鐘",
+      "per_thirty_minute": "每三十分鐘",
+      "per_three_hour": "每三小時",
+      "per_twelve_hour": "每十二小時",
+      "per_twenty_minute": "每二十分鐘",
+      "per_two_hour": "每兩小時",
+      "per_week": "每周",
+      "per_year": "每年"
+    },
+    "valueOrPercent": {
+      "percent": "百分比",
+      "value": "數值"
+    }
   },
   "error": {
     "loginError": "登入錯誤",
@@ -366,7 +402,36 @@
     "user": "用户管理",
     "views": {
       "properties": {
-        "pageTitle": "物業管理"
+        "pageTitle": "物業管理",
+        "propertyForm": {
+          "GoodToKnowTitle": "很高興知道",
+          "ageRestrictionsNotes": "住宿年齡限制注意事項",
+          "allowPreviousDayReservationsLabel": "允許前一天的預訂",
+          "allowSameDayReservationsLabel": "允許付費提早入住",
+          "allowSameDayReservationsUntilLabel": "允許當天預訂，直至今日何時",
+          "amenitiesDividerTitle": "便利設施",
+          "bookingPoliciesDividerTitle": "預訂政策",
+          "checkInEndTimeLabel": "最晚入住時間",
+          "checkInOutPoliciesDividerTitle": "入住退房政策",
+          "checkInStartTimeLabel": "入住時間",
+          "checkOutTimeLabel": "退房時間",
+          "currencyDividerTitle": "貨幣",
+          "earlyCheckInChargeLabel": "提前入住每單位收費",
+          "earlyCheckInChargedUnitLabel": "提早入住收費計算單位",
+          "earlyCheckInChargedUnitTypeLabel": "提早入住收費計算方式",
+          "goodToKnow": "很高興知道",
+          "lateCheckOutAllowedLabel": "允許付費延遲退房",
+          "lateCheckOutChargedUnitLabel": "延後退房收費計算單位",
+          "lateCheckOutChargedUnitTypeLabel": "延遲退房收費計算方式",
+          "lateCheckOutValueLabel": "延後退房每單位收費",
+          "minimumCheckInAgeLabel": "辦理入住，其中一人最小年齡需滿幾歲",
+          "policiesDividerTitle": "政策",
+          "previousDayReservationsDeadlineLabel": "允許前一天的預訂，直到今日何時",
+          "servicesDividerTitle": "服務",
+          "servicesLabel": "服務",
+          "theFinePrint": "須知",
+          "theFinePrintTitle": "須知"
+        }
       },
       "propertyAdd": {
         "pageTitle": "創建財產"
@@ -380,6 +445,10 @@
       "settings": {
         "properties": {
           "add_property": "添加",
+          "propertyForm": {
+            "currencyPositionLabel": "貨幣符號位置",
+            "currencySymbolLabel": "貨幣符號"
+          },
           "title": "房產清單"
         }
       },
@@ -446,14 +515,20 @@
     "property": {
       "additional_photos": "附加照片",
       "address": "地址",
+      "amenities": "便利設施",
       "available_languages": "可用語言",
+      "city": "城市",
+      "country": "國家/地區",
       "currency": "貨幣",
       "description": "描述",
       "email": "電子郵件",
       "hotel_id": "飯店ID",
       "image": "影像",
       "name": "飯店名稱",
-      "phone": "電話"
+      "phone": "電話",
+      "property_id": "物業編號",
+      "state": "州/省",
+      "zip": "郵遞區號"
     }
   },
   "size": {
@@ -463,6 +538,57 @@
   },
   "stickyDemo": {
     "sticky": "黏性"
+  },
+  "system": {
+    "amenities": {
+      "free_parking": "免費停車場",
+      "is_accessibility_parking": "無障礙停車場",
+      "is_bar": "酒吧",
+      "is_elevator": "電梯",
+      "is_free_wifi_in_public_areas": "公共區域免費無線網絡",
+      "is_gym": "健身房",
+      "is_no_smoking_rooms": "無菸房",
+      "is_outdoor_swimming_pool": "室外游泳池",
+      "is_parking": "停車處",
+      "is_restaurants": "餐廳",
+      "is_smoking_area": "吸煙區",
+      "is_spa": "溫泉"
+    },
+    "available_currency": {
+      "AUD": "澳幣",
+      "CAD": "加幣",
+      "CHF": "瑞士法郎",
+      "CNY": "人民幣",
+      "EUR": "歐元",
+      "GBP": "英鎊",
+      "HKD": "港幣",
+      "IDR": "印尼盾",
+      "INR": "印度盧比",
+      "JPY": "日圓",
+      "KRW": "韓元",
+      "MYR": "馬來西亞林吉特",
+      "NTD": "新台幣",
+      "PHP": "菲律賓比索",
+      "RUB": "俄羅斯盧布",
+      "SEK": "瑞典克朗",
+      "SGD": "新加坡元",
+      "THB": "泰銖",
+      "USD": "美國美元",
+      "VND": "越南盾"
+    },
+    "available_services": {
+      "is_luggage_storage": "行李寄存",
+      "is_room_service": "客房服務",
+      "is_safety_deposit_box": "保險箱",
+      "is_self_checkin": "自助入住",
+      "is_shuttle_service": "擺渡車服務",
+      "is_taxi_service": "的士服務",
+      "is_tours": "旅遊"
+    },
+    "currency_position": {
+      "after": "後",
+      "before": "前"
+    }
   },
   "tableDemo": {
     "action": "操作",

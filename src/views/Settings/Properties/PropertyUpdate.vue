@@ -7,8 +7,7 @@ import { useI18n } from '@/hooks/web/useI18n'
 import { useRouter, useRoute } from 'vue-router'
 const { query } = useRoute()
 
-const hotelId = query.hotelId as string
-
+const propertyId = query.propertyId as string
 const { push, go } = useRouter()
 
 const { t } = useI18n()
@@ -25,8 +24,8 @@ const save = async () => {
 </script>
 
 <template>
-  <ContentDetailWrap title="編輯" @back="push('/settings/hotel')">
-    <PropertyForm ref="formRef" :hotel-id="hotelId" />
+  <ContentDetailWrap title="編輯" @back="push('/settings/properties/list')">
+    <PropertyForm ref="formRef" :property-id="propertyId" />
 
     <template #header>
       <ElButton @click="go(-1)">

@@ -1,5 +1,5 @@
 export interface HotelListRowData {
-  hotelId: string
+  propertyId: string
   hotelName: string
   status: boolean
 }

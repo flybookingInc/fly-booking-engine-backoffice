@@ -1532,6 +1532,19 @@ export default [
         data: [MockHotelDetail]
       }
     }
+  },
+  {
+    url: '/mock/property/getProperty',
+    method: 'get',
+    response: () => {
+      // response: ({ query }) => {
+      //   const { pageIndex, pageSize } = query
+
+      return {
+        success: true,
+        data: MockHotelDetail
+      }
+    }
   }
   // 登录接口
   //   {

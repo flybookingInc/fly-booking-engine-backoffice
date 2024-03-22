@@ -53,7 +53,8 @@ export enum ComponentNameEnum {
   INPUT_PASSWORD = 'InputPassword',
   EDITOR = 'Editor',
   TREE_SELECT = 'TreeSelect',
-  UPLOAD = 'Upload'
+  UPLOAD = 'Upload',
+  DYNAMIC_INPUT = 'DynamicInput'
 }
 
 type CamelCaseComponentName = keyof typeof ComponentNameEnum extends infer K
@@ -72,6 +73,24 @@ export interface InputPasswordComponentProps {
 }
 
 export interface InputComponentProps extends Partial<InputProps> {
+  rows?: number
+  on?: {
+    blur?: (event: FocusEvent) => void
+    focus?: (event: FocusEvent) => void
+    change?: (value: string | number) => void
+    clear?: () => void
+    input?: (value: string | number) => void
+  }
+  slots?: {
+    prefix?: (...args: any[]) => JSX.Element | null
+    suffix?: (...args: any[]) => JSX.Element | null
+    prepend?: (...args: any[]) => JSX.Element | null
+    append?: (...args: any[]) => JSX.Element | null
+  }
+  style?: CSSProperties
+}
+
+export interface DynamicInputComponentProps extends Partial<InputProps> {
   rows?: number
   on?: {
     blur?: (event: FocusEvent) => void
@@ -620,6 +639,7 @@ export interface FormSchema {
     | InputPasswordComponentProps
     | TreeSelectComponentProps
     | UploadComponentProps
+    | DynamicInputComponentProps
     | any
 
   /**

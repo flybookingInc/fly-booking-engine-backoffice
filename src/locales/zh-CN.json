@@ -36,6 +36,9 @@
     "weeklyUserActivity": "每周用户活跃量"
   },
   "common": {
+    "active": "开启",
+    "add": "添加",
+    "add_new_line": "添加新行",
     "back": "返回",
     "cancel": "取消",
     "closeAll": "关闭全部标签页",
@@ -53,11 +56,14 @@
     "delOk": "确定",
     "delSuccess": "删除成功",
     "delWarning": "提示",
+    "delete": "删除",
+    "delete_line": "删除行",
     "document": "项目文档",
     "doneLabel": "结束",
     "endTimeText": "结束时间",
     "expand": "展开",
     "fullscreen": "全屏",
+    "inactive": "关闭",
     "inputText": "请输入",
     "login": "登录",
     "loginOut": "退出系统",
@@ -117,6 +123,55 @@
   "echartDemo": {
     "echart": "图表",
     "echartDes": "基于 echarts 二次封装组件，自适应宽度，只需传入 options 与 height 属性即可展示对应的图表。"
+  },
+  "emun": {
+    "timeInterval": {
+      "per_day": "每天",
+      "per_eight_hour": "每八小时",
+      "per_eleven_hour": "每十一小时",
+      "per_five_hour": "每五小时",
+      "per_five_minute": "每五分钟",
+      "per_fivteen_minute": "每十五分钟",
+      "per_four_hour": "每四小时",
+      "per_hour": "每小时",
+      "per_minute": "每分钟",
+      "per_month": "每月",
+      "per_nine_hour": "每九小时",
+      "per_seven_hour": "每七小时",
+      "per_six_hour": "每六小时",
+      "per_ten_hour": "每十小时",
+      "per_ten_minute": "每十分钟"
+    }
+  },
+  "enum": {
+    "timeInterval": {
+      "per_day": "每天",
+      "per_eight_hour": "每八小时",
+      "per_eleven_hour": "每十一小时",
+      "per_five_hour": "每五小时",
+      "per_five_minute": "每五分钟",
+      "per_fivteen_minute": "每十五分钟",
+      "per_four_hour": "每四小时",
+      "per_hour": "每小时",
+      "per_minute": "每分钟",
+      "per_month": "每月",
+      "per_nine_hour": "每九小时",
+      "per_seven_hour": "每七小时",
+      "per_six_hour": "每六小时",
+      "per_ten_hour": "每十小时",
+      "per_ten_minute": "每十分钟",
+      "per_thirty_minute": "每三十分钟",
+      "per_three_hour": "每三小时",
+      "per_twelve_hour": "每十二小时",
+      "per_twenty_minute": "每二十分钟",
+      "per_two_hour": "每两小时",
+      "per_week": "每周",
+      "per_year": "每年"
+    },
+    "valueOrPercent": {
+      "percent": "百分比",
+      "value": "数值"
+    }
   },
   "error": {
     "loginError": "登录错误",
@@ -366,7 +421,36 @@
     "user": "用户管理",
     "views": {
       "properties": {
-        "pageTitle": "物业管理"
+        "pageTitle": "物业管理",
+        "propertyForm": {
+          "GoodToKnowTitle": "很高兴知道",
+          "ageRestrictionsNotes": "住宿年龄限制注意事项",
+          "allowPreviousDayReservationsLabel": "允许前一天的预订",
+          "allowSameDayReservationsLabel": "允许付费提早入住",
+          "allowSameDayReservationsUntilLabel": "允许当天预订，直至今日何时",
+          "amenitiesDividerTitle": "便利设施",
+          "bookingPoliciesDividerTitle": "预订政策",
+          "checkInEndTimeLabel": "最晚入住时间",
+          "checkInOutPoliciesDividerTitle": "入住退房政策",
+          "checkInStartTimeLabel": "入住时间",
+          "checkOutTimeLabel": "退房时间",
+          "currencyDividerTitle": "货币",
+          "earlyCheckInChargeLabel": "提前入住每单位收费",
+          "earlyCheckInChargedUnitLabel": "提早入住收费计算单位",
+          "earlyCheckInChargedUnitTypeLabel": "提早入住收费计算方式",
+          "goodToKnow": "很高兴知道",
+          "lateCheckOutAllowedLabel": "允许付费延迟退房",
+          "lateCheckOutChargedUnitLabel": "延后退房收费计算单位",
+          "lateCheckOutChargedUnitTypeLabel": "延迟退房收费计算方式",
+          "lateCheckOutValueLabel": "延后退房每单位收费",
+          "minimumCheckInAgeLabel": "办理入住，其中一人最小年龄需满几岁",
+          "policiesDividerTitle": "政策",
+          "previousDayReservationsDeadlineLabel": "允许前一天的预订，直到今日何时",
+          "servicesDividerTitle": "服务",
+          "servicesLabel": "服务",
+          "theFinePrint": "须知",
+          "theFinePrintTitle": "须知"
+        }
       },
       "propertyAdd": {
         "pageTitle": "创建财产"
@@ -380,6 +464,10 @@
       "settings": {
         "properties": {
           "add_property": "添加",
+          "propertyForm": {
+            "currencyPositionLabel": "货币符号位置",
+            "currencySymbolLabel": "货币符号"
+          },
           "title": "房产清单"
         }
       },
@@ -446,14 +534,20 @@
     "property": {
       "additional_photos": "附加照片",
       "address": "地址",
+      "amenities": "便利设施",
       "available_languages": "可用语言",
+      "city": "城市",
+      "country": "国家/地区",
       "currency": "货币",
       "description": "描述",
       "email": "电子邮件",
       "hotel_id": "酒店ID",
       "image": "图像",
       "name": "酒店名称",
-      "phone": "电话"
+      "phone": "电话",
+      "property_id": "物业编号",
+      "state": "州/省",
+      "zip": "邮政编码"
     }
   },
   "size": {
@@ -463,6 +557,57 @@
   },
   "stickyDemo": {
     "sticky": "黏性"
+  },
+  "system": {
+    "amenities": {
+      "free_parking": "免费停车场",
+      "is_accessibility_parking": "无障碍停车场",
+      "is_bar": "酒吧",
+      "is_elevator": "电梯",
+      "is_free_wifi_in_public_areas": "公共区域免费无线网络",
+      "is_gym": "健身房",
+      "is_no_smoking_rooms": "无烟房",
+      "is_outdoor_swimming_pool": "室外游泳池",
+      "is_parking": "停車處",
+      "is_restaurants": "餐厅",
+      "is_smoking_area": "吸烟区",
+      "is_spa": "温泉"
+    },
+    "available_currency": {
+      "AUD": "澳元",
+      "CAD": "加元",
+      "CHF": "瑞士法郎",
+      "CNY": "人民币",
+      "EUR": "欧元",
+      "GBP": "英镑",
+      "HKD": "港元",
+      "IDR": "印尼盾",
+      "INR": "印度卢比",
+      "JPY": "日圆",
+      "KRW": "韩元",
+      "MYR": "马来西亚林吉特",
+      "NTD": "新台币",
+      "PHP": "菲律宾比索",
+      "RUB": "俄罗斯卢布",
+      "SEK": "瑞典克朗",
+      "SGD": "新加坡元",
+      "THB": "泰铢",
+      "USD": "美国美元",
+      "VND": "越南盾"
+    },
+    "available_services": {
+      "is_luggage_storage": "行李寄存",
+      "is_room_service": "客房服务",
+      "is_safety_deposit_box": "保险箱",
+      "is_self_checkin": "自助入住",
+      "is_shuttle_service": "摆渡车服务",
+      "is_taxi_service": "的士服务",
+      "is_tours": "旅游"
+    },
+    "currency_position": {
+      "after": "后",
+      "before": "前"
+    }
   },
   "tableDemo": {
     "action": "操作",

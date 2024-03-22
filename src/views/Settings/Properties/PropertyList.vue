@@ -40,7 +40,7 @@ const tableData = reactive<HotelListRowData[]>([])
 
 const columns: TableColumn[] = [
   {
-    field: 'hotelId',
+    field: 'propertyId',
     label: 'ID'
   },
   {
@@ -108,7 +108,7 @@ const getList = async () => {
     const hotels = response.data.data as HotelDetails[]
     for (let hotel of hotels) {
       tableData.push({
-        hotelId: hotel.hotel_id,
+        propertyId: hotel.property_id,
         hotelName: hotel.name,
         status: true
       })
@@ -127,11 +127,11 @@ const addAction = () => {
 }
 
 const updateAction = (row: HotelListRowData) => {
-  push(`/settings/properties/update?propertyId=${row.hotelId}`)
+  push(`/settings/properties/update?propertyId=${row.propertyId}`)
 }
 
 const updatePhotoAction = (row: HotelListRowData) => {
-  push(`/settings/properties/photo-update?propertyId=${row.hotelId}`)
+  push(`/settings/properties/photo-update?propertyId=${row.propertyId}`)
 }
 
 const deleteAction = async (row: HotelListRowData) => {
@@ -142,7 +142,7 @@ const deleteAction = async (row: HotelListRowData) => {
       cancelButtonText: '取消',
       type: 'warning'
     }).then(async () => {
-      await deletePropertyApi({ property_id: row.hotelId })
+      await deletePropertyApi({ property_id: row.propertyId })
       await getList()
       ElMessage.success('刪除成功')
     })

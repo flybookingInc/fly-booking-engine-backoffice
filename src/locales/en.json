@@ -36,6 +36,9 @@
     "weeklyUserActivity": "Weekly user activity"
   },
   "common": {
+    "active": "Active",
+    "add": "Add",
+    "add_new_line": "Add New Line",
     "back": "Back",
     "cancel": "Cancel",
     "closeAll": "Close all",
@@ -53,11 +56,14 @@
     "delOk": "OK",
     "delSuccess": "Deleted successfully",
     "delWarning": "Warning",
+    "delete": "Delete",
+    "delete_line": "Delete Line",
     "document": "Document",
     "doneLabel": "End",
     "endTimeText": "End time",
     "expand": "Expand",
     "fullscreen": "Fullscreen",
+    "inactive": "Inactive",
     "inputText": "Please input",
     "login": "Login",
     "loginOut": "Login out",
@@ -117,6 +123,36 @@
   "echartDemo": {
     "echart": "Echart",
     "echartDes": "Based on the secondary packaging components of eckarts, the width is adaptive. The corresponding chart can be displayed by passing in the options and height attributes."
+  },
+  "enum": {
+    "timeInterval": {
+      "per_day": "every day",
+      "per_eight_hour": "every eight hours",
+      "per_eleven_hour": "every eleven hours",
+      "per_five_hour": "every five hours",
+      "per_five_minute": "every five minutes",
+      "per_fivteen_minute": "every fifteen minutes",
+      "per_four_hour": "every four hours",
+      "per_hour": "per hour",
+      "per_minute": "every minute",
+      "per_month": "per month",
+      "per_nine_hour": "every nine hours",
+      "per_seven_hour": "every seven hours",
+      "per_six_hour": "every six hours",
+      "per_ten_hour": "every ten hours",
+      "per_ten_minute": "every ten minutes",
+      "per_thirty_minute": "every thirty minutes",
+      "per_three_hour": "every three hours",
+      "per_twelve_hour": "every twelve hours",
+      "per_twenty_minute": "every twenty minutes",
+      "per_two_hour": "every two hours",
+      "per_week": "weekly",
+      "per_year": "Per year"
+    },
+    "valueOrPercent": {
+      "percent": "percentage",
+      "value": "numerical value"
+    }
   },
   "error": {
     "loginError": "Login error",
@@ -366,7 +402,35 @@
     "user": "User management",
     "views": {
       "properties": {
-        "pageTitle": "Property Management"
+        "pageTitle": "Property Management",
+        "propertyForm": {
+          "GoodToKnowTitle": "Good To Know",
+          "ageRestrictionsNotes": "Notes on accommodation age restrictions",
+          "allowPreviousDayReservationsLabel": "Allow Previous Day Reservations",
+          "allowSameDayReservationsLabel": "Early check-in is allowed for a fee",
+          "allowSameDayReservationsUntilLabel": "Allow Same Day Reservations Until Today When",
+          "amenitiesDividerTitle": "Amenities",
+          "bookingPoliciesDividerTitle": "Booking Policy",
+          "checkInEndTimeLabel": "latest check-in time",
+          "checkInOutPoliciesDividerTitle": "Check in Out Policies",
+          "checkInStartTimeLabel": "check in time",
+          "checkOutTimeLabel": "check-out time",
+          "currencyDividerTitle": "Currency",
+          "earlyCheckInChargeLabel": "Early check-in fee per unit",
+          "earlyCheckInChargedUnitLabel": "Early check-in fee calculation unit",
+          "earlyCheckInChargedUnitTypeLabel": "Early check-in fee calculation method",
+          "goodToKnow": "Good To Know",
+          "lateCheckOutAllowedLabel": "Paid late check-out allowed",
+          "lateCheckOutChargedUnitLabel": "Late check-out fee calculation unit",
+          "lateCheckOutValueLabel": "Late check-out fee per unit",
+          "minimumCheckInAgeLabel": "To check in, what is the minimum age of one of the guests?",
+          "policiesDividerTitle": "Policies",
+          "previousDayReservationsDeadlineLabel": "Allow Previous Day Reservations Until Today When",
+          "servicesDividerTitle": "Services",
+          "servicesLabel": "Services",
+          "theFinePrint": "The Fine Print",
+          "theFinePrintTitle": "The Fine Print"
+        }
       },
       "propertyAdd": {
         "pageTitle": "Create Property"
@@ -380,6 +444,10 @@
       "settings": {
         "properties": {
           "add_property": "Add",
+          "propertyForm": {
+            "currencyPositionLabel": "Currency Position",
+            "currencySymbolLabel": "Currency Symbol"
+          },
           "title": "Property List"
         }
       },
@@ -446,14 +514,20 @@
     "property": {
       "additional_photos": "Additional Photos",
       "address": "Address",
+      "amenities": "Amenities",
       "available_languages": "Available Languages",
+      "city": "City",
+      "country": "Country/Region",
       "currency": "Currency",
       "description": "Description",
       "email": "Email",
       "hotel_id": "Hotel ID",
       "image": "Image",
       "name": "Hotel Name",
-      "phone": "Phone"
+      "phone": "Phone",
+      "property_id": "Property ID",
+      "state": "State",
+      "zip": "Zip Code"
     }
   },
   "size": {
@@ -463,6 +537,57 @@
   },
   "stickyDemo": {
     "sticky": "Sticky"
+  },
+  "system": {
+    "amenities": {
+      "free_parking": "Free Parking",
+      "is_accessibility_parking": "Accessibility Parking",
+      "is_bar": "Bar",
+      "is_elevator": "Elevator",
+      "is_free_wifi_in_public_areas": "Free Wifi in Public Areas",
+      "is_gym": "Gym",
+      "is_no_smoking_rooms": "No Smoking Rooms",
+      "is_outdoor_swimming_pool": "Outdoor Swimming Pool",
+      "is_parking": "Parking",
+      "is_restaurants": "Restaurants",
+      "is_smoking_area": "Smoking Area",
+      "is_spa": "Spa"
+    },
+    "available_currency": {
+      "AUD": "Australian Dollar",
+      "CAD": "Canadian Dollar",
+      "CHF": "Swiss Franc",
+      "CNY": "Chinese Yuan",
+      "EUR": "Euro",
+      "GBP": "British Pound",
+      "HKD": "Hong Kong Dollar",
+      "IDR": "Indonesian Rupiah",
+      "INR": "Indian Rupee",
+      "JPY": "Japanese Yen",
+      "KRW": "South Korean Won",
+      "MYR": "Malaysian Ringgit",
+      "NTD": "New Taiwan Dollar",
+      "PHP": "Philippine Peso",
+      "RUB": "Russian Ruble",
+      "SEK": "Swedish Krona",
+      "SGD": "Singapore Dollar",
+      "THB": "Thai Baht",
+      "USD": "United States Dollar",
+      "VND": "Vietnamese Dong"
+    },
+    "available_services": {
+      "is_luggage_storage": "Luggage Storage",
+      "is_room_service": "Room Service",
+      "is_safety_deposit_box": "Safety Deposit Box",
+      "is_self_checkin": "Self Checkin",
+      "is_shuttle_service": "Shuttle Service",
+      "is_taxi_service": "Taxi Service",
+      "is_tours": "Tours"
+    },
+    "currency_position": {
+      "after": "After",
+      "before": "Before"
+    }
   },
   "tableDemo": {
     "action": "Action",

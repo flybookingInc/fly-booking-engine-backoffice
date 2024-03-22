@@ -191,7 +191,28 @@ const MockHotelDetail: HotelDetails = {
       age_restrictions_notes: ['未滿18歲入住需監護人同意書', '入住須攜帶有相片之身分證件']
     },
     children_age_limit: 12,
-    default_cancellation_policy: [],
+    default_cancellation_policy: [
+      {
+        days_before_checkin: 3,
+        penalty_type: ValueOrPercentEnum.PERCENT,
+        penalty_value: 0
+      },
+      {
+        days_before_checkin: 1,
+        penalty_type: ValueOrPercentEnum.PERCENT,
+        penalty_value: 50
+      },
+      {
+        days_before_checkin: 0,
+        penalty_type: ValueOrPercentEnum.PERCENT,
+        penalty_value: 100
+      },
+      {
+        penalty_type: ValueOrPercentEnum.PERCENT,
+        penalty_value: 100,
+        specific_date: '2024-12-31'
+      }
+    ],
     default_cancellation_policy_notes: '',
     booking_policy: {
       allow_same_day_reservations: true,

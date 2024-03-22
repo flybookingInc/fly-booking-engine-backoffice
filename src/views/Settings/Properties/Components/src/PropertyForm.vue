@@ -3,7 +3,7 @@ import { Form, FormSchema, SelectOption, CheckboxOption } from '@/components/For
 import { useForm } from '@/hooks/web/useForm'
 import { reactive, watch, ref, onBeforeMount } from 'vue'
 import { useValidator } from '@/hooks/web/useValidator'
-import { HotelDetails, Language } from '@/types/stores/property'
+import { CancellationPolicy, HotelDetails, Language } from '@/types/stores/property'
 import { getPropertyApi, postPropertyApi, putPropertyApi } from '@/api/setting/property'
 import {
   getAvailableAmenitiesApi,
@@ -39,6 +39,7 @@ let formMode: string = 'add'
 const amenitiesValues = ref<string[]>([])
 const theFinePrintValue = ref<string[]>([])
 const goodToKnowValue = ref<string[]>([])
+const cancellationPolicyValue = ref<CancellationPolicy[]>([])
 
 const schema = reactive<FormSchema[]>([
   {
@@ -741,6 +742,26 @@ const schema = reactive<FormSchema[]>([
     }
   },
   {
+    field: 'cancellationPoliciesDivider',
+    label: t('router.views.properties.propertyForm.cancellationPoliciesTitle'),
+    component: 'Divider'
+  },
+  {
+    field: 'cancellationPolicies',
+    label: t('router.views.properties.propertyForm.cancellationPoliciesLabel'),
+    component: 'CancellationInput',
+    colProps: {
+      span: 24
+    },
+    value: [],
+    optionApi: async () => {
+      console.log('cancellationPolicyValue.value=', cancellationPolicyValue.value)
+      await setValues({
+        cancellationPolicies: cancellationPolicyValue.value
+      })
+    }
+  },
+  {
     field: 'theFinePrintDivider',
     label: t('router.views.properties.propertyForm.theFinePrintTitle'),
     component: 'Divider'
@@ -821,6 +842,12 @@ onBeforeMount(async () => {
   await loadHotelDetails()
   theFinePrintValue.value = hotelDetails?.the_fine_print || []
   goodToKnowValue.value = hotelDetails?.good_to_know || []
+  console.log('hotelDetails=', hotelDetails)
+  console.log(
+    'hotelDetails?.policy.default_cancellation_policy=',
+    hotelDetails?.policy.default_cancellation_policy
+  )
+  cancellationPolicyValue.value = hotelDetails?.policy.default_cancellation_policy || []
 })
 
 /**

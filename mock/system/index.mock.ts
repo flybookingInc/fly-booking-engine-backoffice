@@ -50,6 +50,18 @@ const mockAvailableServices: string[] = [
   'is_tours'
 ]
 
+const mockAvailableCreditCards: string[] = [
+  'visa',
+  'master',
+  'jcb',
+  'amex',
+  'diners',
+  'discover',
+  'unionpay',
+  'maestro',
+  'elo'
+]
+
 export default [
   // 列表接口
   {
@@ -101,6 +113,19 @@ export default [
       return {
         success: true,
         data: mockAvailableServices
+      }
+    }
+  },
+  {
+    url: '/mock/system/getAvailableCreditCards',
+    method: 'get',
+    response: () => {
+      // response: ({ query }) => {
+      //   const { pageIndex, pageSize } = query
+
+      return {
+        success: true,
+        data: mockAvailableCreditCards
       }
     }
   }

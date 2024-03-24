@@ -90,7 +90,7 @@ const getPenaltyTypeOptions = () => {
   <div :class="[prefixCls, `${prefixCls}--${configGlobal?.size}`]">
     <ElCard class="mb-4">
       <template #header>
-        <h4 class="text-lg">距離入住天數規則</h4>
+        <h4 class="text-lg">{{ t('settings.property.dayToStayRule') }}</h4>
       </template>
       <div v-for="(_, index) in daysBeforeCheckinRulesRef" :key="index" class="my-4 flex inline">
         <ElRow>
@@ -140,8 +140,8 @@ const getPenaltyTypeOptions = () => {
     </ElCard>
     <ElCard>
       <template #header>
-        <h4 class="text-lg">特定日期規則</h4>
-        <p>特定日期規則若和距離天數規則同時成立，以特定日期規則為主</p>
+        <h4 class="text-lg">{{ t('settings.property.specificDateRule') }}</h4>
+        <p>{{ t('settings.property.specificDateRuleDescription') }}</p>
       </template>
       <div v-for="(_, index) in specificDateRulesRef" :key="index" class="my-4 flex inline">
         <ElRow>

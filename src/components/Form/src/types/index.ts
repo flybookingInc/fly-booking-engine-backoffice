@@ -92,6 +92,9 @@ export interface InputComponentProps extends Partial<InputProps> {
 }
 
 export interface DynamicInputComponentProps extends Partial<InputProps> {
+  hasCardContainer?: boolean
+  cardDescription?: string
+  cardTitle?: string
   rows?: number
   on?: {
     blur?: (event: FocusEvent) => void

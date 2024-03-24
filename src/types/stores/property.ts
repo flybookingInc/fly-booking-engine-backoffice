@@ -90,12 +90,13 @@ export interface PropertyPolicy {
   parking_policy: string
   pets_policy: PetPolicyEnum
   pets_policy_notes: string[]
-  terms_and_conditions: string
+  terms_and_conditions: string[]
 }
 
 export interface PropertyPaymentMethodsCardType {
-  card_code: CardTypeEnum
-  card_name: string
+  available_card: CardTypeEnum[]
+  payment_type_id: string
+  enabled: boolean
 }
 
 interface PropertypaymentMethodBankTransfer {
@@ -107,25 +108,23 @@ interface PropertypaymentMethodBankTransfer {
   routing_number: string
   swift_code: string
   iban: string
+  payment_type_id: string
+  enabled: boolean
+}
+
+interface PropertypaymentMethodCash {
+  payment_type_id: string
+  enabled: boolean
 }
 
 interface PropertypaymentMethod {
-  card_types?: PropertyPaymentMethodsCardType[]
-  bank_transfer?: PropertypaymentMethodBankTransfer[]
-  method:
-    | 'credit'
-    | 'bank_transfer'
-    | 'cash'
-    | 'paypal'
-    | 'stripe'
-    | 'line_pay'
-    | 'apple_pay'
-    | 'google_pay'
-  name: string
+  credit_card?: PropertyPaymentMethodsCardType
+  bank_transfer?: PropertypaymentMethodBankTransfer
+  cash?: PropertypaymentMethodCash
 }
 
 export interface PropertyPayment {
-  methods: PropertypaymentMethod[]
+  methods: PropertypaymentMethod
 }
 
 export interface RoomBed {

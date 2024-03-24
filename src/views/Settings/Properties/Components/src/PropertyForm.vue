@@ -7,6 +7,7 @@ import { CancellationPolicy, HotelDetails, Language } from '@/types/stores/prope
 import { getPropertyApi, postPropertyApi, putPropertyApi } from '@/api/setting/property'
 import {
   getAvailableAmenitiesApi,
+  getAvailableCreditCardsApi,
   getAvailableCurrenciesApi,
   getAvailableLanguagesApi,
   getAvailableServicesApi
@@ -18,6 +19,7 @@ import {
   AgeEnum,
   BeforeAfterEnum,
   HalfHourEnum,
+  PetPolicyEnum,
   TimeIntervalEnum,
   ValueOrPercentEnum
 } from '@/types/enums/dataStore'
@@ -40,6 +42,8 @@ const amenitiesValues = ref<string[]>([])
 const theFinePrintValue = ref<string[]>([])
 const goodToKnowValue = ref<string[]>([])
 const cancellationPolicyValue = ref<CancellationPolicy[]>([])
+const petsPolicyNoteValue = ref<string[]>([])
+const availableCreditCardsValue = ref<string[]>([])
 
 const schema = reactive<FormSchema[]>([
   {
@@ -221,7 +225,6 @@ const schema = reactive<FormSchema[]>([
   },
   {
     field: 'amenities',
-    label: t('settings.property.amenities'),
     component: 'CheckboxGroup',
     colProps: {
       span: 24
@@ -248,7 +251,6 @@ const schema = reactive<FormSchema[]>([
   },
   {
     field: 'services',
-    label: t('router.views.properties.propertyForm.servicesLabel'),
     component: 'CheckboxGroup',
     colProps: {
       span: 24
@@ -742,13 +744,66 @@ const schema = reactive<FormSchema[]>([
     }
   },
   {
+    field: 'infantsAndChildrenDivider',
+    label: t('router.views.properties.propertyForm.infantsAndChildrenTitle'),
+    component: 'Divider'
+  },
+  {
+    field: 'infantsAgeLimit',
+    label: t('router.views.properties.propertyForm.infantsAgeLimitLabel'),
+    component: 'InputNumber',
+    colProps: {
+      span: 12
+    },
+    optionApi: async () => {
+      setValues({ infantsAgeLimit: hotelDetails?.policy.infants_age_limit })
+    }
+  },
+  {
+    field: 'infantAmenitiesPolicy',
+    label: t('router.views.properties.propertyForm.infantAmenitiesPolicyLabel'),
+    component: 'Input',
+    colProps: {
+      span: 12
+    },
+    optionApi: async () => {
+      setValues({ infantAmenitiesPolicy: hotelDetails?.policy.infant_amenities_policy })
+    }
+  },
+  {
+    field: 'minimumAgeLimitForChildrenAccommodation',
+    label: t('router.views.properties.propertyForm.minimumAgeLimitForChildrenAccommodationLabel'),
+    component: 'InputNumber',
+    colProps: {
+      span: 12
+    },
+    optionApi: async () => {
+      setValues({
+        minimumAgeLimitForChildrenAccommodation:
+          hotelDetails?.policy.minimum_age_limit_for_children_accommodation
+      })
+    }
+  },
+  {
+    field: 'childrenAgeLimit',
+    label: t('router.views.properties.propertyForm.childrenAgeLimitLabel'),
+    component: 'InputNumber',
+    colProps: {
+      span: 12
+    },
+    optionApi: async () => {
+      setValues({
+        childrenAgeLimit: hotelDetails?.policy.children_age_limit
+      })
+    }
+  },
+  {
     field: 'cancellationPoliciesDivider',
     label: t('router.views.properties.propertyForm.cancellationPoliciesTitle'),
     component: 'Divider'
   },
   {
     field: 'cancellationPolicies',
-    label: t('router.views.properties.propertyForm.cancellationPoliciesLabel'),
     component: 'CancellationInput',
     colProps: {
       span: 24
@@ -762,16 +817,37 @@ const schema = reactive<FormSchema[]>([
     }
   },
   {
+    field: 'termsAndConditionsDivider',
+    label: t('router.views.properties.propertyForm.termsAndConditionsTitle'),
+    component: 'Divider'
+  },
+  {
+    field: 'termsAndConditions',
+    component: 'DynamicInput',
+    colProps: {
+      span: 24
+    },
+    componentProps: {
+      hasCardContainer: true
+    },
+    value: [],
+    optionApi: async () => {
+      await setValues({ termsAndConditions: hotelDetails?.policy.terms_and_conditions })
+    }
+  },
+  {
     field: 'theFinePrintDivider',
     label: t('router.views.properties.propertyForm.theFinePrintTitle'),
     component: 'Divider'
   },
   {
     field: 'theFinePrint',
-    label: t('router.views.properties.propertyForm.theFinePrint'),
     component: 'DynamicInput',
     colProps: {
       span: 24
+    },
+    componentProps: {
+      hasCardContainer: true
     },
     value: [],
     optionApi: async () => {
@@ -785,14 +861,230 @@ const schema = reactive<FormSchema[]>([
   },
   {
     field: 'goodToKnow',
-    label: t('router.views.properties.propertyForm.goodToKnow'),
     component: 'DynamicInput',
     colProps: {
       span: 24
     },
+    componentProps: {
+      hasCardContainer: true
+    },
     value: [],
     optionApi: async () => {
       await setValues({ goodToKnow: goodToKnowValue.value })
+    }
+  },
+  {
+    field: 'petsDivider',
+    label: t('router.views.properties.propertyForm.petsTitle'),
+    component: 'Divider'
+  },
+  {
+    field: 'petsPolicy',
+    label: t('router.views.properties.propertyForm.petsPolicyLabel'),
+    component: 'SelectV2',
+    colProps: {
+      span: 24
+    },
+    hidden: false,
+    value: '',
+    componentProps: {
+      options: [],
+      clearable: false
+    },
+    optionApi: async () => {
+      await setValues({
+        petsPolicy: hotelDetails?.policy.pets_policy
+      })
+      return Object.values(PetPolicyEnum).map((policy) => {
+        return {
+          label: t(`enum.petPolicy.${policy}`),
+          value: policy
+        } as SelectOption
+      })
+    }
+  },
+  {
+    field: 'petsPolicyNote',
+    label: t('router.views.properties.propertyForm.petsPolicyNoteLabel'),
+    component: 'DynamicInput',
+    colProps: {
+      span: 24
+    },
+    componentProps: {
+      hasCardContainer: true
+    },
+    value: [],
+    optionApi: async () => {
+      await setValues({ petsPolicyNote: petsPolicyNoteValue.value })
+    }
+  },
+  {
+    field: 'parkingDivider',
+    label: t('router.views.properties.propertyForm.parkingTitle'),
+    component: 'Divider'
+  },
+  {
+    field: 'parking',
+    label: t('router.views.properties.propertyForm.parkingLabel'),
+    component: 'Input',
+    colProps: {
+      span: 12
+    },
+    optionApi: async () => {
+      setValues({ parking: hotelDetails?.policy.parking_policy })
+    }
+  },
+  {
+    field: 'creditCardDivider',
+    label: t('router.views.properties.propertyForm.creditCardTitle'),
+    component: 'Divider'
+  },
+  {
+    field: 'availableCreditCards',
+    component: 'CheckboxGroup',
+    colProps: {
+      span: 24
+    },
+    value: availableCreditCardsValue,
+    componentProps: {
+      options: []
+    },
+    optionApi: async () => {
+      const res = await getAvailableCreditCardsApi({ pageIndex: 1, pageSize: 1000 })
+      return (res.data.data || []).map((creditCard) => {
+        return {
+          label: t(`enum.creditCard.${creditCard}`),
+          value: creditCard
+        } as CheckboxOption
+      })
+    }
+  },
+  {
+    field: 'bankTransferDivider',
+    label: t('router.views.properties.propertyForm.bankTransferTitle'),
+    component: 'Divider'
+  },
+  {
+    field: 'enabledBankTransfer',
+    label: t('router.views.properties.propertyForm.enabledBankTransferLabel'),
+    component: 'Switch',
+    colProps: {
+      span: 24
+    },
+    value: false,
+    componentProps: {
+      'active-value': true,
+      'inactivate-value': false,
+      activeText: t('common.active'),
+      inactivateText: t('common.inactive'),
+      inlinePrompt: true
+    },
+    optionApi: async () => {
+      await setValues({
+        enabledBankTransfer: hotelDetails?.payment.methods.bank_transfer?.enabled || false
+      })
+    }
+  },
+  {
+    field: 'accountName',
+    label: t('router.views.properties.propertyForm.accountNameLabel'),
+    component: 'Input',
+    colProps: {
+      span: 12
+    },
+    optionApi: async () => {
+      setValues({ accountName: hotelDetails?.payment.methods.bank_transfer?.account_name || '' })
+    }
+  },
+  {
+    field: 'accountNumber',
+    label: t('router.views.properties.propertyForm.accountNumberLabel'),
+    component: 'Input',
+    colProps: {
+      span: 12
+    },
+    optionApi: async () => {
+      setValues({
+        accountNumber: hotelDetails?.payment.methods.bank_transfer?.account_number || ''
+      })
+    }
+  },
+  {
+    field: 'bankCode',
+    label: t('router.views.properties.propertyForm.bankCodeLabel'),
+    component: 'Input',
+    colProps: {
+      span: 12
+    },
+    optionApi: async () => {
+      setValues({
+        bankCode: hotelDetails?.payment.methods.bank_transfer?.bank_code || ''
+      })
+    }
+  },
+  {
+    field: 'bankName',
+    label: t('router.views.properties.propertyForm.bankNameLabel'),
+    component: 'Input',
+    colProps: {
+      span: 12
+    },
+    optionApi: async () => {
+      setValues({
+        bankName: hotelDetails?.payment.methods.bank_transfer?.bank_name || ''
+      })
+    }
+  },
+  {
+    field: 'branchName',
+    label: t('router.views.properties.propertyForm.branchNameLabel'),
+    component: 'Input',
+    colProps: {
+      span: 12
+    },
+    optionApi: async () => {
+      setValues({
+        branchName: hotelDetails?.payment.methods.bank_transfer?.branch_name || ''
+      })
+    }
+  },
+  {
+    field: 'iban',
+    label: t('router.views.properties.propertyForm.ibanLabel'),
+    component: 'Input',
+    colProps: {
+      span: 12
+    },
+    optionApi: async () => {
+      setValues({
+        iban: hotelDetails?.payment.methods.bank_transfer?.iban || ''
+      })
+    }
+  },
+  {
+    field: 'routingNumber',
+    label: t('router.views.properties.propertyForm.routingNumberLabel'),
+    component: 'Input',
+    colProps: {
+      span: 12
+    },
+    optionApi: async () => {
+      setValues({
+        routingNumber: hotelDetails?.payment.methods.bank_transfer?.routing_number || ''
+      })
+    }
+  },
+  {
+    field: 'swiftCode',
+    label: t('router.views.properties.propertyForm.swiftCodeLabel'),
+    component: 'Input',
+    colProps: {
+      span: 12
+    },
+    optionApi: async () => {
+      setValues({
+        swiftCode: hotelDetails?.payment.methods.bank_transfer?.swift_code || ''
+      })
     }
   }
 ])
@@ -842,12 +1134,8 @@ onBeforeMount(async () => {
   await loadHotelDetails()
   theFinePrintValue.value = hotelDetails?.the_fine_print || []
   goodToKnowValue.value = hotelDetails?.good_to_know || []
-  console.log('hotelDetails=', hotelDetails)
-  console.log(
-    'hotelDetails?.policy.default_cancellation_policy=',
-    hotelDetails?.policy.default_cancellation_policy
-  )
   cancellationPolicyValue.value = hotelDetails?.policy.default_cancellation_policy || []
+  petsPolicyNoteValue.value = hotelDetails?.policy.pets_policy_notes || []
 })
 
 /**

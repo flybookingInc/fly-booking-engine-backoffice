@@ -119,54 +119,29 @@ const MockHotelDetail: HotelDetails = {
   ],
   name: '永和浮逸飯店',
   payment: {
-    methods: [
-      {
-        card_types: [
-          {
-            card_code: CardTypeEnum.VISA,
-            card_name: 'VISA卡'
-          },
-          {
-            card_code: CardTypeEnum.MASTER,
-            card_name: '萬事達卡'
-          },
-          {
-            card_code: CardTypeEnum.LINE_PAY,
-            card_name: 'Line支付'
-          },
-          {
-            card_code: CardTypeEnum.GOOGLE_PAY,
-            card_name: 'google支付'
-          },
-          {
-            card_code: CardTypeEnum.APPLE_PAY,
-            card_name: 'apple支付'
-          }
-        ],
-        method: 'credit',
-        name: '信用卡'
+    methods: {
+      credit_card: {
+        available_card: [CardTypeEnum.VISA, CardTypeEnum.MASTER],
+        payment_type_id: 'credit_card',
+        enabled: true
       },
-      {
-        bank_transfer: [
-          {
-            account_name: '紅浮股份有限公司',
-            account_number: '010101-343434-56789',
-            bank_code: 'cathay',
-            bank_name: '國泰世華銀行',
-            branch_name: '安和分行',
-            iban: '',
-            routing_number: '',
-            swift_code: ''
-          }
-        ],
-        method: 'bank_transfer',
-        name: '銀行轉帳'
+      bank_transfer: {
+        account_name: '紅浮股份有限公司',
+        account_number: '010101-343434-56789',
+        bank_code: 'cathay',
+        bank_name: '國泰世華銀行',
+        branch_name: '安和分行',
+        iban: '',
+        routing_number: '',
+        swift_code: '',
+        payment_type_id: 'bank_transfer',
+        enabled: true
       },
-      {
-        method: 'cash',
-        name: '現金'
+      cash: {
+        payment_type_id: 'cash',
+        enabled: true
       }
-    ]
+    }
   },
   phone: '+886-2-3233-0100',
   policy: {
@@ -222,7 +197,7 @@ const MockHotelDetail: HotelDetails = {
     },
     infants_age_limit: 2,
     parking_policy: '須事先預約',
-    terms_and_conditions: '入住須攜帶有相片之身分證件'
+    terms_and_conditions: ['入住須攜帶有相片之身分證件']
   },
   property_id: 'test',
   rate_plan_details: {

@@ -16,6 +16,10 @@ import {
   GetAvailableServicesResponse
 } from '@/types/api/system/getAvailableServices'
 import type { AxiosResponse } from 'axios'
+import {
+  GetAvailableCreditCardsRequest,
+  GetAvailableCreditCardsResponse
+} from '@/types/api/system/getAvailableCreditCards'
 
 export const getAvailableLanguagesApi = (
   data: GetAvailableLanguagesRequest
@@ -39,4 +43,10 @@ export const getAvailableServicesApi = (
   data: GetAvailableServicesRequest
 ): Promise<AxiosResponse<GetAvailableServicesResponse>> => {
   return request.get({ url: '/mock/system/getAvailableServices', params: data })
+}
+
+export const getAvailableCreditCardsApi = (
+  data: GetAvailableCreditCardsRequest
+): Promise<AxiosResponse<GetAvailableCreditCardsResponse>> => {
+  return request.get({ url: '/mock/system/getAvailableCreditCards', params: data })
 }

@@ -940,6 +940,27 @@ const schema = reactive<FormSchema[]>([
     component: 'Divider'
   },
   {
+    field: 'carditCardPayment',
+    label: t('router.views.properties.propertyForm.creditCardPaymentLabel'),
+    component: 'Switch',
+    colProps: {
+      span: 24
+    },
+    value: false,
+    componentProps: {
+      'active-value': true,
+      'inactivate-value': false,
+      activeText: t('common.active'),
+      inactivateText: t('common.inactive'),
+      inlinePrompt: true
+    },
+    optionApi: async () => {
+      await setValues({
+        carditCardPayment: hotelDetails?.payment.methods.credit_card?.enabled || false
+      })
+    }
+  },
+  {
     field: 'availableCreditCards',
     component: 'CheckboxGroup',
     colProps: {
@@ -1084,6 +1105,32 @@ const schema = reactive<FormSchema[]>([
     optionApi: async () => {
       setValues({
         swiftCode: hotelDetails?.payment.methods.bank_transfer?.swift_code || ''
+      })
+    }
+  },
+  {
+    field: 'CashDivider',
+    label: t('router.views.properties.propertyForm.cashTitle'),
+    component: 'Divider'
+  },
+  {
+    field: 'cashPayment',
+    label: t('router.views.properties.propertyForm.cashPaymentLabel'),
+    component: 'Switch',
+    colProps: {
+      span: 24
+    },
+    value: false,
+    componentProps: {
+      'active-value': true,
+      'inactivate-value': false,
+      activeText: t('common.active'),
+      inactivateText: t('common.inactive'),
+      inlinePrompt: true
+    },
+    optionApi: async () => {
+      await setValues({
+        cashPayment: hotelDetails?.payment.methods.cash?.enabled || false
       })
     }
   }

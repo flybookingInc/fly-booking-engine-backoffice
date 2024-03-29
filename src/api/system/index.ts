@@ -1,52 +1,35 @@
 import request from '@/axios'
-import {
-  GetAvailableLanguagesRequest,
-  GetAvailableLanguagesResponse
-} from '@/types/api/system/getAvailablelanguages'
-import {
-  GetAvailableAmenitiesRequest,
-  GetAvailableAmenitiesResponse
-} from '@/types/api/system/getAvailableAmenities'
-import {
-  GetAvailableCurrenciesRequest,
-  GetAvailableCurrenciesResponse
-} from '@/types/api/system/getAvailableCurrencies'
-import {
-  GetAvailableServicesRequest,
-  GetAvailableServicesResponse
-} from '@/types/api/system/getAvailableServices'
+import { GetAvailableLanguagesResponse } from '@/types/api/system/getAvailablelanguages'
+import { GetAvailableAmenitiesResponse } from '@/types/api/system/getAvailableAmenities'
+import { GetAvailableCurrenciesResponse } from '@/types/api/system/getAvailableCurrencies'
+import { GetAvailableServicesResponse } from '@/types/api/system/getAvailableServices'
 import type { AxiosResponse } from 'axios'
-import {
-  GetAvailableCreditCardsRequest,
-  GetAvailableCreditCardsResponse
-} from '@/types/api/system/getAvailableCreditCards'
+import { GetAvailableCreditCardsResponse } from '@/types/api/system/getAvailableCreditCards'
 
-export const getAvailableLanguagesApi = (
-  data: GetAvailableLanguagesRequest
-): Promise<AxiosResponse<GetAvailableLanguagesResponse>> => {
-  return request.get({ url: '/mock/system/getAvailableLanguages', params: data })
+export const getAvailableLanguagesApi = (): Promise<
+  AxiosResponse<GetAvailableLanguagesResponse>
+> => {
+  return request.get({ url: '/mock/system/getAvailableLanguages' })
 }
 
-export const getAvailableAmenitiesApi = (
-  data: GetAvailableAmenitiesRequest
-): Promise<AxiosResponse<GetAvailableAmenitiesResponse>> => {
-  return request.get({ url: '/mock/system/getAvailableAmenities', params: data })
+export const getAvailableAmenitiesApi = (): Promise<
+  AxiosResponse<GetAvailableAmenitiesResponse>
+> => {
+  return request.get({ url: '/mock/system/getAvailableAmenities' })
 }
 
-export const getAvailableCurrenciesApi = (
-  data: GetAvailableCurrenciesRequest
-): Promise<AxiosResponse<GetAvailableCurrenciesResponse>> => {
-  return request.get({ url: '/mock/system/getAvailableCurrencies', params: data })
+export const getAvailableCurrenciesApi = (): Promise<
+  AxiosResponse<GetAvailableCurrenciesResponse>
+> => {
+  return request.get({ url: '/mock/system/getAvailableCurrencies' })
 }
 
-export const getAvailableServicesApi = (
-  data: GetAvailableServicesRequest
-): Promise<AxiosResponse<GetAvailableServicesResponse>> => {
-  return request.get({ url: '/mock/system/getAvailableServices', params: data })
+export const getAvailableServicesApi = (): Promise<AxiosResponse<GetAvailableServicesResponse>> => {
+  return request.get({ url: '/mock/system/getAvailableServices' })
 }
 
-export const getAvailableCreditCardsApi = (
-  data: GetAvailableCreditCardsRequest
-): Promise<AxiosResponse<GetAvailableCreditCardsResponse>> => {
-  return request.get({ url: '/mock/system/getAvailableCreditCards', params: data })
+export const getAvailableCreditCardsApi = (): Promise<
+  AxiosResponse<GetAvailableCreditCardsResponse>
+> => {
+  return request.get({ url: '/mock/system/getAvailableCreditCards' })
 }

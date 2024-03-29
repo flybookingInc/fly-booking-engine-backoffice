@@ -1,10 +1,7 @@
-export interface GetAvailableAmenitiesRequest {
-  pageIndex: number
-  pageSize: number
-}
+import { AmenitiesEnum } from '@/types/enums/dataStore'
 
 export interface GetAvailableAmenitiesResponse {
   success: boolean
-  data?: string[] // for example: ['is_accessibility_parking', 'is_bar', 'is_elevator']
+  data?: AmenitiesEnum[] // for example: ['is_accessibility_parking', 'is_bar', 'is_elevator']
   message?: string
 }

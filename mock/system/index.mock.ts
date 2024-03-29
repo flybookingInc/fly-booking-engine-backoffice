@@ -1,34 +1,34 @@
 import { LanguageCodeEnum } from '@/types/enums/languageCode'
-import { Language } from '@/types/stores/property'
 
-const mockAvailableLanguages: Language[] = [
-  {
-    code: LanguageCodeEnum.EN,
-    name: 'English'
-  },
-  {
-    code: LanguageCodeEnum.ZH_TW,
-    name: '正體中文'
-  },
-  {
-    code: LanguageCodeEnum.ZH_CN,
-    name: '简体中文'
-  }
+const mockAvailableLanguages: LanguageCodeEnum[] = [
+  LanguageCodeEnum.EN,
+  LanguageCodeEnum.ZH_TW,
+  LanguageCodeEnum.ZH_CN,
+  LanguageCodeEnum.JA,
+  LanguageCodeEnum.KO,
+  LanguageCodeEnum.DE,
+  LanguageCodeEnum.FR,
+  LanguageCodeEnum.IT,
+  LanguageCodeEnum.ES,
+  LanguageCodeEnum.RU,
+  LanguageCodeEnum.PT,
+  LanguageCodeEnum.VI,
+  LanguageCodeEnum.TH
 ]
 
 const mockAvailableAmenities: string[] = [
   'free_parking',
-  'is_accessibility_parking',
-  'is_bar',
-  'is_elevator',
-  'is_free_wifi_in_public_areas',
-  'is_gym',
-  'is_no_smoking_rooms',
-  'is_outdoor_swimming_pool',
-  'is_parking',
-  'is_restaurants',
-  'is_smoking_area',
-  'is_spa'
+  'accessibility_parking',
+  'bar',
+  'elevator',
+  'free_wifi_in_public_areas',
+  'gym',
+  'no_smoking_rooms',
+  'outdoor_swimming_pool',
+  'parking',
+  'restaurants',
+  'smoking_area',
+  'spa'
 ]
 
 const mockAvailableCurrencies: { code: string; symbol: string }[] = [
@@ -41,13 +41,13 @@ const mockAvailableCurrencies: { code: string; symbol: string }[] = [
 ]
 
 const mockAvailableServices: string[] = [
-  'is_luggage_storage',
-  'is_room_service',
-  'is_safety_deposit_box',
-  'is_self_checkin',
-  'is_shuttle_service',
-  'is_taxi_service',
-  'is_tours'
+  'luggage_storage',
+  'room_service',
+  'safety_deposit_box',
+  'self_checkin',
+  'shuttle_service',
+  'taxi_service',
+  'tours'
 ]
 
 const mockAvailableCreditCards: string[] = [

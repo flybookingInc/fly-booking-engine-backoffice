@@ -245,8 +245,10 @@ const signIn = async () => {
           // 是否使用動態路由
           console.log('appStore.getDynamicRouter', appStore.getDynamicRouter)
           if (appStore.getDynamicRouter) {
+            console.log('use dynamic router')
             getRole()
           } else {
+            console.log('use static router')
             await permissionStore.generateRoutes('static').catch(() => {})
             permissionStore.getAddRouters.forEach((route) => {
               addRoute(route as RouteRecordRaw) // 動態添加可訪問路由表

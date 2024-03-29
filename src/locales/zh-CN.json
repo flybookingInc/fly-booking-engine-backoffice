@@ -145,6 +145,25 @@
       "unionpay": "银联卡",
       "visa": "VISA卡"
     },
+    "language": {
+      "ar": "阿拉伯语",
+      "de": "德语",
+      "en": "英语",
+      "es": "西班牙语",
+      "fr": "法语",
+      "hi": "印地语",
+      "it": "意大利语",
+      "ja": "日语",
+      "ko": "朝鲜语",
+      "nl": "荷兰语",
+      "pt": "葡萄牙语",
+      "ru": "俄语",
+      "tr": "土耳其语",
+      "vi": "越南语",
+      "zh": "中文",
+      "zh-cn": "简体中文",
+      "zh-tw": "正体中文"
+    },
     "petPolicy": {
       "pets_allowed": "允许宠物",
       "pets_not_allowed": "不允许宠物",
@@ -432,6 +451,7 @@
       "properties": {
         "pageTitle": "物业管理",
         "propertyForm": {
+          "CancellationPolicyNotesTitle": "取消注意事项",
           "GoodToKnowTitle": "提示",
           "accountNameLabel": "帐户名称",
           "accountNumberLabel": "帐户号码",
@@ -440,8 +460,10 @@
           "allowSameDayReservationsLabel": "允许付费提早入住",
           "allowSameDayReservationsUntilLabel": "允许当天预订，直至今日何时",
           "amenitiesDividerTitle": "便利设施",
+          "availableCreditCardsLabel": "可使用的信用卡",
           "bankCodeLabel": "银行代码",
           "bankNameLabel": "银行名称",
+          "bankTransferTitle": "银行汇款",
           "bookingPoliciesDividerTitle": "预订政策",
           "branchNameLabel": "分行名称",
           "cancellationPoliciesLabel": "取消规则",
@@ -463,6 +485,7 @@
           "goodToKnow": "提示",
           "ibanLabel": "国际银行帐户号码",
           "infantAmenitiesPolicyLabel": "婴儿设备规定",
+          "infantAmenitiesPolicyTitle": "婴儿设施使用规定",
           "infantsAgeLimitLabel": "婴儿年龄上限",
           "infantsAndChildrenTitle": "婴儿和孩童",
           "lateCheckOutAllowedLabel": "允许付费延迟退房",
@@ -496,6 +519,12 @@
       "roles": {
         "pageTitle": "角色管理"
       },
+      "roomTypeList": {
+        "pageTitle": "房型设定"
+      },
+      "roomTypeUpdate": {
+        "pageTitle": "编辑房型"
+      },
       "settings": {
         "properties": {
           "add_property": "添加",
@@ -504,6 +533,9 @@
             "currencySymbolLabel": "货币符号"
           },
           "title": "房产清单"
+        },
+        "roomTypesList": {
+          "title": "房型设定"
         }
       },
       "users": {
@@ -568,7 +600,8 @@
   "settings": {
     "property": {
       "additional_photos": "附加照片",
-      "address": "地址",
+      "address1": "第一行地址",
+      "address2": "第二行地址",
       "amenities": "便利设施",
       "available_languages": "可用语言",
       "city": "城市",
@@ -579,6 +612,8 @@
       "email": "电子邮件",
       "hotel_id": "酒店ID",
       "image": "图像",
+      "latitude": "纬度",
+      "logitude": "经度",
       "name": "酒店名称",
       "phone": "电话",
       "property_id": "物业编号",
@@ -598,18 +633,18 @@
   },
   "system": {
     "amenities": {
+      "accessibility_parking": "无障碍停车场",
+      "bar": "酒吧",
+      "elevator": "电梯",
       "free_parking": "免费停车场",
-      "is_accessibility_parking": "无障碍停车场",
-      "is_bar": "酒吧",
-      "is_elevator": "电梯",
-      "is_free_wifi_in_public_areas": "公共区域免费无线网络",
-      "is_gym": "健身房",
-      "is_no_smoking_rooms": "无烟房",
-      "is_outdoor_swimming_pool": "室外游泳池",
-      "is_parking": "停車處",
-      "is_restaurants": "餐厅",
-      "is_smoking_area": "吸烟区",
-      "is_spa": "温泉"
+      "free_wifi_in_public_areas": "公共区域免费无线网络",
+      "gym": "健身房",
+      "no_smoking_rooms": "无烟房",
+      "outdoor_swimming_pool": "室外游泳池",
+      "parking": "停車處",
+      "restaurants": "餐厅",
+      "smoking_area": "吸烟区",
+      "spa": "温泉"
     },
     "available_currency": {
       "AUD": "澳元",
@@ -634,13 +669,13 @@
       "VND": "越南盾"
     },
     "available_services": {
-      "is_luggage_storage": "行李寄存",
-      "is_room_service": "客房服务",
-      "is_safety_deposit_box": "保险箱",
-      "is_self_checkin": "自助入住",
-      "is_shuttle_service": "摆渡车服务",
-      "is_taxi_service": "的士服务",
-      "is_tours": "旅游"
+      "luggage_storage": "行李寄存",
+      "room_service": "客房服务",
+      "safety_deposit_box": "保险箱",
+      "self_checkin": "自助入住",
+      "shuttle_service": "摆渡车服务",
+      "taxi_service": "的士服务",
+      "tours": "旅游"
     },
     "currency_position": {
       "after": "后",

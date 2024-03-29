@@ -145,6 +145,25 @@
       "unionpay": "UnionPay cards",
       "visa": "VISA card"
     },
+    "language": {
+      "ar": "Arabic",
+      "de": "German",
+      "en": "English",
+      "es": "spanish",
+      "fr": "French",
+      "hi": "Hindi",
+      "it": "Italian",
+      "ja": "Japanese",
+      "ko": "Korean language",
+      "nl": "Dutch",
+      "pt": "Portuguese",
+      "ru": "Russian",
+      "tr": "turkish",
+      "vi": "Vietnamese",
+      "zh": "Chinese",
+      "zh-cn": "Simplified Chinese",
+      "zh-tw": "Traditional Chinese"
+    },
     "petPolicy": {
       "pets_allowed": "pets allowed",
       "pets_not_allowed": "No pets allowed",
@@ -432,6 +451,7 @@
       "properties": {
         "pageTitle": "Property Management",
         "propertyForm": {
+          "CancellationPolicyNotesTitle": "Cancellation Notes",
           "GoodToKnowTitle": "Good To Know",
           "accountNameLabel": "account name",
           "accountNumberLabel": "account number",
@@ -440,8 +460,10 @@
           "allowSameDayReservationsLabel": "Early check-in is allowed for a fee",
           "allowSameDayReservationsUntilLabel": "Allow Same Day Reservations Until Today When",
           "amenitiesDividerTitle": "Amenities",
+          "availableCreditCardsLabel": "Acceptable credit cards",
           "bankCodeLabel": "Bank Code",
           "bankNameLabel": "Bank name",
+          "bankTransferTitle": "Bank transfer",
           "bookingPoliciesDividerTitle": "Booking Policy",
           "branchNameLabel": "Branch name",
           "cancellationPoliciesLabel": "Cancel rules",
@@ -463,6 +485,7 @@
           "goodToKnow": "hint",
           "ibanLabel": "international bank account number",
           "infantAmenitiesPolicyLabel": "Baby equipment regulations",
+          "infantAmenitiesPolicyTitle": "Regulations for the use of baby facilities",
           "infantsAgeLimitLabel": "upper age limit for infants",
           "infantsAndChildrenTitle": "babies and children",
           "lateCheckOutAllowedLabel": "Paid late check-out allowed",
@@ -496,6 +519,12 @@
       "roles": {
         "pageTitle": "Role Management"
       },
+      "roomTypeList": {
+        "pageTitle": "Room type settings"
+      },
+      "roomTypeUpdate": {
+        "pageTitle": "Edit room type"
+      },
       "settings": {
         "properties": {
           "add_property": "Add",
@@ -504,6 +533,9 @@
             "currencySymbolLabel": "Currency Symbol"
           },
           "title": "Property List"
+        },
+        "roomTypesList": {
+          "title": "Room type settings"
         }
       },
       "users": {
@@ -568,7 +600,8 @@
   "settings": {
     "property": {
       "additional_photos": "Additional Photos",
-      "address": "Address",
+      "address1": "First line of address",
+      "address2": "Second line of address",
       "amenities": "Amenities",
       "available_languages": "Available Languages",
       "city": "City",
@@ -579,6 +612,8 @@
       "email": "Email",
       "hotel_id": "Hotel ID",
       "image": "Image",
+      "latitude": "latitude",
+      "logitude": "longitude",
       "name": "Hotel Name",
       "phone": "Phone",
       "property_id": "Property ID",
@@ -598,18 +633,18 @@
   },
   "system": {
     "amenities": {
+      "accessibility_parking": "Accessibility Parking",
+      "bar": "Bar",
+      "elevator": "Elevator",
       "free_parking": "Free Parking",
-      "is_accessibility_parking": "Accessibility Parking",
-      "is_bar": "Bar",
-      "is_elevator": "Elevator",
-      "is_free_wifi_in_public_areas": "Free Wifi in Public Areas",
-      "is_gym": "Gym",
-      "is_no_smoking_rooms": "No Smoking Rooms",
-      "is_outdoor_swimming_pool": "Outdoor Swimming Pool",
-      "is_parking": "Parking",
-      "is_restaurants": "Restaurants",
-      "is_smoking_area": "Smoking Area",
-      "is_spa": "Spa"
+      "free_wifi_in_public_areas": "Free Wifi in Public Areas",
+      "gym": "Gym",
+      "no_smoking_rooms": "No Smoking Rooms",
+      "outdoor_swimming_pool": "Outdoor Swimming Pool",
+      "parking": "Parking",
+      "restaurants": "Restaurants",
+      "smoking_area": "Smoking Area",
+      "spa": "Spa"
     },
     "available_currency": {
       "AUD": "Australian Dollar",
@@ -634,13 +669,13 @@
       "VND": "Vietnamese Dong"
     },
     "available_services": {
-      "is_luggage_storage": "Luggage Storage",
-      "is_room_service": "Room Service",
-      "is_safety_deposit_box": "Safety Deposit Box",
-      "is_self_checkin": "Self Checkin",
-      "is_shuttle_service": "Shuttle Service",
-      "is_taxi_service": "Taxi Service",
-      "is_tours": "Tours"
+      "luggage_storage": "Luggage Storage",
+      "room_service": "Room Service",
+      "safety_deposit_box": "Safety Deposit Box",
+      "self_checkin": "Self Checkin",
+      "shuttle_service": "Shuttle Service",
+      "taxi_service": "Taxi Service",
+      "tours": "Tours"
     },
     "currency_position": {
       "after": "After",

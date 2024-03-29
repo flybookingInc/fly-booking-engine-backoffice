@@ -70,6 +70,41 @@ const adminList = [
         ]
       },
       {
+        path: 'roomTypes',
+        name: 'RoomType',
+        component: '##',
+        redirect: '/settings/roomTypes/list',
+        meta: {
+          title: t('router.views.properties.pageTitle')
+          // noCache: true,
+          // affix: true
+        },
+        children: [
+          {
+            path: 'list',
+            name: 'RoomTypeList',
+            component: 'views/Settings/RoomTypes/RoomTypeList',
+            meta: {
+              title: t('router.views.roomTypeList.pageTitle'),
+              noCache: true,
+              affix: true
+            }
+          },
+          {
+            path: 'update',
+            name: 'RoomTypeUpdate',
+            component: 'views/Settings/RoomTypes/RoomTypeUpdate',
+            meta: {
+              title: t('router.views.roomTypeUpdate.pageTitle'),
+              noCache: true,
+              affix: true,
+              noTagsView: true,
+              hidden: true
+            }
+          }
+        ]
+      },
+      {
         path: 'users',
         component: 'views/Settings/Users',
         name: 'Users',
@@ -149,6 +184,7 @@ export default [
       const { roleName } = query
       console.log('roleName=', roleName)
       if (roleName === RoleEnum.SUPERADMIN || roleName === RoleEnum.ADMIN) {
+        console.log('use super admin list')
         return adminList
       } else {
         return testList

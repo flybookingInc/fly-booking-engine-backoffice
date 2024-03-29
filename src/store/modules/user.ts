@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { store } from '../index'
 import { useAppStore } from '@/store/modules/app'
+import { usePropertyStore } from '@/store/modules/property'
 import { useStorage } from '@/hooks/web/useStorage'
 import { UserLoginType, UserMeta, UserType } from '@/api/login/types'
 import { getCurrentUser } from '@/utils/firebase'
@@ -8,7 +9,7 @@ import { ElMessageBox } from 'element-plus'
 import { useI18n } from '@/hooks/web/useI18n'
 import { loginOutApi } from '@/api/login'
 import { useTagsViewStore } from './tagsView'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 import { User } from 'firebase/auth'
 import router from '@/router'
@@ -120,6 +121,15 @@ export const useUserStore = defineStore(
     const logout = () => {
       logoutConfirm()
     }
+    // watch user.currentPropertylId, if it changes, reload hotel details
+    watch(
+      () => currentPropertylId.value,
+      async () => {
+        const property = usePropertyStore()
+        const hotelDetails = await property.FetchHotelDetails()
+        Object.assign(property.hotelDetails, hotelDetails)
+      }
+    )
     const setRememberMe = (rememberMeValue: boolean) => {
       rememberMe.value = rememberMeValue
     }

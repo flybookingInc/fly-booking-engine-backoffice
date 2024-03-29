@@ -26,6 +26,8 @@ declare global {
 
   declare type LayoutType = 'classic' | 'topLeft' | 'top' | 'cutMenu'
 
+  declare type ValueOf<T> = T[keyof T]
+
   declare type AxiosContentType =
     | 'application/json'
     | 'application/x-www-form-urlencoded'

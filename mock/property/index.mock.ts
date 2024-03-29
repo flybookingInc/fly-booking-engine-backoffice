@@ -2,10 +2,11 @@
 // import { SUCCESS_CODE } from '@/constants'
 // import { AppRoleEnum, RoleEnum } from '@/enums/roleEnum'
 import {
+  AmenitiesEnum,
   BabyFacilityEnum,
   BedCodeEnum,
   BeforeAfterEnum,
-  CardTypeEnum,
+  CreditCardTypeEnum,
   CurrencyCodeEnum,
   FloorTypeEnum,
   HourEnum,
@@ -13,6 +14,7 @@ import {
   PillowTypeEnum,
   PriceUnitEnum,
   RoomViewCodeEnum,
+  ServicesEnum,
   TimeIntervalEnum,
   TvCastingEnum,
   TvContentEnum,
@@ -47,27 +49,23 @@ import { HotelDetails } from '@/types/stores/property'
 
 // mock hotelDetail Data
 const MockHotelDetail: HotelDetails = {
-  available_languages: [
-    { code: LanguageCodeEnum.ZH_TW, name: '正體中文' },
-    { code: LanguageCodeEnum.EN, name: 'English' }
+  available_languages: [LanguageCodeEnum.ZH_TW, LanguageCodeEnum.EN, LanguageCodeEnum.ZH_CN],
+  services: [
+    ServicesEnum.AIRPORT_TRANSFER,
+    ServicesEnum.BABYSITTING,
+    ServicesEnum.CONCIERGE,
+    ServicesEnum.CURRENCY_EXCHANGE,
+    ServicesEnum.DAILY_HOUSEKEEPING,
+    ServicesEnum.DRY_CLEANING,
+    ServicesEnum.LAUNDRY_SERVICE,
+    ServicesEnum.LUGGAGE_STORAGE,
+    ServicesEnum.ROOM_SERVICE,
+    ServicesEnum.SAFETY_DEPOSIT_BOX,
+    ServicesEnum.SELF_CHECKIN,
+    ServicesEnum.SHUTTLE_SERVICE,
+    ServicesEnum.TAXI_SERVICE,
+    ServicesEnum.FREE_TOURS
   ],
-  services: {
-    is_24hr_front_desk: true,
-    is_airport_transfer: true,
-    is_babysitting: true,
-    is_concierge: true,
-    is_currency_exchange: true,
-    is_daily_housekeeping: true,
-    is_dry_cleaning: true,
-    is_laundry_service: true,
-    is_luggage_storage: true,
-    is_room_service: true,
-    is_safety_deposit_box: true,
-    is_self_checkin: true,
-    is_shuttle_service: true,
-    is_taxi_service: true,
-    is_tours: true
-  },
   good_to_know: ['現在無需支付任何費用。信用卡資料僅作為訂房擔保，您可到店付款。'],
   address: {
     address1: 'No. 331, Sec. 1, Zhongshan Rd., Yonghe Dist.',
@@ -79,40 +77,41 @@ const MockHotelDetail: HotelDetails = {
     state: "T'ai-pei",
     zip: '234017'
   },
-  amenities: {
-    is_accessibility_parking: true,
-    is_bar: true,
-    is_elevator: true,
-    is_free_wifi_in_public_areas: true,
-    is_gym: true,
-    is_no_smoking_rooms: true,
-    is_spa: true,
-    is_outdoor_swimming_pool: true,
-    is_parking: true,
-    free_parking: true,
-    is_restaurants: true,
-    is_smoking_area: true
-  },
+  amenities: [
+    AmenitiesEnum.ACCESSIBILITY_PARKING,
+    AmenitiesEnum.BAR,
+    AmenitiesEnum.ELEVATOR,
+    AmenitiesEnum.FREE_WIFI_IN_PUBLIC_AREAS,
+    AmenitiesEnum.GYM,
+    AmenitiesEnum.NO_SMOKING_ROOMS,
+    AmenitiesEnum.SPA,
+    AmenitiesEnum.OUTDOOR_SWIMMING_POOL,
+    AmenitiesEnum.PARKING,
+    AmenitiesEnum.RESTAURANTS,
+    AmenitiesEnum.SMOKING_AREA
+  ],
   currency: {
     currency_code: CurrencyCodeEnum.TWD,
-    currency_position: BeforeAfterEnum.BEFORE,
-    currency_symbol: 'NT$'
+    currency_position: BeforeAfterEnum.BEFORE
   },
   description: '打造一個適合居住的旅館。自在、寧靜為設計目的，低視覺衝擊、日然採光、綠色植栽圍繞。',
   email: 'fooyee.yonghe@gmail.com',
   hotel_id: '217575',
   image: [
     {
+      sequence: 1,
       image: 'https://example.com',
       thumb: 'https://example.com'
     }
   ],
   additional_photos: [
     {
+      sequence: 1,
       image: 'https://example.com',
       thumb: 'https://example.com'
     },
     {
+      sequence: 2,
       image: 'https://example.com',
       thumb: 'https://example.com'
     }
@@ -121,7 +120,7 @@ const MockHotelDetail: HotelDetails = {
   payment: {
     methods: {
       credit_card: {
-        available_card: [CardTypeEnum.VISA, CardTypeEnum.MASTER],
+        available_card: [CreditCardTypeEnum.VISA, CreditCardTypeEnum.MASTER],
         payment_type_id: 'credit_card',
         enabled: true
       },
@@ -145,7 +144,7 @@ const MockHotelDetail: HotelDetails = {
   },
   phone: '+886-2-3233-0100',
   policy: {
-    infant_amenities_policy: '須事先預約',
+    infant_amenities_policy: ['須事先預約'],
     minimum_age_limit_for_children_accommodation: 6,
     pets_policy: PetPolicyEnum.ROOM_TYPE_DEPENDENT,
     pets_policy_notes: ['攜帶寵物每日加收清潔費500元整', '寵物須自行照顧'],
@@ -188,7 +187,7 @@ const MockHotelDetail: HotelDetails = {
         specific_date: '2024-12-31'
       }
     ],
-    default_cancellation_policy_notes: '',
+    default_cancellation_policy_notes: [''],
     booking_policy: {
       allow_same_day_reservations: true,
       same_day_reservations_deadline: HourEnum._NOT_SET,
@@ -196,7 +195,7 @@ const MockHotelDetail: HotelDetails = {
       previous_day_reservations_deadline: HourEnum._06_OCLOCK
     },
     infants_age_limit: 2,
-    parking_policy: '須事先預約',
+    parking_policy: ['須事先預約'],
     terms_and_conditions: ['入住須攜帶有相片之身分證件']
   },
   property_id: 'test',
@@ -217,6 +216,7 @@ const MockHotelDetail: HotelDetails = {
           description: '早餐',
           image: [
             {
+              sequence: 1,
               image: 'https://via.placeholder.com/150',
               thumb: 'https://via.placeholder.com/150'
             }
@@ -248,6 +248,7 @@ const MockHotelDetail: HotelDetails = {
           description: '早餐',
           image: [
             {
+              sequence: 1,
               image: 'https://via.placeholder.com/150',
               thumb: 'https://via.placeholder.com/150'
             }
@@ -279,6 +280,7 @@ const MockHotelDetail: HotelDetails = {
           description: '早餐',
           image: [
             {
+              sequence: 1,
               image: 'https://via.placeholder.com/150',
               thumb: 'https://via.placeholder.com/150'
             }
@@ -310,6 +312,7 @@ const MockHotelDetail: HotelDetails = {
           description: '早餐',
           image: [
             {
+              sequence: 1,
               image: 'https://via.placeholder.com/150',
               thumb: 'https://via.placeholder.com/150'
             }
@@ -341,6 +344,7 @@ const MockHotelDetail: HotelDetails = {
           description: '早餐',
           image: [
             {
+              sequence: 1,
               image: 'https://via.placeholder.com/150',
               thumb: 'https://via.placeholder.com/150'
             }
@@ -372,6 +376,7 @@ const MockHotelDetail: HotelDetails = {
           description: '早餐',
           image: [
             {
+              sequence: 1,
               image: 'https://via.placeholder.com/150',
               thumb: 'https://via.placeholder.com/150'
             }
@@ -403,6 +408,7 @@ const MockHotelDetail: HotelDetails = {
           description: '早餐',
           image: [
             {
+              sequence: 1,
               image: 'https://via.placeholder.com/150',
               thumb: 'https://via.placeholder.com/150'
             }
@@ -479,18 +485,22 @@ const MockHotelDetail: HotelDetails = {
       ],
       photos: [
         {
+          sequence: 1,
           image: 'https://h-img2.cloudbeds.com/217575/xjg3hoyu_featured~~640aaee494d31.jpg',
           thumb: 'https://h-img2.cloudbeds.com/217575/xjg3hoyu_thumb~~640aaee4d02f7.jpg'
         },
         {
+          sequence: 2,
           image: 'https://h-img3.cloudbeds.com/217575/7lfmrgxs_gallery~~640aaf015a0c6.jpg',
           thumb: 'https://h-img1.cloudbeds.com/217575/7lfmrgxs_thumb~~640aaf019d144.jpg'
         },
         {
+          sequence: 3,
           image: 'https://h-img1.cloudbeds.com/217575/dx4zxagv_gallery~~640aaf15698dc.jpg',
           thumb: 'https://h-img2.cloudbeds.com/217575/dx4zxagv_thumb~~640aaf15a3cd7.jpg'
         },
         {
+          sequence: 4,
           image: 'https://h-img3.cloudbeds.com/217575/vo4wxzv9_gallery~~640aaf39f36ca.jpg',
           thumb: 'https://h-img2.cloudbeds.com/217575/vo4wxzv9_thumb~~640aaf3a447b3.jpg'
         }
@@ -600,22 +610,27 @@ const MockHotelDetail: HotelDetails = {
       ],
       photos: [
         {
+          sequence: 1,
           image: 'https://h-img3.cloudbeds.com/217575/ed1_featured~~6380bf7cae1a4.jpg',
           thumb: 'https://h-img3.cloudbeds.com/217575/ed1_thumb~~6380bf7d01fd0.jpg'
         },
         {
+          sequence: 2,
           image: 'https://h-img1.cloudbeds.com/217575/ed5_gallery~~6380bf8ada44a.jpg',
           thumb: 'https://h-img1.cloudbeds.com/217575/ed5_thumb~~6380bf8b1bced.jpg'
         },
         {
+          sequence: 3,
           image: 'https://h-img3.cloudbeds.com/217575/kogxdotw_gallery~~640aafdcb20dd.jpg',
           thumb: 'https://h-img1.cloudbeds.com/217575/kogxdotw_thumb~~640aafdcef2e0.jpg'
         },
         {
+          sequence: 4,
           image: 'https://h-img1.cloudbeds.com/217575/iqjbv0os_gallery~~640aafec63b7b.jpg',
           thumb: 'https://h-img2.cloudbeds.com/217575/iqjbv0os_thumb~~640aafeca5077.jpg'
         },
         {
+          sequence: 5,
           image: 'https://h-img1.cloudbeds.com/217575/dx4zxagv_gallery~~640ab00f8e854.jpg',
           thumb: 'https://h-img2.cloudbeds.com/217575/dx4zxagv_thumb~~640ab00fc2eb5.jpg'
         }
@@ -725,10 +740,12 @@ const MockHotelDetail: HotelDetails = {
       ],
       photos: [
         {
+          sequence: 1,
           image: 'https://h-img2.cloudbeds.com/217575/zylsskif_featured~~640aafbb92da7.jpg',
           thumb: 'https://h-img2.cloudbeds.com/217575/zylsskif_thumb~~640aafbbcb575.jpg'
         },
         {
+          sequence: 2,
           image: 'https://h-img3.cloudbeds.com/uploads/217575/single_gallery~~64acc61117521.jpg',
           thumb: 'https://h-img2.cloudbeds.com/uploads/217575/single_thumb~~64acc6113fdce.jpg'
         }
@@ -838,14 +855,17 @@ const MockHotelDetail: HotelDetails = {
       ],
       photos: [
         {
+          sequence: 1,
           image: 'https://h-img3.cloudbeds.com/217575/ajmh0fl4_featured~~640ab1751c580.jpg',
           thumb: 'https://h-img3.cloudbeds.com/217575/ajmh0fl4_thumb~~640ab1755e33f.jpg'
         },
         {
+          sequence: 2,
           image: 'https://h-img3.cloudbeds.com/217575/i7xbqmyd_gallery~~640ab18bd88ef.jpg',
           thumb: 'https://h-img2.cloudbeds.com/217575/i7xbqmyd_thumb~~640ab18c2ac18.jpg'
         },
         {
+          sequence: 3,
           image: 'https://h-img2.cloudbeds.com/217575/dx4zxagv_gallery~~640ab0c2a4454.jpg',
           thumb: 'https://h-img1.cloudbeds.com/217575/dx4zxagv_thumb~~640ab0c2cff30.jpg'
         }
@@ -955,18 +975,22 @@ const MockHotelDetail: HotelDetails = {
       ],
       photos: [
         {
+          sequence: 1,
           image: 'https://h-img2.cloudbeds.com/217575/jzxxf3cu_featured~~640ab0438fcd0.jpg',
           thumb: 'https://h-img3.cloudbeds.com/217575/jzxxf3cu_thumb~~640ab043d0765.jpg'
         },
         {
+          sequence: 2,
           image: 'https://h-img2.cloudbeds.com/217575/rkagp6l5_gallery~~640ab063b83f8.jpg',
           thumb: 'https://h-img1.cloudbeds.com/217575/rkagp6l5_thumb~~640ab0640819c.jpg'
         },
         {
+          sequence: 3,
           image: 'https://h-img1.cloudbeds.com/217575/gkwwsnxs_gallery~~640ab06b010e1.jpg',
           thumb: 'https://h-img1.cloudbeds.com/217575/gkwwsnxs_thumb~~640ab06b559af.jpg'
         },
         {
+          sequence: 4,
           image: 'https://h-img1.cloudbeds.com/217575/xpne79yc_gallery~~640ab06f34e6b.jpg',
           thumb: 'https://h-img2.cloudbeds.com/217575/xpne79yc_thumb~~640ab06f72bb4.jpg'
         }
@@ -1081,6 +1105,7 @@ const MockHotelDetail: HotelDetails = {
       ],
       photos: [
         {
+          sequence: 1,
           image:
             'https://h-img3.cloudbeds.com/uploads/217575/img20230518150950_featured~~64acc4dd88a9b.jpg',
           thumb:
@@ -1197,22 +1222,27 @@ const MockHotelDetail: HotelDetails = {
       ],
       photos: [
         {
+          sequence: 1,
           image: 'https://h-img2.cloudbeds.com/217575/dn1c2xiv_featured~~640ab1c0dabae.jpg',
           thumb: 'https://h-img3.cloudbeds.com/217575/dn1c2xiv_thumb~~640ab1c120b0f.jpg'
         },
         {
+          sequence: 2,
           image: 'https://h-img2.cloudbeds.com/217575/6bsdsjrn_gallery~~640ab1cbd63ad.jpg',
           thumb: 'https://h-img3.cloudbeds.com/217575/6bsdsjrn_thumb~~640ab1cc1ec85.jpg'
         },
         {
+          sequence: 3,
           image: 'https://h-img3.cloudbeds.com/217575/gnxdpivj_gallery~~640ab1dd0eb39.jpg',
           thumb: 'https://h-img1.cloudbeds.com/217575/gnxdpivj_thumb~~640ab1dd5458a.jpg'
         },
         {
+          sequence: 4,
           image: 'https://h-img3.cloudbeds.com/217575/mhzusres_gallery~~640ab1e98508c.jpg',
           thumb: 'https://h-img2.cloudbeds.com/217575/mhzusres_thumb~~640ab1e9bedad.jpg'
         },
         {
+          sequence: 5,
           image: 'https://h-img2.cloudbeds.com/217575/dx4zxagv_gallery~~640ab1f11db08.jpg',
           thumb: 'https://h-img2.cloudbeds.com/217575/dx4zxagv_thumb~~640ab1f155277.jpg'
         }
@@ -1322,18 +1352,22 @@ const MockHotelDetail: HotelDetails = {
       ],
       photos: [
         {
+          sequence: 1,
           image: 'https://h-img2.cloudbeds.com/217575/xjg3hoyu_featured~~640aaee494d31.jpg',
           thumb: 'https://h-img2.cloudbeds.com/217575/xjg3hoyu_thumb~~640aaee4d02f7.jpg'
         },
         {
+          sequence: 2,
           image: 'https://h-img3.cloudbeds.com/217575/7lfmrgxs_gallery~~640aaf015a0c6.jpg',
           thumb: 'https://h-img1.cloudbeds.com/217575/7lfmrgxs_thumb~~640aaf019d144.jpg'
         },
         {
+          sequence: 3,
           image: 'https://h-img1.cloudbeds.com/217575/dx4zxagv_gallery~~640aaf15698dc.jpg',
           thumb: 'https://h-img2.cloudbeds.com/217575/dx4zxagv_thumb~~640aaf15a3cd7.jpg'
         },
         {
+          sequence: 4,
           image: 'https://h-img3.cloudbeds.com/217575/vo4wxzv9_gallery~~640aaf39f36ca.jpg',
           thumb: 'https://h-img2.cloudbeds.com/217575/vo4wxzv9_thumb~~640aaf3a447b3.jpg'
         }
@@ -1443,18 +1477,22 @@ const MockHotelDetail: HotelDetails = {
       ],
       photos: [
         {
+          sequence: 1,
           image: 'https://h-img2.cloudbeds.com/217575/xjg3hoyu_featured~~640aaee494d31.jpg',
           thumb: 'https://h-img2.cloudbeds.com/217575/xjg3hoyu_thumb~~640aaee4d02f7.jpg'
         },
         {
+          sequence: 2,
           image: 'https://h-img3.cloudbeds.com/217575/7lfmrgxs_gallery~~640aaf015a0c6.jpg',
           thumb: 'https://h-img1.cloudbeds.com/217575/7lfmrgxs_thumb~~640aaf019d144.jpg'
         },
         {
+          sequence: 3,
           image: 'https://h-img1.cloudbeds.com/217575/dx4zxagv_gallery~~640aaf15698dc.jpg',
           thumb: 'https://h-img2.cloudbeds.com/217575/dx4zxagv_thumb~~640aaf15a3cd7.jpg'
         },
         {
+          sequence: 4,
           image: 'https://h-img3.cloudbeds.com/217575/vo4wxzv9_gallery~~640aaf39f36ca.jpg',
           thumb: 'https://h-img2.cloudbeds.com/217575/vo4wxzv9_thumb~~640aaf3a447b3.jpg'
         }
@@ -1539,6 +1577,30 @@ export default [
       return {
         success: true,
         data: MockHotelDetail
+      }
+    }
+  },
+  {
+    url: '/mock/property/putProperty',
+    method: 'put',
+    response: ({ query }) => {
+      const { data } = query
+
+      return {
+        success: true,
+        data: data
+      }
+    }
+  },
+  {
+    url: '/mock/property/postProperty',
+    method: 'post',
+    response: ({ query }) => {
+      const { data } = query
+
+      return {
+        success: true,
+        data: data
       }
     }
   }

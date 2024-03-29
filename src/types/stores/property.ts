@@ -10,28 +10,31 @@ import {
   ValueOrPercentEnum,
   BeforeAfterEnum,
   CurrencyCodeEnum,
-  CardTypeEnum,
+  CreditCardTypeEnum,
   BedCodeEnum,
   RoomViewCodeEnum,
   PillowTypeEnum,
   BabyFacilityEnum,
   TimeIntervalEnum,
   HourEnum,
-  PetPolicyEnum
+  PetPolicyEnum,
+  AmenitiesEnum,
+  ServicesEnum
 } from '@/types/enums/dataStore'
 
 export interface PropertyImage {
+  sequence: number // order of image
   thumb: string // URL
   image: string // URL
 }
 
 export interface PropertyCurrency {
   currency_code: CurrencyCodeEnum
-  currency_symbol: string
   currency_position: BeforeAfterEnum
 }
 
 export interface PropertyAdditionalPhotos {
+  sequence: number
   thumb: string // URL
   image: string // URL
 }
@@ -79,27 +82,27 @@ export interface BookingPolicy {
 }
 
 export interface PropertyPolicy {
-  infant_amenities_policy: string
+  infant_amenities_policy: string[]
   check_in_out_policy: CheckInOutPolicy
   children_age_limit: number
   default_cancellation_policy: CancellationPolicy[]
-  default_cancellation_policy_notes: string
+  default_cancellation_policy_notes: string[]
   booking_policy: BookingPolicy
   minimum_age_limit_for_children_accommodation: number // 最低可入住兒童年齡限制
   infants_age_limit: number
-  parking_policy: string
+  parking_policy: string[]
   pets_policy: PetPolicyEnum
   pets_policy_notes: string[]
   terms_and_conditions: string[]
 }
 
 export interface PropertyPaymentMethodsCardType {
-  available_card: CardTypeEnum[]
+  available_card: CreditCardTypeEnum[]
   payment_type_id: string
   enabled: boolean
 }
 
-interface PropertypaymentMethodBankTransfer {
+export interface PropertypaymentMethodBankTransfer {
   bank_code: string
   bank_name: string
   branch_name: string
@@ -112,12 +115,12 @@ interface PropertypaymentMethodBankTransfer {
   enabled: boolean
 }
 
-interface PropertypaymentMethodCash {
+export interface PropertypaymentMethodCash {
   payment_type_id: string
   enabled: boolean
 }
 
-interface PropertypaymentMethod {
+export interface PropertypaymentMethod {
   credit_card?: PropertyPaymentMethodsCardType
   bank_transfer?: PropertypaymentMethodBankTransfer
   cash?: PropertypaymentMethodCash
@@ -144,11 +147,13 @@ interface RoomPilow {
 }
 
 interface packageDetailImage {
+  sequence: number // order of image
   thumb: string // URL
   image: string // URL
 }
 
 interface roomTypePhoto {
+  sequence: number
   thumb: string // URL
   image: string // URL
 }
@@ -245,46 +250,6 @@ export interface RatePlanDetail {
   room_type_id: string
 }
 
-// use object.keys() and .filter("is_").filter(=true) to get all the amentities key array.
-export interface PropertyAmenities {
-  is_accessibility_parking: boolean
-  is_bar: boolean
-  is_elevator: boolean
-  is_free_wifi_in_public_areas: boolean
-  is_gym: boolean
-  is_no_smoking_rooms: boolean
-  is_spa: boolean
-  is_outdoor_swimming_pool: boolean
-  is_parking: boolean
-  free_parking: boolean
-  is_restaurants: boolean
-  is_smoking_area: boolean
-}
-
-// use object.keys() and .filter("is_").filter(=true) to get all the active service key array.
-export interface PropertyServices {
-  is_24hr_front_desk: boolean
-  is_airport_transfer: boolean
-  is_babysitting: boolean
-  is_concierge: boolean
-  is_currency_exchange: boolean
-  is_daily_housekeeping: boolean
-  is_dry_cleaning: boolean
-  is_laundry_service: boolean
-  is_luggage_storage: boolean
-  is_room_service: boolean
-  is_safety_deposit_box: boolean
-  is_self_checkin: boolean
-  is_shuttle_service: boolean
-  is_taxi_service: boolean
-  is_tours: boolean
-}
-
-export interface Language {
-  code: LanguageCodeEnum
-  name: string
-}
-
 // thie interface should be same as api response
 export interface HotelDetails {
   hotel_id: string
@@ -293,15 +258,15 @@ export interface HotelDetails {
   image: PropertyImage[]
   description: string
   currency: PropertyCurrency
-  available_languages: Language[]
+  available_languages: LanguageCodeEnum[]
   payment: PropertyPayment
   additional_photos: PropertyAdditionalPhotos[]
   phone: string
   email: string
   address: PropertyAddress
   policy: PropertyPolicy
-  amenities: PropertyAmenities
-  services: PropertyServices
+  amenities: AmenitiesEnum[]
+  services: ServicesEnum[]
   good_to_know: string[]
   the_fine_print: string[]
   rate_plan_details: { [roomTypeRatePlanId: string]: RatePlanDetail }

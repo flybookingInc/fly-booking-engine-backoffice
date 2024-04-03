@@ -18,7 +18,7 @@ import type { CancellationPolicy } from '@/types/stores/property'
 import { ValueOrPercentEnum } from '@/types/enums/dataStore'
 const { getPrefixCls } = useDesign()
 const { t } = useI18n()
-const prefixCls = getPrefixCls('input-dynamic')
+const prefixCls = getPrefixCls('cancellation-input')
 // 輸入欄位的值
 
 const props = defineProps({

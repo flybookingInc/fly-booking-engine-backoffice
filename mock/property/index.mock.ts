@@ -3,7 +3,6 @@
 // import { AppRoleEnum, RoleEnum } from '@/enums/roleEnum'
 import {
   AmenitiesEnum,
-  BabyFacilityEnum,
   BedCodeEnum,
   BeforeAfterEnum,
   CreditCardTypeEnum,
@@ -11,15 +10,29 @@ import {
   FloorTypeEnum,
   HourEnum,
   PetPolicyEnum,
+  PillowFirmnessEnum,
   PillowTypeEnum,
   PriceUnitEnum,
+  RoomBathRoomFacilityEnum,
+  RoomBedroomAndLaundryFacilityEnum,
+  RoomEntertainmentFacilityEnum,
+  RoomFacilityEnum,
+  RoomFamilyFacilityEnum,
+  RoomHeatingAndCoolingFacilityEnum,
+  RoomInternetAndOfficeFacilityEnum,
+  RoomKitchenAndDiningFacilityEnum,
+  RoomSafetyFacilityEnum,
+  RoomTypeStatusEnum,
   RoomViewCodeEnum,
   ServicesEnum,
   TimeIntervalEnum,
   TvCastingEnum,
   TvContentEnum,
   TvResolutionEnum,
-  ValueOrPercentEnum
+  ValueOrPercentEnum,
+  WiFiSpecificationEnum,
+  WifiAvailabilityEnum,
+  WiredInternetAvailabilityEnum
 } from '@/types/enums/dataStore'
 import { LanguageCodeEnum } from '@/types/enums/languageCode'
 import { HotelDetails } from '@/types/stores/property'
@@ -425,64 +438,39 @@ const MockHotelDetail: HotelDetails = {
       room_type_id: '475909'
     }
   },
-  room_type_details: {
-    '431074': {
+  room_type_details: [
+    {
+      wired_internet_availability: [WiredInternetAvailabilityEnum.WIRED_INTERNET_FREE_IN_ROOM],
+      facilities: {
+        room_facility: Object.values(RoomFacilityEnum),
+        room_notes: [],
+        bathroom_facility: Object.values(RoomBathRoomFacilityEnum),
+        bathroom_notes: [],
+        bedroom_and_laundry_facility: Object.values(RoomBedroomAndLaundryFacilityEnum),
+        bedroom_and_laundry_notes: [],
+        heating_and_cooling_facility: Object.values(RoomHeatingAndCoolingFacilityEnum),
+        heating_and_cooling_notes: [],
+        safety_facility: Object.values(RoomSafetyFacilityEnum),
+        safety_notes: [],
+        internet_and_office_facility: Object.values(RoomInternetAndOfficeFacilityEnum),
+        internet_and_office_notes: [],
+        kitchen_and_dining_facility: Object.values(RoomKitchenAndDiningFacilityEnum),
+        kitchen_and_dining_notes: [],
+        family_facility: Object.values(RoomFamilyFacilityEnum),
+        family_notes: [],
+        entertainment_facility: Object.values(RoomEntertainmentFacilityEnum),
+        entertainment_notes: []
+      },
+      pms_room_type_id: '431074',
       bath_set_brand: '上山採藥',
       beds_included: [
         {
           code: BedCodeEnum.DOUBLE,
-          name: '雙人床',
           quantity: 1
         }
       ],
       floor_type: [FloorTypeEnum.SPC],
       hairdryer_type: 'TESCOM 2200TW',
-      is_110v_socket: true,
-      is_220v_socket: false,
-      is_air_conditioning: true,
-      is_bath_set: true,
-      is_bathrobes: false,
-      is_bathtub: true,
-      is_both_side_socket_of_bedside: true,
-      is_clothes_rack: true,
-      is_coffie_maker: false,
-      is_crib_available: true,
-      is_electric_kettle: true,
-      is_extra_bed_availale: false,
-      is_glass_bottled_water: false,
-      is_hairdryer: true,
-      is_heating: false,
-      is_hot_tub: false,
-      is_instant_coffee: true,
-      is_japanese_toilet: true,
-      is_kitchenette: false,
-      is_lead_free_faucet: true,
-      is_linens: true,
-      is_low_blue_lights_lamp: true,
-      is_microwave: false,
-      is_minibar: false,
-      is_optional_pilow: true,
-      is_private_bathroom: true,
-      is_refrigerator: true,
-      is_safty_locker: false,
-      is_slippers: true,
-      is_soundproof: true,
-      is_tea_bag: true,
-      is_toilet_paper: true,
-      is_toiletries: true,
-      is_towels: true,
-      is_tv: true,
-      is_universal_socket: true,
-      is_wake_up_service: true,
-      is_wifi: true,
-      is_wifi_free: true,
-      is_wired_internet: false,
-      is_wired_internet_free: false,
-      baby_facilities: [
-        BabyFacilityEnum.BABY_BOTTLE_STERILIZER,
-        BabyFacilityEnum.BABY_CRIB,
-        BabyFacilityEnum.BABY_BATHTUB
-      ],
       photos: [
         {
           sequence: 1,
@@ -505,22 +493,13 @@ const MockHotelDetail: HotelDetails = {
           thumb: 'https://h-img2.cloudbeds.com/217575/vo4wxzv9_thumb~~640aaf3a447b3.jpg'
         }
       ],
-      pilow_type: [
-        {
-          code: PillowTypeEnum.SOFT,
-          name: '軟枕'
-        },
-        {
-          code: PillowTypeEnum.MEDIUM,
-          name: '硬度適中枕'
-        },
-        {
-          code: PillowTypeEnum.FIRM,
-          name: '較具支撐力枕'
-        }
+      pillow_types: [PillowTypeEnum.MEMORY_FOAM, PillowTypeEnum.COTTON],
+      pillow_firmness: [
+        PillowFirmnessEnum.SOFT,
+        PillowFirmnessEnum.MEDIUM,
+        PillowFirmnessEnum.FIRM
       ],
       room_size: 24,
-      room_size_unit: '平方公尺',
       room_type_id: '431074',
       room_type_name: 'Standard Double',
       tv_casting: [TvCastingEnum.CHROMECAST, TvCastingEnum.AIRPLAY, TvCastingEnum.DLNA],
@@ -536,78 +515,48 @@ const MockHotelDetail: HotelDetails = {
       ],
       tv_resolution: TvResolutionEnum._4K,
       tv_size: 70,
-      view_types: [
-        {
-          code: RoomViewCodeEnum.CITY_VIEW,
-          name: '城市景觀'
-        },
-        {
-          code: RoomViewCodeEnum.PARTIAL_NO_VIEW,
-          name: '部分房間無窗'
-        }
-      ],
-      wifi_description: '免費WiFi',
-      wifi_max_download_speed: 300,
-      wifi_max_upload_speed: 300,
-      wifi_specifications: 'WiFi 5'
+      view_types: [RoomViewCodeEnum.CITY_VIEW, RoomViewCodeEnum.PARTIAL_NO_VIEW],
+      status: RoomTypeStatusEnum.ACTIVE,
+      internet_max_download_speed: 300,
+      internet_max_upload_speed: 300,
+      wifi_specifications: [WiFiSpecificationEnum.WIFI5, WiFiSpecificationEnum.WIFI4],
+      wifi_availability: [
+        WifiAvailabilityEnum.WIFI_FREE_IN_ROOM,
+        WifiAvailabilityEnum.WIFI_PAID_IN_PUBLIC_AREAS
+      ]
     },
-    '431129': {
+    {
+      wired_internet_availability: [WiredInternetAvailabilityEnum.WIRED_INTERNET_FREE_IN_ROOM],
+      facilities: {
+        room_facility: Object.values(RoomFacilityEnum),
+        room_notes: [],
+        bathroom_facility: Object.values(RoomBathRoomFacilityEnum),
+        bathroom_notes: [],
+        bedroom_and_laundry_facility: Object.values(RoomBedroomAndLaundryFacilityEnum),
+        bedroom_and_laundry_notes: [],
+        heating_and_cooling_facility: Object.values(RoomHeatingAndCoolingFacilityEnum),
+        heating_and_cooling_notes: [],
+        safety_facility: Object.values(RoomSafetyFacilityEnum),
+        safety_notes: [],
+        internet_and_office_facility: Object.values(RoomInternetAndOfficeFacilityEnum),
+        internet_and_office_notes: [],
+        kitchen_and_dining_facility: Object.values(RoomKitchenAndDiningFacilityEnum),
+        kitchen_and_dining_notes: [],
+        family_facility: Object.values(RoomFamilyFacilityEnum),
+        family_notes: [],
+        entertainment_facility: Object.values(RoomEntertainmentFacilityEnum),
+        entertainment_notes: []
+      },
+      pms_room_type_id: '431129',
       bath_set_brand: '上山採藥',
       beds_included: [
         {
           code: BedCodeEnum.DOUBLE,
-          name: '雙人床',
           quantity: 1
         }
       ],
       floor_type: [FloorTypeEnum.SPC],
       hairdryer_type: 'TESCOM 2200TW',
-      is_110v_socket: true,
-      is_220v_socket: false,
-      is_air_conditioning: true,
-      is_bath_set: true,
-      is_bathrobes: false,
-      is_bathtub: true,
-      is_both_side_socket_of_bedside: true,
-      is_clothes_rack: true,
-      is_coffie_maker: false,
-      is_crib_available: true,
-      is_electric_kettle: true,
-      is_extra_bed_availale: false,
-      is_glass_bottled_water: false,
-      is_hairdryer: true,
-      is_heating: false,
-      is_hot_tub: false,
-      is_instant_coffee: true,
-      is_japanese_toilet: true,
-      is_kitchenette: false,
-      is_lead_free_faucet: true,
-      is_linens: true,
-      is_low_blue_lights_lamp: true,
-      is_microwave: false,
-      is_minibar: false,
-      is_optional_pilow: true,
-      is_private_bathroom: true,
-      is_refrigerator: true,
-      is_safty_locker: false,
-      is_slippers: true,
-      is_soundproof: true,
-      is_tea_bag: true,
-      is_toilet_paper: true,
-      is_toiletries: true,
-      is_towels: true,
-      is_tv: true,
-      is_universal_socket: true,
-      is_wake_up_service: true,
-      is_wifi: true,
-      is_wifi_free: true,
-      is_wired_internet: false,
-      is_wired_internet_free: false,
-      baby_facilities: [
-        BabyFacilityEnum.BABY_BOTTLE_STERILIZER,
-        BabyFacilityEnum.BABY_CRIB,
-        BabyFacilityEnum.BABY_BATHTUB
-      ],
       photos: [
         {
           sequence: 1,
@@ -635,22 +584,14 @@ const MockHotelDetail: HotelDetails = {
           thumb: 'https://h-img2.cloudbeds.com/217575/dx4zxagv_thumb~~640ab00fc2eb5.jpg'
         }
       ],
-      pilow_type: [
-        {
-          code: PillowTypeEnum.SOFT,
-          name: '軟枕'
-        },
-        {
-          code: PillowTypeEnum.MEDIUM,
-          name: '硬度適中枕'
-        },
-        {
-          code: PillowTypeEnum.FIRM,
-          name: '較具支撐力枕'
-        }
+      pillow_types: [PillowTypeEnum.MEMORY_FOAM, PillowTypeEnum.COTTON],
+      pillow_firmness: [
+        PillowFirmnessEnum.SOFT,
+        PillowFirmnessEnum.MEDIUM,
+        PillowFirmnessEnum.FIRM
       ],
       room_size: 24,
-      room_size_unit: '平方公尺',
+
       room_type_id: '431129',
       room_type_name: 'Elite Double',
       tv_casting: [TvCastingEnum.CHROMECAST, TvCastingEnum.AIRPLAY, TvCastingEnum.DLNA],
@@ -666,78 +607,48 @@ const MockHotelDetail: HotelDetails = {
       ],
       tv_resolution: TvResolutionEnum._4K,
       tv_size: 70,
-      view_types: [
-        {
-          code: RoomViewCodeEnum.CITY_VIEW,
-          name: '城市景觀'
-        },
-        {
-          code: RoomViewCodeEnum.PARTIAL_NO_VIEW,
-          name: '部分房間無窗'
-        }
-      ],
-      wifi_description: '免費WiFi',
-      wifi_max_download_speed: 300,
-      wifi_max_upload_speed: 300,
-      wifi_specifications: 'WiFi 5'
+      view_types: [RoomViewCodeEnum.CITY_VIEW, RoomViewCodeEnum.PARTIAL_NO_VIEW],
+      status: RoomTypeStatusEnum.ACTIVE,
+      internet_max_download_speed: 300,
+      internet_max_upload_speed: 300,
+      wifi_specifications: [WiFiSpecificationEnum.WIFI5, WiFiSpecificationEnum.WIFI4],
+      wifi_availability: [
+        WifiAvailabilityEnum.WIFI_FREE_IN_ROOM,
+        WifiAvailabilityEnum.WIFI_PAID_IN_PUBLIC_AREAS
+      ]
     },
-    '464349': {
+    {
+      wired_internet_availability: [WiredInternetAvailabilityEnum.WIRED_INTERNET_FREE_IN_ROOM],
+      facilities: {
+        room_facility: Object.values(RoomFacilityEnum),
+        room_notes: [],
+        bathroom_facility: Object.values(RoomBathRoomFacilityEnum),
+        bathroom_notes: [],
+        bedroom_and_laundry_facility: Object.values(RoomBedroomAndLaundryFacilityEnum),
+        bedroom_and_laundry_notes: [],
+        heating_and_cooling_facility: Object.values(RoomHeatingAndCoolingFacilityEnum),
+        heating_and_cooling_notes: [],
+        safety_facility: Object.values(RoomSafetyFacilityEnum),
+        safety_notes: [],
+        internet_and_office_facility: Object.values(RoomInternetAndOfficeFacilityEnum),
+        internet_and_office_notes: [],
+        kitchen_and_dining_facility: Object.values(RoomKitchenAndDiningFacilityEnum),
+        kitchen_and_dining_notes: [],
+        family_facility: Object.values(RoomFamilyFacilityEnum),
+        family_notes: [],
+        entertainment_facility: Object.values(RoomEntertainmentFacilityEnum),
+        entertainment_notes: []
+      },
+      pms_room_type_id: '464349',
       bath_set_brand: '上山採藥',
       beds_included: [
         {
           code: BedCodeEnum.SINGLE,
-          name: '單人床',
           quantity: 1
         }
       ],
       floor_type: [FloorTypeEnum.SPC],
       hairdryer_type: 'TESCOM 2200TW',
-      is_110v_socket: true,
-      is_220v_socket: false,
-      is_air_conditioning: true,
-      is_bath_set: true,
-      is_bathrobes: false,
-      is_bathtub: true,
-      is_both_side_socket_of_bedside: true,
-      is_clothes_rack: true,
-      is_coffie_maker: false,
-      is_crib_available: true,
-      is_electric_kettle: true,
-      is_extra_bed_availale: false,
-      is_glass_bottled_water: false,
-      is_hairdryer: true,
-      is_heating: false,
-      is_hot_tub: false,
-      is_instant_coffee: true,
-      is_japanese_toilet: true,
-      is_kitchenette: false,
-      is_lead_free_faucet: true,
-      is_linens: true,
-      is_low_blue_lights_lamp: true,
-      is_microwave: false,
-      is_minibar: false,
-      is_optional_pilow: true,
-      is_private_bathroom: true,
-      is_refrigerator: true,
-      is_safty_locker: false,
-      is_slippers: true,
-      is_soundproof: true,
-      is_tea_bag: true,
-      is_toilet_paper: true,
-      is_toiletries: true,
-      is_towels: true,
-      is_tv: true,
-      is_universal_socket: true,
-      is_wake_up_service: true,
-      is_wifi: true,
-      is_wifi_free: true,
-      is_wired_internet: false,
-      is_wired_internet_free: false,
-      baby_facilities: [
-        BabyFacilityEnum.BABY_BOTTLE_STERILIZER,
-        BabyFacilityEnum.BABY_CRIB,
-        BabyFacilityEnum.BABY_BATHTUB
-      ],
       photos: [
         {
           sequence: 1,
@@ -750,22 +661,14 @@ const MockHotelDetail: HotelDetails = {
           thumb: 'https://h-img2.cloudbeds.com/uploads/217575/single_thumb~~64acc6113fdce.jpg'
         }
       ],
-      pilow_type: [
-        {
-          code: PillowTypeEnum.SOFT,
-          name: '軟枕'
-        },
-        {
-          code: PillowTypeEnum.MEDIUM,
-          name: '硬度適中枕'
-        },
-        {
-          code: PillowTypeEnum.FIRM,
-          name: '較具支撐力枕'
-        }
+      pillow_types: [PillowTypeEnum.MEMORY_FOAM, PillowTypeEnum.COTTON],
+      pillow_firmness: [
+        PillowFirmnessEnum.SOFT,
+        PillowFirmnessEnum.MEDIUM,
+        PillowFirmnessEnum.FIRM
       ],
       room_size: 24,
-      room_size_unit: '平方公尺',
+
       room_type_id: '464349',
       room_type_name: 'Single Room',
       tv_casting: [TvCastingEnum.CHROMECAST, TvCastingEnum.AIRPLAY, TvCastingEnum.DLNA],
@@ -781,78 +684,48 @@ const MockHotelDetail: HotelDetails = {
       ],
       tv_resolution: TvResolutionEnum._4K,
       tv_size: 70,
-      view_types: [
-        {
-          code: RoomViewCodeEnum.CITY_VIEW,
-          name: '城市景觀'
-        },
-        {
-          code: RoomViewCodeEnum.PARTIAL_NO_VIEW,
-          name: '部分房間無窗'
-        }
-      ],
-      wifi_description: '免費WiFi',
-      wifi_max_download_speed: 300,
-      wifi_max_upload_speed: 300,
-      wifi_specifications: 'WiFi 5'
+      view_types: [RoomViewCodeEnum.CITY_VIEW, RoomViewCodeEnum.PARTIAL_NO_VIEW],
+      status: RoomTypeStatusEnum.ACTIVE,
+      internet_max_download_speed: 300,
+      internet_max_upload_speed: 300,
+      wifi_specifications: [WiFiSpecificationEnum.WIFI5, WiFiSpecificationEnum.WIFI4],
+      wifi_availability: [
+        WifiAvailabilityEnum.WIFI_FREE_IN_ROOM,
+        WifiAvailabilityEnum.WIFI_PAID_IN_PUBLIC_AREAS
+      ]
     },
-    '464352': {
+    {
+      wired_internet_availability: [WiredInternetAvailabilityEnum.WIRED_INTERNET_FREE_IN_ROOM],
+      facilities: {
+        room_facility: Object.values(RoomFacilityEnum),
+        room_notes: [],
+        bathroom_facility: Object.values(RoomBathRoomFacilityEnum),
+        bathroom_notes: [],
+        bedroom_and_laundry_facility: Object.values(RoomBedroomAndLaundryFacilityEnum),
+        bedroom_and_laundry_notes: [],
+        heating_and_cooling_facility: Object.values(RoomHeatingAndCoolingFacilityEnum),
+        heating_and_cooling_notes: [],
+        safety_facility: Object.values(RoomSafetyFacilityEnum),
+        safety_notes: [],
+        internet_and_office_facility: Object.values(RoomInternetAndOfficeFacilityEnum),
+        internet_and_office_notes: [],
+        kitchen_and_dining_facility: Object.values(RoomKitchenAndDiningFacilityEnum),
+        kitchen_and_dining_notes: [],
+        family_facility: Object.values(RoomFamilyFacilityEnum),
+        family_notes: [],
+        entertainment_facility: Object.values(RoomEntertainmentFacilityEnum),
+        entertainment_notes: []
+      },
+      pms_room_type_id: '464352',
       bath_set_brand: '上山採藥',
       beds_included: [
         {
           code: BedCodeEnum.DOUBLE,
-          name: '雙人床',
           quantity: 2
         }
       ],
       floor_type: [FloorTypeEnum.SPC],
       hairdryer_type: 'TESCOM 2200TW',
-      is_110v_socket: true,
-      is_220v_socket: false,
-      is_air_conditioning: true,
-      is_bath_set: true,
-      is_bathrobes: false,
-      is_bathtub: true,
-      is_both_side_socket_of_bedside: true,
-      is_clothes_rack: true,
-      is_coffie_maker: false,
-      is_crib_available: true,
-      is_electric_kettle: true,
-      is_extra_bed_availale: false,
-      is_glass_bottled_water: false,
-      is_hairdryer: true,
-      is_heating: false,
-      is_hot_tub: false,
-      is_instant_coffee: true,
-      is_japanese_toilet: true,
-      is_kitchenette: false,
-      is_lead_free_faucet: true,
-      is_linens: true,
-      is_low_blue_lights_lamp: true,
-      is_microwave: false,
-      is_minibar: false,
-      is_optional_pilow: true,
-      is_private_bathroom: true,
-      is_refrigerator: true,
-      is_safty_locker: false,
-      is_slippers: true,
-      is_soundproof: true,
-      is_tea_bag: true,
-      is_toilet_paper: true,
-      is_toiletries: true,
-      is_towels: true,
-      is_tv: true,
-      is_universal_socket: true,
-      is_wake_up_service: true,
-      is_wifi: true,
-      is_wifi_free: true,
-      is_wired_internet: false,
-      is_wired_internet_free: false,
-      baby_facilities: [
-        BabyFacilityEnum.BABY_BOTTLE_STERILIZER,
-        BabyFacilityEnum.BABY_CRIB,
-        BabyFacilityEnum.BABY_BATHTUB
-      ],
       photos: [
         {
           sequence: 1,
@@ -870,22 +743,14 @@ const MockHotelDetail: HotelDetails = {
           thumb: 'https://h-img1.cloudbeds.com/217575/dx4zxagv_thumb~~640ab0c2cff30.jpg'
         }
       ],
-      pilow_type: [
-        {
-          code: PillowTypeEnum.SOFT,
-          name: '軟枕'
-        },
-        {
-          code: PillowTypeEnum.MEDIUM,
-          name: '硬度適中枕'
-        },
-        {
-          code: PillowTypeEnum.FIRM,
-          name: '較具支撐力枕'
-        }
+      pillow_types: [PillowTypeEnum.MEMORY_FOAM, PillowTypeEnum.COTTON],
+      pillow_firmness: [
+        PillowFirmnessEnum.SOFT,
+        PillowFirmnessEnum.MEDIUM,
+        PillowFirmnessEnum.FIRM
       ],
       room_size: 24,
-      room_size_unit: '平方公尺',
+
       room_type_id: '464352',
       room_type_name: '四人家庭房 (兩張雙人床)',
       tv_casting: [TvCastingEnum.CHROMECAST, TvCastingEnum.AIRPLAY, TvCastingEnum.DLNA],
@@ -901,78 +766,48 @@ const MockHotelDetail: HotelDetails = {
       ],
       tv_resolution: TvResolutionEnum._4K,
       tv_size: 70,
-      view_types: [
-        {
-          code: RoomViewCodeEnum.CITY_VIEW,
-          name: '城市景觀'
-        },
-        {
-          code: RoomViewCodeEnum.PARTIAL_NO_VIEW,
-          name: '部分房間無窗'
-        }
-      ],
-      wifi_description: '免費WiFi',
-      wifi_max_download_speed: 300,
-      wifi_max_upload_speed: 300,
-      wifi_specifications: 'WiFi 5'
+      view_types: [RoomViewCodeEnum.CITY_VIEW, RoomViewCodeEnum.PARTIAL_NO_VIEW],
+      status: RoomTypeStatusEnum.ACTIVE,
+      internet_max_download_speed: 300,
+      internet_max_upload_speed: 300,
+      wifi_specifications: [WiFiSpecificationEnum.WIFI5, WiFiSpecificationEnum.WIFI4],
+      wifi_availability: [
+        WifiAvailabilityEnum.WIFI_FREE_IN_ROOM,
+        WifiAvailabilityEnum.WIFI_PAID_IN_PUBLIC_AREAS
+      ]
     },
-    '472669': {
+    {
+      wired_internet_availability: [WiredInternetAvailabilityEnum.WIRED_INTERNET_FREE_IN_ROOM],
+      facilities: {
+        room_facility: Object.values(RoomFacilityEnum),
+        room_notes: [],
+        bathroom_facility: Object.values(RoomBathRoomFacilityEnum),
+        bathroom_notes: [],
+        bedroom_and_laundry_facility: Object.values(RoomBedroomAndLaundryFacilityEnum),
+        bedroom_and_laundry_notes: [],
+        heating_and_cooling_facility: Object.values(RoomHeatingAndCoolingFacilityEnum),
+        heating_and_cooling_notes: [],
+        safety_facility: Object.values(RoomSafetyFacilityEnum),
+        safety_notes: [],
+        internet_and_office_facility: Object.values(RoomInternetAndOfficeFacilityEnum),
+        internet_and_office_notes: [],
+        kitchen_and_dining_facility: Object.values(RoomKitchenAndDiningFacilityEnum),
+        kitchen_and_dining_notes: [],
+        family_facility: Object.values(RoomFamilyFacilityEnum),
+        family_notes: [],
+        entertainment_facility: Object.values(RoomEntertainmentFacilityEnum),
+        entertainment_notes: []
+      },
+      pms_room_type_id: '472669',
       bath_set_brand: '上山採藥',
       beds_included: [
         {
           code: BedCodeEnum.DOUBLE,
-          name: '雙人床',
           quantity: 1
         }
       ],
       floor_type: [FloorTypeEnum.SPC],
       hairdryer_type: 'TESCOM 2200TW',
-      is_110v_socket: true,
-      is_220v_socket: false,
-      is_air_conditioning: true,
-      is_bath_set: true,
-      is_bathrobes: false,
-      is_bathtub: true,
-      is_both_side_socket_of_bedside: true,
-      is_clothes_rack: true,
-      is_coffie_maker: false,
-      is_crib_available: true,
-      is_electric_kettle: true,
-      is_extra_bed_availale: false,
-      is_glass_bottled_water: false,
-      is_hairdryer: true,
-      is_heating: false,
-      is_hot_tub: false,
-      is_instant_coffee: true,
-      is_japanese_toilet: true,
-      is_kitchenette: false,
-      is_lead_free_faucet: true,
-      is_linens: true,
-      is_low_blue_lights_lamp: true,
-      is_microwave: false,
-      is_minibar: false,
-      is_optional_pilow: true,
-      is_private_bathroom: true,
-      is_refrigerator: true,
-      is_safty_locker: false,
-      is_slippers: true,
-      is_soundproof: true,
-      is_tea_bag: true,
-      is_toilet_paper: true,
-      is_toiletries: true,
-      is_towels: true,
-      is_tv: true,
-      is_universal_socket: true,
-      is_wake_up_service: true,
-      is_wifi: true,
-      is_wifi_free: true,
-      is_wired_internet: false,
-      is_wired_internet_free: false,
-      baby_facilities: [
-        BabyFacilityEnum.BABY_BOTTLE_STERILIZER,
-        BabyFacilityEnum.BABY_CRIB,
-        BabyFacilityEnum.BABY_BATHTUB
-      ],
       photos: [
         {
           sequence: 1,
@@ -995,22 +830,14 @@ const MockHotelDetail: HotelDetails = {
           thumb: 'https://h-img2.cloudbeds.com/217575/xpne79yc_thumb~~640ab06f72bb4.jpg'
         }
       ],
-      pilow_type: [
-        {
-          code: PillowTypeEnum.SOFT,
-          name: '軟枕'
-        },
-        {
-          code: PillowTypeEnum.MEDIUM,
-          name: '硬度適中枕'
-        },
-        {
-          code: PillowTypeEnum.FIRM,
-          name: '較具支撐力枕'
-        }
+      pillow_types: [PillowTypeEnum.MEMORY_FOAM, PillowTypeEnum.COTTON],
+      pillow_firmness: [
+        PillowFirmnessEnum.SOFT,
+        PillowFirmnessEnum.MEDIUM,
+        PillowFirmnessEnum.FIRM
       ],
       room_size: 24,
-      room_size_unit: '平方公尺',
+
       room_type_id: '472669',
       room_type_name: 'Deluxe Double',
       tv_casting: [TvCastingEnum.CHROMECAST, TvCastingEnum.AIRPLAY, TvCastingEnum.DLNA],
@@ -1026,83 +853,52 @@ const MockHotelDetail: HotelDetails = {
       ],
       tv_resolution: TvResolutionEnum._4K,
       tv_size: 70,
-      view_types: [
-        {
-          code: RoomViewCodeEnum.CITY_VIEW,
-          name: '城市景觀'
-        },
-        {
-          code: RoomViewCodeEnum.PARTIAL_NO_VIEW,
-          name: '部分房間無窗'
-        }
-      ],
-      wifi_description: '免費WiFi',
-      wifi_max_download_speed: 300,
-      wifi_max_upload_speed: 300,
-      wifi_specifications: 'WiFi 5'
+      view_types: [RoomViewCodeEnum.CITY_VIEW, RoomViewCodeEnum.PARTIAL_NO_VIEW],
+      status: RoomTypeStatusEnum.ACTIVE,
+      internet_max_download_speed: 300,
+      internet_max_upload_speed: 300,
+      wifi_specifications: [WiFiSpecificationEnum.WIFI5, WiFiSpecificationEnum.WIFI4],
+      wifi_availability: [
+        WifiAvailabilityEnum.WIFI_FREE_IN_ROOM,
+        WifiAvailabilityEnum.WIFI_PAID_IN_PUBLIC_AREAS
+      ]
     },
-    '475906': {
+    {
+      wired_internet_availability: [WiredInternetAvailabilityEnum.WIRED_INTERNET_FREE_IN_ROOM],
+      facilities: {
+        room_facility: Object.values(RoomFacilityEnum),
+        room_notes: [],
+        bathroom_facility: Object.values(RoomBathRoomFacilityEnum),
+        bathroom_notes: [],
+        bedroom_and_laundry_facility: Object.values(RoomBedroomAndLaundryFacilityEnum),
+        bedroom_and_laundry_notes: [],
+        heating_and_cooling_facility: Object.values(RoomHeatingAndCoolingFacilityEnum),
+        heating_and_cooling_notes: [],
+        safety_facility: Object.values(RoomSafetyFacilityEnum),
+        safety_notes: [],
+        internet_and_office_facility: Object.values(RoomInternetAndOfficeFacilityEnum),
+        internet_and_office_notes: [],
+        kitchen_and_dining_facility: Object.values(RoomKitchenAndDiningFacilityEnum),
+        kitchen_and_dining_notes: [],
+        family_facility: Object.values(RoomFamilyFacilityEnum),
+        family_notes: [],
+        entertainment_facility: Object.values(RoomEntertainmentFacilityEnum),
+        entertainment_notes: []
+      },
+      pms_room_type_id: '475906',
       bath_set_brand: '上山採藥',
       beds_included: [
         {
           code: BedCodeEnum.DOUBLE,
-          name: '雙人床',
           quantity: 1
         },
         {
           code: BedCodeEnum.SINGLE_SOFA_BED,
-          name: '單人沙發床',
           quantity: 1
         }
       ],
       floor_type: [FloorTypeEnum.SPC],
       hairdryer_type: 'TESCOM 2200TW',
-      is_110v_socket: true,
-      is_220v_socket: false,
-      is_air_conditioning: true,
-      is_bath_set: true,
-      is_bathrobes: false,
-      is_bathtub: true,
-      is_both_side_socket_of_bedside: true,
-      is_clothes_rack: true,
-      is_coffie_maker: false,
-      is_crib_available: true,
-      is_electric_kettle: true,
-      is_extra_bed_availale: false,
-      is_glass_bottled_water: false,
-      is_hairdryer: true,
-      is_heating: false,
-      is_hot_tub: false,
-      is_instant_coffee: true,
-      is_japanese_toilet: true,
-      is_kitchenette: false,
-      is_lead_free_faucet: true,
-      is_linens: true,
-      is_low_blue_lights_lamp: true,
-      is_microwave: false,
-      is_minibar: false,
-      is_optional_pilow: true,
-      is_private_bathroom: true,
-      is_refrigerator: true,
-      is_safty_locker: false,
-      is_slippers: true,
-      is_soundproof: true,
-      is_tea_bag: true,
-      is_toilet_paper: true,
-      is_toiletries: true,
-      is_towels: true,
-      is_tv: true,
-      is_universal_socket: true,
-      is_wake_up_service: true,
-      is_wifi: true,
-      is_wifi_free: true,
-      is_wired_internet: false,
-      is_wired_internet_free: false,
-      baby_facilities: [
-        BabyFacilityEnum.BABY_BOTTLE_STERILIZER,
-        BabyFacilityEnum.BABY_CRIB,
-        BabyFacilityEnum.BABY_BATHTUB
-      ],
       photos: [
         {
           sequence: 1,
@@ -1112,22 +908,14 @@ const MockHotelDetail: HotelDetails = {
             'https://h-img2.cloudbeds.com/uploads/217575/img20230518150950_thumb~~64acc4ddbd065.jpg'
         }
       ],
-      pilow_type: [
-        {
-          code: PillowTypeEnum.SOFT,
-          name: '軟枕'
-        },
-        {
-          code: PillowTypeEnum.MEDIUM,
-          name: '硬度適中枕'
-        },
-        {
-          code: PillowTypeEnum.FIRM,
-          name: '較具支撐力枕'
-        }
+      pillow_types: [PillowTypeEnum.MEMORY_FOAM, PillowTypeEnum.COTTON],
+      pillow_firmness: [
+        PillowFirmnessEnum.SOFT,
+        PillowFirmnessEnum.MEDIUM,
+        PillowFirmnessEnum.FIRM
       ],
       room_size: 24,
-      room_size_unit: '平方公尺',
+
       room_type_id: '475906',
       room_type_name: '3 people - Sofa Bed extention Room',
       tv_casting: [TvCastingEnum.CHROMECAST, TvCastingEnum.AIRPLAY, TvCastingEnum.DLNA],
@@ -1143,83 +931,52 @@ const MockHotelDetail: HotelDetails = {
       ],
       tv_resolution: TvResolutionEnum._4K,
       tv_size: 70,
-      view_types: [
-        {
-          code: RoomViewCodeEnum.CITY_VIEW,
-          name: '城市景觀'
-        },
-        {
-          code: RoomViewCodeEnum.PARTIAL_NO_VIEW,
-          name: '部分房間無窗'
-        }
-      ],
-      wifi_description: '免費WiFi',
-      wifi_max_download_speed: 300,
-      wifi_max_upload_speed: 300,
-      wifi_specifications: 'WiFi 5'
+      view_types: [RoomViewCodeEnum.CITY_VIEW, RoomViewCodeEnum.PARTIAL_NO_VIEW],
+      status: RoomTypeStatusEnum.ACTIVE,
+      internet_max_download_speed: 300,
+      internet_max_upload_speed: 300,
+      wifi_specifications: [WiFiSpecificationEnum.WIFI5, WiFiSpecificationEnum.WIFI4],
+      wifi_availability: [
+        WifiAvailabilityEnum.WIFI_FREE_IN_ROOM,
+        WifiAvailabilityEnum.WIFI_PAID_IN_PUBLIC_AREAS
+      ]
     },
-    '475909': {
+    {
+      wired_internet_availability: [WiredInternetAvailabilityEnum.WIRED_INTERNET_FREE_IN_ROOM],
+      facilities: {
+        room_facility: Object.values(RoomFacilityEnum),
+        room_notes: [],
+        bathroom_facility: Object.values(RoomBathRoomFacilityEnum),
+        bathroom_notes: [],
+        bedroom_and_laundry_facility: Object.values(RoomBedroomAndLaundryFacilityEnum),
+        bedroom_and_laundry_notes: [],
+        heating_and_cooling_facility: Object.values(RoomHeatingAndCoolingFacilityEnum),
+        heating_and_cooling_notes: [],
+        safety_facility: Object.values(RoomSafetyFacilityEnum),
+        safety_notes: [],
+        internet_and_office_facility: Object.values(RoomInternetAndOfficeFacilityEnum),
+        internet_and_office_notes: [],
+        kitchen_and_dining_facility: Object.values(RoomKitchenAndDiningFacilityEnum),
+        kitchen_and_dining_notes: [],
+        family_facility: Object.values(RoomFamilyFacilityEnum),
+        family_notes: [],
+        entertainment_facility: Object.values(RoomEntertainmentFacilityEnum),
+        entertainment_notes: []
+      },
+      pms_room_type_id: '475909',
       bath_set_brand: '上山採藥',
       beds_included: [
         {
           code: BedCodeEnum.DOUBLE,
-          name: '雙人床',
           quantity: 1
         },
         {
           code: BedCodeEnum.DOUBLE_SOFA_BED,
-          name: '雙人沙發床',
           quantity: 1
         }
       ],
       floor_type: [FloorTypeEnum.SPC],
       hairdryer_type: 'TESCOM 2200TW',
-      is_110v_socket: true,
-      is_220v_socket: false,
-      is_air_conditioning: true,
-      is_bath_set: true,
-      is_bathrobes: false,
-      is_bathtub: true,
-      is_both_side_socket_of_bedside: true,
-      is_clothes_rack: true,
-      is_coffie_maker: false,
-      is_crib_available: true,
-      is_electric_kettle: true,
-      is_extra_bed_availale: false,
-      is_glass_bottled_water: false,
-      is_hairdryer: true,
-      is_heating: false,
-      is_hot_tub: false,
-      is_instant_coffee: true,
-      is_japanese_toilet: true,
-      is_kitchenette: false,
-      is_lead_free_faucet: true,
-      is_linens: true,
-      is_low_blue_lights_lamp: true,
-      is_microwave: false,
-      is_minibar: false,
-      is_optional_pilow: true,
-      is_private_bathroom: true,
-      is_refrigerator: true,
-      is_safty_locker: false,
-      is_slippers: true,
-      is_soundproof: true,
-      is_tea_bag: true,
-      is_toilet_paper: true,
-      is_toiletries: true,
-      is_towels: true,
-      is_tv: true,
-      is_universal_socket: true,
-      is_wake_up_service: true,
-      is_wifi: true,
-      is_wifi_free: true,
-      is_wired_internet: false,
-      is_wired_internet_free: false,
-      baby_facilities: [
-        BabyFacilityEnum.BABY_BOTTLE_STERILIZER,
-        BabyFacilityEnum.BABY_CRIB,
-        BabyFacilityEnum.BABY_BATHTUB
-      ],
       photos: [
         {
           sequence: 1,
@@ -1247,22 +1004,14 @@ const MockHotelDetail: HotelDetails = {
           thumb: 'https://h-img2.cloudbeds.com/217575/dx4zxagv_thumb~~640ab1f155277.jpg'
         }
       ],
-      pilow_type: [
-        {
-          code: PillowTypeEnum.SOFT,
-          name: '軟枕'
-        },
-        {
-          code: PillowTypeEnum.MEDIUM,
-          name: '硬度適中枕'
-        },
-        {
-          code: PillowTypeEnum.FIRM,
-          name: '較具支撐力枕'
-        }
+      pillow_types: [PillowTypeEnum.MEMORY_FOAM, PillowTypeEnum.COTTON],
+      pillow_firmness: [
+        PillowFirmnessEnum.SOFT,
+        PillowFirmnessEnum.MEDIUM,
+        PillowFirmnessEnum.FIRM
       ],
       room_size: 24,
-      room_size_unit: '平方公尺',
+
       room_type_id: '475909',
       room_type_name: '4 People Sofa Bed extention Room',
       tv_casting: [TvCastingEnum.CHROMECAST, TvCastingEnum.AIRPLAY, TvCastingEnum.DLNA],
@@ -1278,78 +1027,48 @@ const MockHotelDetail: HotelDetails = {
       ],
       tv_resolution: TvResolutionEnum._4K,
       tv_size: 70,
-      view_types: [
-        {
-          code: RoomViewCodeEnum.CITY_VIEW,
-          name: '城市景觀'
-        },
-        {
-          code: RoomViewCodeEnum.PARTIAL_NO_VIEW,
-          name: '部分房間無窗'
-        }
-      ],
-      wifi_description: '免費WiFi',
-      wifi_max_download_speed: 300,
-      wifi_max_upload_speed: 300,
-      wifi_specifications: 'WiFi 5'
+      view_types: [RoomViewCodeEnum.CITY_VIEW, RoomViewCodeEnum.PARTIAL_NO_VIEW],
+      status: RoomTypeStatusEnum.ACTIVE,
+      internet_max_download_speed: 300,
+      internet_max_upload_speed: 300,
+      wifi_specifications: [WiFiSpecificationEnum.WIFI5, WiFiSpecificationEnum.WIFI4],
+      wifi_availability: [
+        WifiAvailabilityEnum.WIFI_FREE_IN_ROOM,
+        WifiAvailabilityEnum.WIFI_PAID_IN_PUBLIC_AREAS
+      ]
     },
-    '474094': {
+    {
+      wired_internet_availability: [WiredInternetAvailabilityEnum.WIRED_INTERNET_FREE_IN_ROOM],
+      facilities: {
+        room_facility: Object.values(RoomFacilityEnum),
+        room_notes: [],
+        bathroom_facility: Object.values(RoomBathRoomFacilityEnum),
+        bathroom_notes: [],
+        bedroom_and_laundry_facility: Object.values(RoomBedroomAndLaundryFacilityEnum),
+        bedroom_and_laundry_notes: [],
+        heating_and_cooling_facility: Object.values(RoomHeatingAndCoolingFacilityEnum),
+        heating_and_cooling_notes: [],
+        safety_facility: Object.values(RoomSafetyFacilityEnum),
+        safety_notes: [],
+        internet_and_office_facility: Object.values(RoomInternetAndOfficeFacilityEnum),
+        internet_and_office_notes: [],
+        kitchen_and_dining_facility: Object.values(RoomKitchenAndDiningFacilityEnum),
+        kitchen_and_dining_notes: [],
+        family_facility: Object.values(RoomFamilyFacilityEnum),
+        family_notes: [],
+        entertainment_facility: Object.values(RoomEntertainmentFacilityEnum),
+        entertainment_notes: []
+      },
+      pms_room_type_id: '474094',
       bath_set_brand: '上山採藥',
       beds_included: [
         {
           code: BedCodeEnum.DOUBLE,
-          name: '雙人床',
           quantity: 1
         }
       ],
       floor_type: [FloorTypeEnum.SPC],
       hairdryer_type: 'TESCOM 2200TW',
-      is_110v_socket: true,
-      is_220v_socket: false,
-      is_air_conditioning: true,
-      is_bath_set: true,
-      is_bathrobes: false,
-      is_bathtub: true,
-      is_both_side_socket_of_bedside: true,
-      is_clothes_rack: true,
-      is_coffie_maker: false,
-      is_crib_available: true,
-      is_electric_kettle: true,
-      is_extra_bed_availale: false,
-      is_glass_bottled_water: false,
-      is_hairdryer: true,
-      is_heating: false,
-      is_hot_tub: false,
-      is_instant_coffee: true,
-      is_japanese_toilet: true,
-      is_kitchenette: false,
-      is_lead_free_faucet: true,
-      is_linens: true,
-      is_low_blue_lights_lamp: true,
-      is_microwave: false,
-      is_minibar: false,
-      is_optional_pilow: true,
-      is_private_bathroom: true,
-      is_refrigerator: true,
-      is_safty_locker: false,
-      is_slippers: true,
-      is_soundproof: true,
-      is_tea_bag: true,
-      is_toilet_paper: true,
-      is_toiletries: true,
-      is_towels: true,
-      is_tv: true,
-      is_universal_socket: true,
-      is_wake_up_service: true,
-      is_wifi: true,
-      is_wifi_free: true,
-      is_wired_internet: false,
-      is_wired_internet_free: false,
-      baby_facilities: [
-        BabyFacilityEnum.BABY_BOTTLE_STERILIZER,
-        BabyFacilityEnum.BABY_CRIB,
-        BabyFacilityEnum.BABY_BATHTUB
-      ],
       photos: [
         {
           sequence: 1,
@@ -1372,22 +1091,14 @@ const MockHotelDetail: HotelDetails = {
           thumb: 'https://h-img2.cloudbeds.com/217575/vo4wxzv9_thumb~~640aaf3a447b3.jpg'
         }
       ],
-      pilow_type: [
-        {
-          code: PillowTypeEnum.SOFT,
-          name: '軟枕'
-        },
-        {
-          code: PillowTypeEnum.MEDIUM,
-          name: '硬度適中枕'
-        },
-        {
-          code: PillowTypeEnum.FIRM,
-          name: '較具支撐力枕'
-        }
+      pillow_types: [PillowTypeEnum.MEMORY_FOAM, PillowTypeEnum.COTTON],
+      pillow_firmness: [
+        PillowFirmnessEnum.SOFT,
+        PillowFirmnessEnum.MEDIUM,
+        PillowFirmnessEnum.FIRM
       ],
       room_size: 24,
-      room_size_unit: '平方公尺',
+
       room_type_id: '431074',
       room_type_name: 'Standard Double',
       tv_casting: [TvCastingEnum.CHROMECAST, TvCastingEnum.AIRPLAY, TvCastingEnum.DLNA],
@@ -1403,78 +1114,48 @@ const MockHotelDetail: HotelDetails = {
       ],
       tv_resolution: TvResolutionEnum._4K,
       tv_size: 70,
-      view_types: [
-        {
-          code: RoomViewCodeEnum.CITY_VIEW,
-          name: '城市景觀'
-        },
-        {
-          code: RoomViewCodeEnum.PARTIAL_NO_VIEW,
-          name: '部分房間無窗'
-        }
-      ],
-      wifi_description: '免費WiFi',
-      wifi_max_download_speed: 300,
-      wifi_max_upload_speed: 300,
-      wifi_specifications: 'WiFi 5'
+      view_types: [RoomViewCodeEnum.CITY_VIEW, RoomViewCodeEnum.PARTIAL_NO_VIEW],
+      status: RoomTypeStatusEnum.ACTIVE,
+      internet_max_download_speed: 300,
+      internet_max_upload_speed: 300,
+      wifi_specifications: [WiFiSpecificationEnum.WIFI5, WiFiSpecificationEnum.WIFI4],
+      wifi_availability: [
+        WifiAvailabilityEnum.WIFI_FREE_IN_ROOM,
+        WifiAvailabilityEnum.WIFI_PAID_IN_PUBLIC_AREAS
+      ]
     },
-    '513155': {
+    {
+      wired_internet_availability: [WiredInternetAvailabilityEnum.WIRED_INTERNET_FREE_IN_ROOM],
+      facilities: {
+        room_facility: Object.values(RoomFacilityEnum),
+        room_notes: [],
+        bathroom_facility: Object.values(RoomBathRoomFacilityEnum),
+        bathroom_notes: [],
+        bedroom_and_laundry_facility: Object.values(RoomBedroomAndLaundryFacilityEnum),
+        bedroom_and_laundry_notes: [],
+        heating_and_cooling_facility: Object.values(RoomHeatingAndCoolingFacilityEnum),
+        heating_and_cooling_notes: [],
+        safety_facility: Object.values(RoomSafetyFacilityEnum),
+        safety_notes: [],
+        internet_and_office_facility: Object.values(RoomInternetAndOfficeFacilityEnum),
+        internet_and_office_notes: [],
+        kitchen_and_dining_facility: Object.values(RoomKitchenAndDiningFacilityEnum),
+        kitchen_and_dining_notes: [],
+        family_facility: Object.values(RoomFamilyFacilityEnum),
+        family_notes: [],
+        entertainment_facility: Object.values(RoomEntertainmentFacilityEnum),
+        entertainment_notes: []
+      },
+      pms_room_type_id: '513155',
       bath_set_brand: '上山採藥',
       beds_included: [
         {
           code: BedCodeEnum.DOUBLE,
-          name: '雙人床',
           quantity: 1
         }
       ],
       floor_type: [FloorTypeEnum.SPC],
       hairdryer_type: 'TESCOM 2200TW',
-      is_110v_socket: true,
-      is_220v_socket: false,
-      is_air_conditioning: true,
-      is_bath_set: true,
-      is_bathrobes: false,
-      is_bathtub: true,
-      is_both_side_socket_of_bedside: true,
-      is_clothes_rack: true,
-      is_coffie_maker: false,
-      is_crib_available: true,
-      is_electric_kettle: true,
-      is_extra_bed_availale: false,
-      is_glass_bottled_water: false,
-      is_hairdryer: true,
-      is_heating: false,
-      is_hot_tub: false,
-      is_instant_coffee: true,
-      is_japanese_toilet: true,
-      is_kitchenette: false,
-      is_lead_free_faucet: true,
-      is_linens: true,
-      is_low_blue_lights_lamp: true,
-      is_microwave: false,
-      is_minibar: false,
-      is_optional_pilow: true,
-      is_private_bathroom: true,
-      is_refrigerator: true,
-      is_safty_locker: false,
-      is_slippers: true,
-      is_soundproof: true,
-      is_tea_bag: true,
-      is_toilet_paper: true,
-      is_toiletries: true,
-      is_towels: true,
-      is_tv: true,
-      is_universal_socket: true,
-      is_wake_up_service: true,
-      is_wifi: true,
-      is_wifi_free: true,
-      is_wired_internet: false,
-      is_wired_internet_free: false,
-      baby_facilities: [
-        BabyFacilityEnum.BABY_BOTTLE_STERILIZER,
-        BabyFacilityEnum.BABY_CRIB,
-        BabyFacilityEnum.BABY_BATHTUB
-      ],
       photos: [
         {
           sequence: 1,
@@ -1497,22 +1178,14 @@ const MockHotelDetail: HotelDetails = {
           thumb: 'https://h-img2.cloudbeds.com/217575/vo4wxzv9_thumb~~640aaf3a447b3.jpg'
         }
       ],
-      pilow_type: [
-        {
-          code: PillowTypeEnum.SOFT,
-          name: '軟枕'
-        },
-        {
-          code: PillowTypeEnum.MEDIUM,
-          name: '硬度適中枕'
-        },
-        {
-          code: PillowTypeEnum.FIRM,
-          name: '較具支撐力枕'
-        }
+      pillow_types: [PillowTypeEnum.MEMORY_FOAM, PillowTypeEnum.COTTON],
+      pillow_firmness: [
+        PillowFirmnessEnum.SOFT,
+        PillowFirmnessEnum.MEDIUM,
+        PillowFirmnessEnum.FIRM
       ],
       room_size: 24,
-      room_size_unit: '平方公尺',
+
       room_type_id: '431074',
       room_type_name: 'Standard Double',
       tv_casting: [TvCastingEnum.CHROMECAST, TvCastingEnum.AIRPLAY, TvCastingEnum.DLNA],
@@ -1528,22 +1201,17 @@ const MockHotelDetail: HotelDetails = {
       ],
       tv_resolution: TvResolutionEnum._4K,
       tv_size: 70,
-      view_types: [
-        {
-          code: RoomViewCodeEnum.CITY_VIEW,
-          name: '城市景觀'
-        },
-        {
-          code: RoomViewCodeEnum.PARTIAL_NO_VIEW,
-          name: '部分房間無窗'
-        }
-      ],
-      wifi_description: '免費WiFi',
-      wifi_max_download_speed: 300,
-      wifi_max_upload_speed: 300,
-      wifi_specifications: 'WiFi 5'
+      view_types: [RoomViewCodeEnum.CITY_VIEW, RoomViewCodeEnum.PARTIAL_NO_VIEW],
+      status: RoomTypeStatusEnum.ACTIVE,
+      internet_max_download_speed: 300,
+      internet_max_upload_speed: 300,
+      wifi_specifications: [WiFiSpecificationEnum.WIFI5, WiFiSpecificationEnum.WIFI4],
+      wifi_availability: [
+        WifiAvailabilityEnum.WIFI_FREE_IN_ROOM,
+        WifiAvailabilityEnum.WIFI_PAID_IN_PUBLIC_AREAS
+      ]
     }
-  },
+  ],
   the_fine_print: [
     '請注意，為保障預訂資格，飯店有權向所提供的信用卡行使預授權。',
     '客人需在辦理入住時出示附照片的身份證明文件和信用卡。',

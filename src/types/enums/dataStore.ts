@@ -5,7 +5,7 @@ export enum TvContentEnum {
   YOUTUBE_APP = 'youtube_app',
   AMAZON_PRIME_VIDEO_APP = 'amazon_prime_video_app',
   DISNEY_PLUS_APP = 'disney_plus_app',
-  HBO_MAX_APP = 'hbo_max_app',
+  HBO_GO_APP = 'hbo_go_app',
   APPLE_TV_APP = 'apple_tv_app',
   IQIYI_APP = 'iqiyi_app',
   FREE_CABLE_TV = 'free_cable_tv',
@@ -32,16 +32,8 @@ export enum TvCastingEnum {
   AIRPLAY = 'airplay',
   MIRACAST = 'miracast',
   DLNA = 'dlna',
-  ROKU = 'roku',
-  FIRE_TV = 'fire_tv',
-  ANDROID_TV = 'android_tv',
-  APPLE_TV = 'apple_tv_app',
-  TIZEN = 'tizen',
-  WEBOS = 'webos',
   VIERA_CAST = 'viera_cast',
-  NETCAST = 'netcast',
-  VIERA_CONNECT = 'viera_connect',
-  SMARTC = 'smartc'
+  NETCAST = 'netcast'
 }
 
 export enum FloorTypeEnum {
@@ -255,9 +247,6 @@ export enum CurrencyCodeEnum {
 }
 
 export enum PillowTypeEnum {
-  SOFT = 'soft',
-  MEDIUM = 'medium',
-  FIRM = 'firm',
   FEATHER = 'feather',
   FOAM = 'foam',
   BUCKWHEAT = 'buckwheat',
@@ -274,12 +263,11 @@ export enum PillowTypeEnum {
   WATER = 'water'
 }
 
-export enum BabyFacilityEnum {
-  BABY_BATHTUB = 'baby_bathtub',
-  BED_RAIL = 'bed_rail',
-  BABY_CRIB = 'baby_crib',
-  BABY_HIGH_CHAIR = 'baby_high_chair',
-  BABY_BOTTLE_STERILIZER = 'baby_bottle_sterilizer'
+export enum PillowFirmnessEnum {
+  SOFT = 'soft',
+  MEDIUM = 'medium',
+  FIRM = 'firm',
+  EXTRA_FIRM = 'extra_firm'
 }
 
 export enum TimeIntervalEnum {
@@ -626,4 +614,185 @@ export enum ServicesEnum {
   SHUTTLE_SERVICE = 'shuttle_service',
   TAXI_SERVICE = 'taxi_service',
   FREE_TOURS = 'free_tours'
+}
+
+export enum WiFiSpecificationEnum {
+  WIFI4 = 'WiFi4',
+  WIFI5 = 'WiFi5',
+  WIFI6 = 'WiFi6',
+  WIFI6E = 'WiFi6E',
+  WIFI7 = 'WiFi7'
+}
+
+export enum WifiAvailabilityEnum {
+  WIFI_FREE_IN_ALL_AREAS = 'wifi_free_in_all_areas',
+  WIFI_FREE_IN_ROOM = 'wifi_free_in_room',
+  WIFI_FREE_IN_PUBLIC_AREAS = 'wifi_free_in_public_areas',
+  WIFI_PAID_IN_ALL_AREAS = 'wifi_paid_in_all_areas',
+  WIFI_PAID_IN_ROOM = 'wifi_paid_in_room',
+  WIFI_PAID_IN_PUBLIC_AREAS = 'wifi_paid_in_public_areas'
+}
+
+export enum WiredInternetAvailabilityEnum {
+  WIRED_INTERNET_FREE_IN_ALL_AREAS = 'wired_internet_free_in_all_areas',
+  WIRED_INTERNET_FREE_IN_ROOM = 'wired_internet_free_in_room',
+  WIRED_INTERNET_FREE_IN_PUBLIC_AREAS = 'wired_internet_free_in_public_areas',
+  WIRED_INTERNET_PAID_IN_ALL_AREAS = 'wired_internet_paid_in_all_areas',
+  WIRED_INTERNET_PAID_IN_ROOM = 'wired_internet_paid_in_room',
+  WIRED_INTERNET_PAID_IN_PUBLIC_AREAS = 'wired_internet_paid_in_public_areas'
+}
+
+export enum RoomTypeStatusEnum {
+  ACTIVE = 'active',
+  INACTIVE = 'inactive'
+}
+
+export enum RoomFacilityEnum {
+  BEDSIDE_DOUBLE_SIDED_SOCKET = 'bedside_double_sided_socket',
+  BEDSIDE_LAMP = 'bedside_lamp',
+  DESKTOP_LED_COSMETIC_MIRROR = 'desktop_led_cosmetic_mirror',
+  GLASS_BOTTLED_WATER = 'glass_bottled_water',
+  LOW_BLUE_LIGHTS_LAMP = 'low_blue_lights_lamp',
+  SAFTY_LOCKER = 'safty_locker',
+  SOCKET_110V = '110v_socket',
+  SOCKET_220V = '220v_socket',
+  SOUND_PROOF = 'sound_proof',
+  UNIVERSAL_SOCKET = 'universal_socket',
+  MINI_BAR = 'mini_bar',
+  PRIVATE_BATHROOM = 'private_bathroom'
+}
+
+export enum RoomBathRoomFacilityEnum {
+  BATHROBES = 'bathrobes',
+  BATH_SET = 'bath_set',
+  BATHTUB = 'bathtub',
+  BIDET = 'bidet',
+  BODY_SOAP = 'body_soap',
+  CONDITIONER = 'conditioner',
+  HAIR_DRYER = 'hairdryer',
+  HOT_WATER = 'hot_water',
+  HOT_SPRING_BATH = 'hot_spring_bath',
+  JAPANESE_TOILET = 'japanese_toilet',
+  LEAD_FREE_FAUCET = 'lead_free_faucet',
+  SHAMPOO = 'shampoo',
+  SHOWER_GEL = 'shower_gel',
+  SLIPPERS = 'slippers',
+  SOAP = 'soap',
+  SPA_TUB = 'spa_tub',
+  TOILET_PAPER = 'toilet_paper',
+  TOILETRIES = 'toiletries',
+  TOWELS = 'towels'
+}
+
+export enum RoomBedroomAndLaundryFacilityEnum {
+  BED_SHEETS = 'bed_sheets',
+  CLOTHING_STORAGE = 'clothing_storage',
+  DRAYER = 'drayer',
+  DRAYER_RACK_FOR_CLOTHING = 'drayer_rack_for_clothing',
+  EXTRA_PILLOWS_AND_BLANKETS = 'extra_pillows_and_blankets',
+  HANGERS = 'hangers',
+  IRON = 'iron',
+  MOSQUITO_NET = 'mosquito_net',
+  PILLOWS_CASE = 'pillows_case',
+  ROOM_DARKENING_SHADES = 'room_darkening_shades',
+  WASHER = 'washer',
+  WASHING_POWDER = 'washing_powder'
+}
+
+export enum RoomHeatingAndCoolingFacilityEnum {
+  AIR_CONDITIONING = 'air_conditioning',
+  CELLING_FAN = 'celling_fan',
+  HEATING = 'heating',
+  INDOOR_FIREPLACE = 'indoor_fireplace',
+  PROTABLE_FAN = 'protable_fan',
+  PROTABLE_HEATER = 'protable_heater'
+}
+
+export enum RoomSafetyFacilityEnum {
+  EMWEGENCY_LIGHTING = 'emergency_lighting',
+  FIRST_AID_KIT = 'first_aid_kit',
+  FIRE_EXTINGUISHER = 'fire_extinguisher',
+  FIRE_PROOF_ROOM_DOOR = 'fire_proof_room_door',
+  FLAME_CONSTRUCTION_MATERIALS = 'flame_construction_materials',
+  SMOKE_ALARM = 'smoke_alarm',
+  CARBON_MONOXIDE_DETECTOR = 'carbon_monoxide_detector'
+}
+
+export enum RoomInternetAndOfficeFacilityEnum {
+  DESK_OR_TABLE_AND_CHAIR = 'desk_or_table_and_chair', // Guests have a desk or table that’s used just for working, along with a comfortable chair
+  PRINTER = 'printer',
+  SCANNER = 'scanner',
+  FAX = 'fax',
+  WIRED_INTERNET = 'wired_internet',
+  WIFI = 'wifi'
+}
+
+export enum RoomKitchenAndDiningFacilityEnum {
+  BAKING_SHEET = 'baking_sheet',
+  BARBECUE_UTENSILS = 'barbecue_utensils',
+  BREAD_MAKER = 'bread_maker',
+  BLENDER = 'blender',
+  COFFEE = 'coffee',
+  COFFEE_MAKER = 'coffee_maker',
+  COOKING_BASICS = 'cooking_basics', // Pots and pans, oil, salt and pepper
+  DING_TABLE = 'dining_table',
+  DISHES_AND_SILVERWARE = 'dishes_and_silverware', // Bowls, chopsticks, plates, cups, etc.
+  DISHWASHER = 'dishwasher',
+  FREEZER = 'freezer',
+  HOT_WATER_KETTLE = 'hot_water_kettle',
+  KITCHEN = 'kitchen', // Space where guests can cook their own meals
+  KITCHENETTE = 'kitchenette', // Space where guests can heat up and refrigerate food
+  MICROWAVE = 'microwave',
+  MINI_FRIDGE = 'mini_fridge',
+  OVEN = 'oven',
+  REFRIGERATOR = 'refrigerator',
+  GAS_STOVE = 'gas_stove',
+  ELECTRIC_STOVE = 'electric_stove',
+  WOOD_BURNING_STOVE = 'wood_burning_stove',
+  INDUCTION_STOVE = 'induction_stove',
+  TEA_BAG = 'tea_bag',
+  TEAPOT = 'teapot',
+  TOASTER = 'toaster',
+  TRASH_COMPACTOR = 'trash_compactor',
+  WINE_GLASSES = 'wine_glasses'
+}
+
+export enum RoomFamilyFacilityEnum {
+  BABY_BATH = 'baby_bath',
+  BABY_MONITOR = 'baby_monitor',
+  BABY_SAFTY_GATE = 'baby_safety_gate',
+  BED_RAIL = 'bedrail',
+  BABY_SITTER_RECOMMDATION = 'baby_sitter_recommendation',
+  BOARD_GAMES = 'board_games',
+  CHANGING_TABLE = 'changing_table',
+  CHILDRENS_BOOKS_AND_TOYS = 'childrens_books_and_toys',
+  CHILDRENS_DINNERWARE = 'childrens_dinnerware',
+  CHILDRENS_PLAYGROUND = 'childrens_playground',
+  CRIB = 'crib',
+  FIREPLACE_GUARDS = 'fireplace_guards',
+  HIGH_CHAIR = 'high_chair',
+  OUTLET_COVERS = 'outlet_covers',
+  PACK_AND_PLAY_CRIB = 'pack_and_play_crib',
+  TABLE_CORNER_GUARDS = 'table_corner_guards',
+  WINDOWS_GUARDS = 'windows_guards'
+}
+
+export enum RoomEntertainmentFacilityEnum {
+  ARCADE_GAMES = 'arcade_games',
+  BATTING_CAGE = 'batting_cage',
+  BOOKS_AND_READING_MATERIALS = 'books_and_reading_materials',
+  EXERCISE_EQUIPMENT = 'exercise_equipment',
+  GAME_CONSOLE = 'game_console',
+  LASER_TAG = 'laser_tag',
+  LIFE_SIZE_GAMES = 'life_size_games',
+  MINI_GOLF = 'mini_golf',
+  MOVIE_THEATER = 'movie_theater',
+  PIANO = 'piano',
+  PING_PONG_TABLE = 'ping_pong_table',
+  POOL_TABLE = 'pool_table',
+  RECORD_PLAYER = 'record_player',
+  SKATE_RAMP = 'skate_ramp',
+  SOUND_SYSTEM = 'sound_system',
+  THEME_ROOM = 'theme_room',
+  TV = 'tv'
 }

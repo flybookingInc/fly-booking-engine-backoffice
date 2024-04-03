@@ -32,7 +32,7 @@ import { HotelDetails } from '@/types/stores/property'
 import { deletePropertyApi, getPropertiesApi } from '@/api/setting/property'
 
 const { push } = useRouter()
-const { currentPropertylId } = storeToRefs(useUserStore()) // use storeToRef to keep property reactive
+const { currentPropertyId } = storeToRefs(useUserStore()) // use storeToRef to keep property reactive
 const { t } = useI18n()
 const tableRef = ref<typeof Table>()
 const loading = ref(false)
@@ -135,7 +135,7 @@ const updatePhotoAction = (row: HotelListRowData) => {
 }
 
 const deleteAction = async (row: HotelListRowData) => {
-  if (!currentPropertylId.value) return
+  if (!currentPropertyId.value) return
   try {
     ElMessageBox.confirm('確定要刪除嗎?', '提示', {
       confirmButtonText: '確定',

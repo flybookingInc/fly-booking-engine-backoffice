@@ -1,9 +1,7 @@
 <template>
   <ContentWrap :title="t('router.views.settings.roomTypesList.title')">
-    <div class="mb-10px">
-      <BaseButton type="primary" @click="addAction">{{
-        t('router.views.settings.properties.add_property')
-      }}</BaseButton>
+    <div class="w-48 mb-4">
+      <ElSelectV2 v-model="selectPropertyId" :options="propertySelectOptions" />
     </div>
     <Table
       ref="tableRef"
@@ -20,48 +18,48 @@
 <script setup lang="tsx">
 import { ContentWrap } from '@/components/ContentWrap'
 import { Table, TableColumn } from '@/components/Table'
-import { ElSwitch, ElButton, ElMessage, ElMessageBox } from 'element-plus'
+import { ElSwitch, ElButton, ElMessage, ElSelectV2 } from 'element-plus'
 import { Alignment } from 'element-plus/es/components/table-v2/src/constants'
-import { ref, reactive } from 'vue'
-import { storeToRefs } from 'pinia'
+import { ref, watch, reactive, onMounted } from 'vue'
 import { useI18n } from '@/hooks/web/useI18n'
-import { useUserStore } from '@/store/modules/user'
-import { HotelListRowData } from '@/types/views/settings/property'
+import { RoomTypeListRowData } from '@/types/views/settings/roomType'
 import { useRouter } from 'vue-router'
 import { HotelDetails } from '@/types/stores/property'
-import { deletePropertyApi, getPropertiesApi } from '@/api/setting/property'
+import { getPropertiesApi } from '@/api/setting/property'
+import { useUserStore } from '@/store/modules/user'
+import { usePropertyStore } from '@/store/modules/property'
 
 const { push } = useRouter()
-const { currentPropertylId } = storeToRefs(useUserStore()) // use storeToRef to keep property reactive
 const { t } = useI18n()
+const { currentPropertyId } = useUserStore()
+const { fetchRoomTypes } = usePropertyStore()
 const tableRef = ref<typeof Table>()
 const loading = ref(false)
-const tableData = reactive<HotelListRowData[]>([])
+const selectPropertyId = ref<string>()
+const propertySelectOptions = ref<{ value: string; label: string }[]>([])
+const tableData = reactive<RoomTypeListRowData[]>([])
 
 const columns: TableColumn[] = [
   {
-    field: 'propertyId',
-    label: 'ID'
-  },
-  {
-    field: 'hotelName',
-    label: '名稱'
+    field: 'roomTypeName',
+    label: t('router.views.settings.roomTypesList.roomTypeName')
   },
   {
     field: 'status',
-    label: '狀態',
+    label: t('router.views.settings.roomTypesList.status'),
     align: Alignment.CENTER,
     slots: {
       default: (data: any) => {
         return (
           <ElSwitch
             v-model={data.row.disabled}
-            active-text="上線中"
+            active-text={t('common.actived')}
             active-value={false}
-            inactive-text="下線中"
+            inactive-text={t('common.inactived')}
             inactive-value={true}
             inline-prompt
             disabled={true}
+            size="large"
           />
         )
       }
@@ -86,12 +84,6 @@ const columns: TableColumn[] = [
             <ElButton type="primary" onClick={() => updateAction(data.row)}>
               編輯
             </ElButton>
-            <ElButton class="primary" onClick={() => updatePhotoAction(data.row)}>
-              照片
-            </ElButton>
-            <ElButton class="primary" onClick={() => deleteAction(data.row)}>
-              刪除
-            </ElButton>
           </div>
         )
       }
@@ -99,18 +91,44 @@ const columns: TableColumn[] = [
   }
 ]
 
+watch(selectPropertyId, async (newVal) => {
+  if (newVal) {
+    tableData.splice(0, tableData.length)
+    await getSelectedPropertyRoomTypeList()
+  }
+})
+
+const getSelectedPropertyRoomTypeList = async () => {
+  if (!selectPropertyId.value) return
+  loading.value = true
+  try {
+    const roomTypesDetail = await fetchRoomTypes(selectPropertyId.value)
+    roomTypesDetail.forEach((roomType) => {
+      tableData.push({
+        roomTypeId: roomType.room_type_id,
+        roomTypeName: roomType.room_type_name,
+        status: true
+      })
+    })
+  } catch (err) {
+    ElMessage.error('取得房型列表失敗')
+  } finally {
+    loading.value = false
+  }
+}
+
 // get table list data
-const getList = async () => {
+const getPropertyList = async () => {
   loading.value = true
   try {
     const response = await getPropertiesApi()
     if (response.status !== 200 || !response.data) throw new Error()
     const hotels = response.data.data as HotelDetails[]
     for (let hotel of hotels) {
-      tableData.push({
-        propertyId: hotel.property_id,
-        hotelName: hotel.name,
-        status: true
+      // set select options
+      propertySelectOptions.value.push({
+        label: hotel.name,
+        value: hotel.property_id
       })
     }
   } catch (err) {
@@ -120,35 +138,16 @@ const getList = async () => {
   }
 }
 
-getList()
-
-const addAction = () => {
-  push('/settings/properties/add')
-}
-
-const updateAction = (row: HotelListRowData) => {
-  push(`/settings/properties/update?propertyId=${row.propertyId}`)
-}
-
-const updatePhotoAction = (row: HotelListRowData) => {
-  push(`/settings/properties/photo-update?propertyId=${row.propertyId}`)
-}
-
-const deleteAction = async (row: HotelListRowData) => {
-  if (!currentPropertylId.value) return
-  try {
-    ElMessageBox.confirm('確定要刪除嗎?', '提示', {
-      confirmButtonText: '確定',
-      cancelButtonText: '取消',
-      type: 'warning'
-    }).then(async () => {
-      await deletePropertyApi({ property_id: row.propertyId })
-      await getList()
-      ElMessage.success('刪除成功')
-    })
-  } catch (err) {
-    ElMessage.error('刪除失敗')
+onMounted(async () => {
+  await getPropertyList()
+  // set default select value
+  if (currentPropertyId) {
+    selectPropertyId.value = currentPropertyId
   }
+})
+
+const updateAction = (row: RoomTypeListRowData) => {
+  push(`/settings/roomTypes/update?propertyId=${row.roomTypeId}&roomTypeId=${row.roomTypeId}`)
 }
 </script>
-../../../components/Property/src/types
+@/types/views/settings/property/roomType

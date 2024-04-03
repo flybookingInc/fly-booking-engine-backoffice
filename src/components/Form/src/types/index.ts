@@ -55,7 +55,8 @@ export enum ComponentNameEnum {
   TREE_SELECT = 'TreeSelect',
   UPLOAD = 'Upload',
   DYNAMIC_INPUT = 'DynamicInput',
-  CANCELLATION_INPUT = 'CancellationInput'
+  CANCELLATION_INPUT = 'CancellationInput',
+  BED_INPUT = 'BedInput'
 }
 
 type CamelCaseComponentName = keyof typeof ComponentNameEnum extends infer K
@@ -119,6 +120,10 @@ export interface CancellationInputComponentProps extends Partial<InputProps> {
     prepend?: (...args: any[]) => JSX.Element | null
     append?: (...args: any[]) => JSX.Element | null
   }
+  style?: CSSProperties
+}
+
+export interface BedInputComponentProps extends Partial<InputProps> {
   style?: CSSProperties
 }
 
@@ -655,6 +660,7 @@ export interface FormSchema {
     | UploadComponentProps
     | DynamicInputComponentProps
     | CancellationInputComponentProps
+    | BedInputComponentProps
     | any
 
   /**

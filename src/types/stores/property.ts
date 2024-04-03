@@ -14,12 +14,25 @@ import {
   BedCodeEnum,
   RoomViewCodeEnum,
   PillowTypeEnum,
-  BabyFacilityEnum,
   TimeIntervalEnum,
   HourEnum,
   PetPolicyEnum,
   AmenitiesEnum,
-  ServicesEnum
+  ServicesEnum,
+  RoomTypeStatusEnum,
+  WiFiSpecificationEnum,
+  WifiAvailabilityEnum,
+  RoomBathRoomFacilityEnum,
+  RoomBedroomAndLaundryFacilityEnum,
+  RoomFacilityEnum,
+  RoomFamilyFacilityEnum,
+  RoomHeatingAndCoolingFacilityEnum,
+  RoomInternetAndOfficeFacilityEnum,
+  RoomKitchenAndDiningFacilityEnum,
+  RoomSafetyFacilityEnum,
+  RoomEntertainmentFacilityEnum,
+  WiredInternetAvailabilityEnum,
+  PillowFirmnessEnum
 } from '@/types/enums/dataStore'
 
 export interface PropertyImage {
@@ -132,18 +145,7 @@ export interface PropertyPayment {
 
 export interface RoomBed {
   code: BedCodeEnum // double bed, twin bed, single bed, bunk bed, sofa bed, futon, murphy bed, rollaway bed, crib, trundle bed, water bed, air mattress
-  name: string
   quantity: number
-}
-
-interface RoomView {
-  code: RoomViewCodeEnum
-  name: string
-}
-
-interface RoomPilow {
-  code: PillowTypeEnum
-  name: string
 }
 
 interface packageDetailImage {
@@ -169,68 +171,51 @@ interface packageDetail {
   is_included: boolean
 }
 
+export interface RoomTypeFacility {
+  room_facility: RoomFacilityEnum[]
+  room_notes: string[]
+  bathroom_facility: RoomBathRoomFacilityEnum[]
+  bathroom_notes: string[]
+  bedroom_and_laundry_facility: RoomBedroomAndLaundryFacilityEnum[]
+  bedroom_and_laundry_notes: string[]
+  heating_and_cooling_facility: RoomHeatingAndCoolingFacilityEnum[]
+  heating_and_cooling_notes: string[]
+  safety_facility: RoomSafetyFacilityEnum[]
+  safety_notes: string[]
+  internet_and_office_facility: RoomInternetAndOfficeFacilityEnum[]
+  internet_and_office_notes: string[]
+  kitchen_and_dining_facility: RoomKitchenAndDiningFacilityEnum[]
+  kitchen_and_dining_notes: string[]
+  family_facility: RoomFamilyFacilityEnum[]
+  family_notes: string[]
+  entertainment_facility: RoomEntertainmentFacilityEnum[]
+  entertainment_notes: string[]
+}
+
 export interface RoomTypeDetail {
-  baby_facilities: BabyFacilityEnum[]
+  facilities: RoomTypeFacility
   bath_set_brand: string
   beds_included: RoomBed[]
   floor_type: FloorTypeEnum[] // 地板類型 地毯、塑膠地磚、木質地板、石材地板、大理石地板、瓷磚地板、水泥地板、SPC、其他
   hairdryer_type: string // 吹風機類型 ex: tescom 2200tw
-  is_110v_socket: boolean // 有110v插座
-  is_220v_socket: boolean // 有220v插座
-  is_air_conditioning: boolean
-  is_bath_set: boolean
-  is_bathtub: boolean
-  is_bathrobes: boolean
-  is_both_side_socket_of_bedside: boolean // 床頭兩側都有插座
-  is_clothes_rack: boolean
-  is_coffie_maker: boolean
-  is_crib_available: boolean
-  is_electric_kettle: boolean
-  is_extra_bed_availale: boolean
-  is_glass_bottled_water: boolean
-  is_hairdryer: boolean
-  is_heating: boolean
-  is_hot_tub: boolean
-  is_instant_coffee: boolean
-  is_japanese_toilet: boolean
-  is_kitchenette: boolean
-  is_lead_free_faucet: boolean
-  is_linens: boolean
-  is_low_blue_lights_lamp: boolean
-  is_microwave: boolean
-  is_minibar: boolean
-  is_optional_pilow: boolean // 是否可選擇枕頭類型
-  is_private_bathroom: boolean
-  is_refrigerator: boolean
-  is_safty_locker: boolean
-  is_slippers: boolean
-  is_soundproof: boolean
-  is_tea_bag: boolean
-  is_toiletries: boolean
-  is_toilet_paper: boolean
-  is_tv: boolean
-  is_universal_socket: boolean // 有國際插座
-  is_wake_up_service: boolean
-  is_wifi: boolean
-  is_wifi_free: boolean
-  is_wired_internet: boolean
-  is_wired_internet_free: boolean
-  is_towels: boolean
-  pilow_type: RoomPilow[]
+  pillow_types: PillowTypeEnum[] // 可選枕頭類型
+  pillow_firmness: PillowFirmnessEnum[] // 可選枕頭軟硬度
   photos: roomTypePhoto[]
-  room_size: number
-  room_size_unit: string
+  pms_room_type_id: string
+  room_size: number // square meters
   room_type_id: string
   room_type_name: string
+  status: RoomTypeStatusEnum
   tv_casting: TvCastingEnum[] // ex: chromecast, airplay, miracast, dlna, roku, fire tv, android tv, apple tv, tizen, webos, viera cast, netcast, viera connect, smartc
   tv_resolution: TvResolutionEnum // ex: 4k, 8k, 1080p, 720p, 480p
   tv_size: number // inches
   tv_content: TvContentEnum[] // ex: flat-screen tv, smart tv, cable tv, satellite tv, pay-per-view channels, streaming service
-  view_types: RoomView[]
-  wifi_specifications: string // ex: 802.11a, 802.11b, 802.11g, 802.11n, 802.11ac, 802.11ax, 802.11ad, 802.11ay, WiFi 4, WiFi 5, WiFi 6, WiFi 6E
-  wifi_description: string // ex: wifi, wifi free, wifi paid, wifi free in all areas, wifi free in some areas, wifi paid in all areas, wifi paid in some areas
-  wifi_max_download_speed: number // Mbps
-  wifi_max_upload_speed: number // Mbps
+  view_types: RoomViewCodeEnum[]
+  wifi_specifications: WiFiSpecificationEnum[] // ex: 802.11a, 802.11b, 802.11g, 802.11n, 802.11ac, 802.11ax, 802.11ad, 802.11ay, WiFi 4, WiFi 5, WiFi 6, WiFi 6E
+  wifi_availability: WifiAvailabilityEnum[] // ex: wifi, wifi free, wifi paid, wifi free in all areas, wifi free in some areas, wifi paid in all areas, wifi paid in some areas
+  wired_internet_availability: WiredInternetAvailabilityEnum[] // ex: wired_internet_free_in_all_areas, wired_internet_free_in_room etc.
+  internet_max_download_speed: number // Mbps
+  internet_max_upload_speed: number // Mbps
 }
 
 export interface RatePlanDetail {
@@ -270,7 +255,7 @@ export interface HotelDetails {
   good_to_know: string[]
   the_fine_print: string[]
   rate_plan_details: { [roomTypeRatePlanId: string]: RatePlanDetail }
-  room_type_details: { [roomTypeId: string]: RoomTypeDetail }
+  room_type_details: RoomTypeDetail[]
 }
 
 /**

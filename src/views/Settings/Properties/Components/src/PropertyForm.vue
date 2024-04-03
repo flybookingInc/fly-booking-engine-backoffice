@@ -211,8 +211,8 @@ const schema = reactive<FormSchema[]>([
       const res = await getAvailableCurrenciesApi()
       return (res.data.data || []).map((currency) => {
         return {
-          label: t(`system.available_currency.${currency.code}`),
-          value: currency.code
+          label: t(`system.available_currency.${currency}`),
+          value: currency
         } as SelectOption
       })
     }
@@ -310,8 +310,8 @@ const schema = reactive<FormSchema[]>([
     componentProps: {
       'active-value': true,
       'inactivate-value': false,
-      activeText: t('common.active'),
-      inactivateText: t('common.inactive'),
+      activeText: t('common.actived'),
+      inactivateText: t('common.inactived'),
       inlinePrompt: true,
       on: {
         change: async () => {
@@ -365,8 +365,8 @@ const schema = reactive<FormSchema[]>([
     componentProps: {
       'active-value': true,
       'inactivate-value': false,
-      activeText: t('common.active'),
-      inactivateText: t('common.inactive'),
+      activeText: t('common.actived'),
+      inactivateText: t('common.inactived'),
       inlinePrompt: true,
       on: {
         change: async () => {
@@ -522,8 +522,8 @@ const schema = reactive<FormSchema[]>([
     componentProps: {
       'active-value': true,
       'inactivate-value': false,
-      activeText: t('common.active'),
-      inactivateText: t('common.inactive'),
+      activeText: t('common.actived'),
+      inactivateText: t('common.inactived'),
       inlinePrompt: true,
       on: {
         change: async () => {
@@ -617,8 +617,8 @@ const schema = reactive<FormSchema[]>([
     componentProps: {
       'active-value': true,
       'inactivate-value': false,
-      activeText: t('common.active'),
-      inactivateText: t('common.inactive'),
+      activeText: t('common.actived'),
+      inactivateText: t('common.inactived'),
       inlinePrompt: true,
       on: {
         change: async () => {
@@ -748,8 +748,7 @@ const schema = reactive<FormSchema[]>([
     component: 'CancellationInput',
     colProps: {
       span: 24
-    },
-    value: []
+    }
   },
   {
     field: 'CancellationPolicyNotes',
@@ -895,8 +894,8 @@ const schema = reactive<FormSchema[]>([
     componentProps: {
       'active-value': true,
       'inactivate-value': false,
-      activeText: t('common.active'),
-      inactivateText: t('common.inactive'),
+      activeText: t('common.actived'),
+      inactivateText: t('common.inactived'),
       inlinePrompt: true
     }
   },
@@ -937,8 +936,8 @@ const schema = reactive<FormSchema[]>([
     componentProps: {
       'active-value': true,
       'inactivate-value': false,
-      activeText: t('common.active'),
-      inactivateText: t('common.inactive'),
+      activeText: t('common.actived'),
+      inactivateText: t('common.inactived'),
       inlinePrompt: true
     }
   },
@@ -1022,8 +1021,8 @@ const schema = reactive<FormSchema[]>([
     componentProps: {
       'active-value': true,
       'inactivate-value': false,
-      activeText: t('common.active'),
-      inactivateText: t('common.inactive'),
+      activeText: t('common.actived'),
+      inactivateText: t('common.inactived'),
       inlinePrompt: true
     }
   }

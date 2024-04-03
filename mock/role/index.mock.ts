@@ -60,7 +60,7 @@ const adminList = [
             name: 'PropertyUpdate',
             component: 'views/Settings/Properties/PropertyUpdate',
             meta: {
-              title: t('router.views.propertyAdd.pageTitle'),
+              title: t('router.views.propertyUpdate.pageTitle'),
               noCache: true,
               affix: true,
               noTagsView: true,
@@ -75,7 +75,7 @@ const adminList = [
         component: '##',
         redirect: '/settings/roomTypes/list',
         meta: {
-          title: t('router.views.properties.pageTitle')
+          title: t('router.views.roomTypes.pageTitle')
           // noCache: true,
           // affix: true
         },
@@ -187,6 +187,7 @@ export default [
         console.log('use super admin list')
         return adminList
       } else {
+        console.log('use test list')
         return testList
       }
     }

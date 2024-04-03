@@ -1,3 +1,3 @@
-import PropertyForm from '@/views/Settings/Properties/Components/src/PropertyForm.vue'
+import RoomTypeForm from '@/views/Settings/RoomTypes/Components/src/RoomTypeForm.vue'
 
-export { PropertyForm }
+export { RoomTypeForm }

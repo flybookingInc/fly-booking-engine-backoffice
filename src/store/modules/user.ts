@@ -25,7 +25,7 @@ export const useUserStore = defineStore(
     const roleRouters = ref<Nullable<string[] | AppCustomRouteRecordRaw[]>>(null)
     const rememberMe = ref<boolean>(true)
     const loginInfo = ref<Nullable<UserLoginType>>(null)
-    const currentPropertylId = ref<Nullable<string>>(null) // 當前Property Id，該帳號可能有多個property權限，目前選擇的property
+    const currentPropertyId = ref<Nullable<string>>(null) // 當前Property Id，該帳號可能有多個property權限，目前選擇的property
 
     // getters
 
@@ -50,7 +50,7 @@ export const useUserStore = defineStore(
     const getUserRoles = computed((): string[] => {
       let roles: string[] = []
       userInfo.value?.meta.properties.forEach((item) => {
-        if (item.propertyId === currentPropertylId.value) {
+        if (item.propertyId === currentPropertyId.value) {
           roles = item.roles as string[]
         }
       })
@@ -60,7 +60,7 @@ export const useUserStore = defineStore(
     const getUserPermissions = computed((): string[] => {
       const permissions =
         userInfo.value?.meta.properties.forEach((item) => {
-          item.propertyId === currentPropertylId.value
+          item.propertyId === currentPropertyId.value
           return item.permissions
         }) || []
       return permissions
@@ -85,13 +85,13 @@ export const useUserStore = defineStore(
     }
     const setCurrentPropertyId = (propertyId: Nullable<string>) => {
       if (propertyId === null) {
-        currentPropertylId.value = null
+        currentPropertyId.value = null
         return
       }
       if (!getUserProperties.value.includes(propertyId)) {
         throw new Error('無此飯店權限')
       }
-      currentPropertylId.value = propertyId
+      currentPropertyId.value = propertyId
     }
     const logoutConfirm = () => {
       const { t } = useI18n()
@@ -121,9 +121,9 @@ export const useUserStore = defineStore(
     const logout = () => {
       logoutConfirm()
     }
-    // watch user.currentPropertylId, if it changes, reload hotel details
+    // watch user.currentPropertyId, if it changes, reload hotel details
     watch(
-      () => currentPropertylId.value,
+      () => currentPropertyId.value,
       async () => {
         const property = usePropertyStore()
         const hotelDetails = await property.FetchHotelDetails()
@@ -184,7 +184,7 @@ export const useUserStore = defineStore(
       roleRouters,
       rememberMe,
       loginInfo,
-      currentPropertylId,
+      currentPropertyId,
       getTokenKey,
       getToken,
       getUserInfo,

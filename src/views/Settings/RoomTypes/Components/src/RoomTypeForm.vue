@@ -65,6 +65,7 @@ const hotelDetails: HotelDetails = {} as HotelDetails
 const roomTypeDetails: RoomTypeDetail = {} as RoomTypeDetail
 // const photoUrl = ref('')
 const UPLOAD_PHOTO_LIMIT = 50
+const UPLOAD_PHOTO_SIZE_LIMIT = 1 // MB
 const schema = reactive<FormSchema[]>([
   {
     field: 'status',
@@ -730,7 +731,7 @@ const schema = reactive<FormSchema[]>([
       const res = await getAvailablePillowFirmnessApi()
       return (res.data.data || []).map((item) => {
         return {
-          label: t(`enum.pillow_types.${item}`),
+          label: t(`enum.pillow_firmness.${item}`),
           value: item
         } as CheckboxOption
       })
@@ -759,9 +760,6 @@ const schema = reactive<FormSchema[]>([
       data: { property_id: props.propertyId, room_type_id: props.roomTypeId },
       multiple: true,
       drag: true,
-      // onchange: async (_response, _uploadFile: UploadFile) => {
-      //   const formData = await getFormData()
-      // },
       onSuccess: async (response: PostUploadPhotosResponse, _uploadFile: UploadFile) => {
         const formData = await getFormData()
         if (
@@ -772,25 +770,13 @@ const schema = reactive<FormSchema[]>([
         )
           return
         if (formData.roomTypePhoto === undefined) formData.roomTypePhoto = []
+        const photos: RoomTypePhoto[] = formData.roomTypePhoto
         response.data.photoUrls.forEach((url: string) => {
-          formData.roomTypePhoto.push({ image: url, thumb: url })
+          photos.push({ image: url, thumb: url })
         })
-        await setValues(formData)
+        await setValues({ roomTypePhoto: photos })
+        setRommTypePhotoSechema(photos)
       },
-      // onRemove: async (uploadFile: UploadFile, _uploadFiles: UploadFiles) => {
-      //   const formData = await getFormData()
-      //   formData.roomTypePhoto = (formData.roomTypePhoto as RoomTypePhoto[]).filter((item) => {
-      //     item.image !== uploadFile.url
-      //   })
-      //   await setValues(formData)
-      //   console.log(await getFormData())
-      // },
-      // beforeRemove: (uploadFile: UploadFile, _uploadFiles: UploadFiles) => {
-      //   return ElMessageBox.confirm(`Cancel the transfer of ${uploadFile.name} ?`).then(
-      //     () => true,
-      //     () => false
-      //   )
-      // },
       onExceed: (_uploadFile: UploadFile, _uploadFiles: UploadFiles) => {
         ElMessage.warning(`僅允許上傳${UPLOAD_PHOTO_LIMIT}張圖片`)
       },
@@ -804,10 +790,7 @@ const schema = reactive<FormSchema[]>([
           <div>
             <img class="el-upload-list__item-thumbnail" src={file.file?.url} />
             <span class="el-upload-list__item-actions">
-              <span
-                class="el-upload-list__item-preview"
-                onClick={() => handleMovePhoto(file.file, -1)}
-              >
+              <span onClick={() => handleMovePhoto(file.file, -1)}>
                 <ElIcon>
                   <ElTooltip content={t('common.moveLeft')}>
                     <CaretLeft />
@@ -815,26 +798,26 @@ const schema = reactive<FormSchema[]>([
                 </ElIcon>
               </span>
               {!disabled.value && (
-                <span class="el-upload-list__item-delete" onClick={() => handleDownload(file.file)}>
+                <span>
                   <ElIcon>
-                    <Download />
+                    <ElTooltip content={t('common.download')}>
+                      <a href={file.file.url} target="_blank" class="text-white">
+                        <Download />
+                      </a>
+                    </ElTooltip>
                   </ElIcon>
                 </span>
               )}
               {!disabled.value && (
-                <span
-                  class="el-upload-list__item-delete"
-                  onClick={() => handleRemovePhoto(file.file)}
-                >
+                <span onClick={() => handleRemovePhoto(file.file)}>
                   <ElIcon>
-                    <Delete />
+                    <ElTooltip content={t('common.delete')}>
+                      <Delete />
+                    </ElTooltip>
                   </ElIcon>
                 </span>
               )}
-              <span
-                class="el-upload-list__item-preview"
-                onClick={() => handleMovePhoto(file.file, 1)}
-              >
+              <span onClick={() => handleMovePhoto(file.file, 1)}>
                 <ElIcon>
                   <ElTooltip content={t('common.moveRight')}>
                     <CaretRight />
@@ -844,7 +827,11 @@ const schema = reactive<FormSchema[]>([
             </span>
           </div>
         ),
-        tip: () => <div class="el-upload__tip">只允許 jpg/png 類型檔案,大小限制為 1MB 以內。</div>
+        tip: () => (
+          <div class="text-base">
+            {t('settings.roomType.uploadPhotoSizeLimit', { size: UPLOAD_PHOTO_SIZE_LIMIT })}
+          </div>
+        )
       }
     }
   }
@@ -887,6 +874,10 @@ const handleMovePhoto = async (file: UploadFile, step: number) => {
   photos[newIndex] = temp
   await setValues({ roomTypePhoto: photos })
   // set roomTypePhoto fileList
+  setRommTypePhotoSechema(photos)
+}
+
+const setRommTypePhotoSechema = (photos: RoomTypePhoto[]) => {
   setSchema([
     {
       field: 'roomTypePhoto',
@@ -925,10 +916,6 @@ const handleRemovePhoto = (file: UploadFile) => {
       ])
     })
   })
-}
-
-const handleDownload = (file: UploadFile) => {
-  console.log(file)
 }
 
 const submit = async () => {

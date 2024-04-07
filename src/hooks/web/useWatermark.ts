@@ -48,7 +48,7 @@ export function useWatermark(appendEl: HTMLElement | null = document.body) {
     func = () => {
       createWatermark(str)
     }
-    window.addEventListener('resize', func)
+    window.addEventListener('resize', func, { passive: true })
   }
 
   return { setWatermark, clear }

@@ -1,68 +1,8 @@
 {
-  "common": {
-    "back": "return",
-    "confirmDeleteText": "confirm deletion?",
-    "moveLeft": "move to the left",
-    "moveRight": "move to the right",
-    "warning": "warn"
-  },
-  "component": {
-    "inputImage": {
-      "headtitle": "photo"
-    }
-  },
   "router": {
-    "table": "sheet",
-    "treeTable": "tree table",
-    "user": "User Management",
     "views": {
       "properties": {
-        "pageTitle": "Hotel settings",
         "propertyForm": {
-          "CancellationPolicyNotesTitle": "Cancellation Notes",
-          "GoodToKnowTitle": "hint",
-          "accountNameLabel": "account name",
-          "accountNumberLabel": "account number",
-          "ageRestrictionsNotes": "Notes on accommodation age restrictions",
-          "allowPreviousDayReservationsLabel": "Allows bookings made the day before",
-          "allowSameDayReservationsLabel": "Early check-in is allowed for a fee",
-          "allowSameDayReservationsUntilLabel": "Allow same day bookings until when today",
-          "amenitiesDividerTitle": "Conveniences",
-          "availableBabyFacilityLabel": "Baby facilities available",
-          "availableBathRoomFacilityLabel": "bathroom",
-          "availableBedroomAndLaundryFacilityLabel": "Bedroom and laundry",
-          "availableCreditCardsLabel": "Acceptable credit cards",
-          "availableFloorTypeLabel": "Room floor (optional)",
-          "availableHeatingAndCoolingFacilityLabel": "Heating&Cooling",
-          "availableInternetAndOfficeFacilityLabel": "Internet and office",
-          "availableKitchenAndDiningFacilityLabel": "kitchen and dining",
-          "availablePillowTypeLabel": "Optional pillow types",
-          "availableRoomFacilityLabel": "room equipment",
-          "babyFacilityTitle": "baby equipment",
-          "bankCodeLabel": "Bank Code",
-          "bankNameLabel": "Bank name",
-          "bankTransferTitle": "Bank transfer",
-          "bathSetBrandLabel": "Toiletries brands",
-          "bedTypeTitle": "Bed configuration",
-          "bookingPoliciesDividerTitle": "Reservation policy",
-          "branchNameLabel": "Branch name",
-          "cancellationPoliciesLabel": "Cancel rules",
-          "cancellationPoliciesTitle": "Cancel rules",
-          "cashPaymentLabel": "Enable cash payment method",
-          "cashTitle": "cash",
-          "checkInEndTimeLabel": "latest check-in time",
-          "checkInOutPoliciesDividerTitle": "Check-in and check-out policy",
-          "checkInStartTimeLabel": "check in time",
-          "checkOutTimeLabel": "check-out time",
-          "childrenAgeLimitLabel": "upper age limit for children",
-          "creditCardPaymentLabel": "Enable credit card payment method",
-          "creditCardTitle": "credit card",
-          "currencyDividerTitle": "currency",
-          "earlyCheckInChargeLabel": "Early check-in fee per unit",
-          "earlyCheckInChargedUnitLabel": "Early check-in fee calculation unit",
-          "earlyCheckInChargedUnitTypeLabel": "Early check-in fee calculation method",
-          "enabledBankTransferLabel": "Enable bank transfer payment method",
-          "floorTypeTitle": "floor",
           "goodToKnow": "hint",
           "hairdryerTypeLabel": "hair dryer brand",
           "ibanLabel": "international bank account number",
@@ -104,7 +44,8 @@
           "theFinePrint": "Notice",
           "theFinePrintTitle": "Notice",
           "tvSizeLabel": "TV screen size",
-          "tvTitle": "television"
+          "tvTitle": "television",
+          "wiredInternetAvailabilityLabel": "Is free wired Internet available?"
         }
       },
       "propertyAdd": {
@@ -121,6 +62,7 @@
       },
       "roomType": {
         "propertyForm": {
+          "PillowTypeTitle": "Pillow",
           "RoomFacilityTitle": "equipment",
           "RoomTypePhotoTitle": "Room photos",
           "ViewTypeTitle": "Window view"
@@ -160,26 +102,6 @@
     },
     "watermark": "watermark",
     "workplace": "workbench"
-  },
-  "searchDemo": {
-    "bottom": "bottom",
-    "button": "button",
-    "center": "middle",
-    "change": "Change",
-    "deleteRadio": "Delete radio button",
-    "dynamicOptions": "Dynamic options",
-    "grid": "grid",
-    "inline": "inline",
-    "left": "Left",
-    "loading": "loading",
-    "operate": "operate",
-    "position": "Location",
-    "reset": "reset",
-    "restore": "reduction",
-    "restoreRadio": "Restore radio button",
-    "right": "right",
-    "search": "Inquire",
-    "searchDes": "Based on the secondary encapsulation of the Form component, query and reset functions are implemented"
   },
   "setting": {
     "breadcrumb": "Bread crumbs",
@@ -238,15 +160,15 @@
       "specificDateRuleDescription": "If the specific date rule and the distance rule match at the same time, the specific date rule will take precedence.",
       "state": "province / State",
       "zip": "postal code"
+    },
+    "roomType": {
+      "uploadPhotoSizeLimit": "Only jpg/png type files are allowed, and the size is limited to {size}MB."
     }
   },
   "size": {
     "default": "default",
     "large": "big",
     "small": "Small"
-  },
-  "stickyDemo": {
-    "sticky": "sticky"
   },
   "system": {
     "amenities": {
@@ -298,65 +220,6 @@
       "after": "back",
       "before": "forward"
     }
-  },
-  "tableDemo": {
-    "action": "operate",
-    "author": "author",
-    "changeTitle": "Modify title",
-    "commonly": "generally",
-    "delOrAddAction": "Delete/add action column",
-    "displayTime": "creation time",
-    "example": "Example",
-    "fixedHeaderOrAuto": "fixed head/automatic",
-    "getSelections": "Get multiple selection data",
-    "good": "good",
-    "header": "head",
-    "hidden": "hide",
-    "operate": "operate",
-    "pageviews": "Number of readings",
-    "pagination": "Pagination",
-    "preview": "cover",
-    "reserveIndex": "Overlay serial number",
-    "restoreIndex": "Restore serial number",
-    "selectAllNone": "Select all/Deselect all",
-    "show": "show",
-    "showExpandedRows": "Show expanded rows",
-    "showOrHiddenBorder": "Show/hide borders",
-    "showOrHiddenSortable": "Show/hide sort",
-    "showOrHiddenStripe": "Show/hide zebra pattern",
-    "showSelections": "Show multiple selections",
-    "table": "sheet",
-    "tableDes": "Secondary encapsulation of Table component based on ElementPlus",
-    "title": "title"
-  },
-  "userDemo": {
-    "account": "account",
-    "action": "operate",
-    "createTime": "creation time",
-    "department": "Department",
-    "departmentList": "Department list",
-    "departmentName": "Department name",
-    "disable": "Disable",
-    "email": "Mail",
-    "enable": "enable",
-    "index": "serial number",
-    "message": "Since it is simulated data, only two accounts with different permissions are provided, and developers can modify and combine them according to the actual situation.",
-    "password": "password",
-    "remark": "Remark",
-    "remarkMessage1": "Backend control routing permissions",
-    "remarkMessage2": "Front-end control routing permissions",
-    "role": "Role",
-    "searchDepartment": "Search department",
-    "status": "state",
-    "superiorDepartment": "Higher office",
-    "title": "User Management",
-    "username": "username"
-  },
-  "watermarkDemo": {
-    "clearWatermark": "Clear watermark",
-    "createdWatermark": "Create watermark",
-    "resetWatermark": "reset watermark",
-    "watermark": "watermark"
   },
   "workplace": {
     "access": "project visit",

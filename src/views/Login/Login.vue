@@ -72,7 +72,7 @@ const themeChange = () => {
             </div>
 
             <div class="flex justify-end items-center space-x-10px">
-              <ThemeSwitch @change="themeChange" />
+              <ThemeSwitch @change.passive="themeChange" />
               <LocaleDropdown class="lt-xl:text-white dark:text-white" />
             </div>
           </div>

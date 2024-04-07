@@ -25,7 +25,6 @@ import {
   PillowFirmnessEnum
 } from '@/types/enums/dataStore'
 import { LanguageCodeEnum } from '@/types/enums/languageCode'
-import exp from 'constants'
 
 export interface GetAvailableAmenitiesResponse {
   success: boolean

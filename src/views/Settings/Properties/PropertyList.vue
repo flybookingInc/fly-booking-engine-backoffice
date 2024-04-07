@@ -1,7 +1,7 @@
 <template>
   <ContentWrap :title="t('router.views.settings.properties.title')">
     <div class="mb-10px">
-      <BaseButton type="primary" @click="addAction">{{
+      <BaseButton type="primary" @click.passive="addAction">{{
         t('router.views.settings.properties.add_property')
       }}</BaseButton>
     </div>

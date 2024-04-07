@@ -79,13 +79,13 @@ const addBed = () => {
             </ElRow>
           </ElCol>
           <ElCol :span="4">
-            <ElButton type="danger" class="ml-4" @click="removeBed(index)">{{
+            <ElButton type="danger" class="ml-4" @click.passive="removeBed(index)">{{
               t('common.delete_bed_type')
             }}</ElButton>
           </ElCol>
         </ElRow>
       </div>
-      <ElButton type="primary" @click="addBed()">{{ t('common.add_bed_type') }}</ElButton>
+      <ElButton type="primary" @click.passive="addBed()">{{ t('common.add_bed_type') }}</ElButton>
     </ElCard>
   </div>
 </template>

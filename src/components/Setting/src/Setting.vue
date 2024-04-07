@@ -159,7 +159,7 @@ const themeChange = () => {
   <div
     :class="prefixCls"
     class="fixed top-[45%] right-0 w-40px h-40px flex items-center justify-center bg-[var(--el-color-primary)] cursor-pointer z-10"
-    @click="drawer = true"
+    @click.passive="drawer = true"
   >
     <Icon icon="ant-design:setting-outlined" color="#fff" />
   </div>
@@ -172,7 +172,7 @@ const themeChange = () => {
     <div class="text-center">
       <!-- 主题 -->
       <ElDivider>{{ t('setting.theme') }}</ElDivider>
-      <ThemeSwitch @change="themeChange" />
+      <ThemeSwitch @change.passive="themeChange" />
 
       <!-- 布局 -->
       <ElDivider>{{ t('setting.layout') }}</ElDivider>
@@ -192,7 +192,7 @@ const themeChange = () => {
           '#9c27b0',
           '#ff9800'
         ]"
-        @change="setSystemTheme"
+        @change.passive="setSystemTheme"
       />
 
       <!-- 头部主题 -->
@@ -209,7 +209,7 @@ const themeChange = () => {
           '#009688',
           '#383f45'
         ]"
-        @change="setHeaderTheme"
+        @change.passive="setHeaderTheme"
       />
 
       <!-- 菜单主题 -->
@@ -226,7 +226,7 @@ const themeChange = () => {
           '#001628',
           '#344058'
         ]"
-        @change="setMenuTheme"
+        @change.passive="setMenuTheme"
       />
     </div>
 
@@ -236,12 +236,12 @@ const themeChange = () => {
 
     <ElDivider />
     <div>
-      <BaseButton type="primary" class="w-full" @click="copyConfig">{{
+      <BaseButton type="primary" class="w-full" @click.passive="copyConfig">{{
         t('setting.copy')
       }}</BaseButton>
     </div>
     <div class="mt-5px">
-      <BaseButton type="danger" class="w-full" @click="clear">
+      <BaseButton type="danger" class="w-full" @click.passive="clear">
         {{ t('setting.clearAndReset') }}
       </BaseButton>
     </div>

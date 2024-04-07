@@ -60,11 +60,11 @@ const valueRef = ref(props.modelValue as string[])
           v-model="valueRef[index]"
           :type="textType"
           :value="item"
-        /><ElButton type="danger" class="ml-4" @click="remove(index)">{{
+        /><ElButton type="danger" class="ml-4" @click.passive="remove(index)">{{
           t('common.delete_line')
         }}</ElButton>
       </div>
-      <ElButton type="primary" @click="add()">{{ t('common.add_new_line') }}</ElButton>
+      <ElButton type="primary" @click.passive="add()">{{ t('common.add_new_line') }}</ElButton>
     </ElCard>
     <ElCard v-else>
       <div v-for="(item, index) in props.modelValue" :key="index" class="my-4 flex inline">
@@ -73,11 +73,11 @@ const valueRef = ref(props.modelValue as string[])
           v-model="valueRef[index]"
           :type="textType"
           :value="item"
-        /><ElButton type="danger" class="ml-4" @click="remove(index)">{{
+        /><ElButton type="danger" class="ml-4" @click.passive="remove(index)">{{
           t('common.delete_line')
         }}</ElButton>
       </div>
-      <ElButton type="primary" @click="add()">{{ t('common.add_new_line') }}</ElButton>
+      <ElButton type="primary" @click.passive="add()">{{ t('common.add_new_line') }}</ElButton>
     </ElCard>
   </div>
 </template>

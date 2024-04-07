@@ -72,7 +72,7 @@ function handleShowForm(show = false) {
     <div
       :class="`${prefixCls}__unlock`"
       class="absolute top-0 left-1/2 flex pt-5 h-16 items-center justify-center sm:text-md xl:text-xl text-white flex-col cursor-pointer transform translate-x-1/2"
-      @click="handleShowForm(false)"
+      @click.passive="handleShowForm(false)"
       v-show="showDate"
     >
       <Icon icon="ep:lock" />
@@ -113,7 +113,7 @@ function handleShowForm(show = false) {
               class="mt-2 mr-2 enter-x"
               link
               :disabled="loading"
-              @click="handleShowForm(true)"
+              @click.passive="handleShowForm(true)"
             >
               {{ t('common.back') }}
             </ElButton>
@@ -123,7 +123,7 @@ function handleShowForm(show = false) {
               class="mt-2 mr-2 enter-x"
               link
               :disabled="loading"
-              @click="goLogin"
+              @click.passive="goLogin"
             >
               {{ t('lock.backToLogin') }}
             </ElButton>
@@ -132,7 +132,7 @@ function handleShowForm(show = false) {
               class="mt-2"
               size="small"
               link
-              @click="unLock()"
+              @click.passive="unLock()"
               :disabled="loading"
             >
               {{ t('lock.entrySystem') }}
@@ -205,6 +205,7 @@ function handleShowForm(show = false) {
         font-size: 90px;
       }
     }
+
     @media screen and (min-width: @screen-lg) {
       span:not(.meridiem) {
         font-size: 220px;
@@ -216,6 +217,7 @@ function handleShowForm(show = false) {
         font-size: 260px;
       }
     }
+
     @media screen and (min-width: @screen-2xl) {
       span:not(.meridiem) {
         font-size: 320px;

@@ -36,7 +36,7 @@ const onExpand = () => {
     type="primary"
     :loading="searchLoading"
     :icon="useIcon({ icon: 'ep:search' })"
-    @click="onSearch"
+    @click.passive="onSearch"
   >
     {{ t('common.query') }}
   </ElButton>
@@ -44,7 +44,7 @@ const onExpand = () => {
     v-if="showReset"
     :loading="resetLoading"
     :icon="useIcon({ icon: 'ep:refresh-right' })"
-    @click="onReset"
+    @click.passive="onReset"
   >
     {{ t('common.reset') }}
   </ElButton>
@@ -52,7 +52,7 @@ const onExpand = () => {
     v-if="showExpand"
     :icon="useIcon({ icon: visible ? 'ep:arrow-down' : 'ep:arrow-up' })"
     text
-    @click="onExpand"
+    @click.passive="onExpand"
   >
     {{ t(visible ? 'common.shrink' : 'common.expand') }}
   </ElButton>

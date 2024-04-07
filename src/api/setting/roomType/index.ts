@@ -5,6 +5,11 @@ import { PostRoomTypeRequest, PostRoomTypeResponse } from '@/types/api/roomType/
 import { PutRoomTypeRequest, PutRoomTypeResponse } from '@/types/api/roomType/putRoomType'
 import { DeleteRoomTypeRequest, DeleteRoomTypeResponse } from '@/types/api/roomType/deleteRoomType'
 import { GetRoomTypesRequest, GetRoomTypesResponse } from '@/types/api/roomType/getRoomTypes'
+import { PostUploadPhotosRequest, PostUploadPhotosResponse } from '@/types/api/roomType/postPhotos'
+import {
+  DeleteUploadPhotosRequest,
+  DeleteUploadPhotosResponse
+} from '@/types/api/roomType/deletePhoto'
 
 export const getRoomTypesApi = (
   data: GetRoomTypesRequest
@@ -34,4 +39,16 @@ export const deleteRoomTypeApi = (
   data: DeleteRoomTypeRequest
 ): Promise<AxiosResponse<DeleteRoomTypeResponse>> => {
   return request.delete({ url: `/mock/roomType/deleteRoomType`, data })
+}
+
+export const postUploadPhotosApi = (
+  data: PostUploadPhotosRequest
+): Promise<AxiosResponse<PostUploadPhotosResponse>> => {
+  return request.post({ url: '/mock/roomType/uploadPhotos', data })
+}
+
+export const deleteUploadPhotosApi = (
+  data: DeleteUploadPhotosRequest
+): Promise<AxiosResponse<DeleteUploadPhotosResponse>> => {
+  return request.delete({ url: '/mock/roomType/deletePhoto', data })
 }

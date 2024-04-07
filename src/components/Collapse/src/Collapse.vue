@@ -23,7 +23,7 @@ const toggleCollapse = () => {
 </script>
 
 <template>
-  <div :class="prefixCls" @click="toggleCollapse">
+  <div :class="prefixCls" @click.passive="toggleCollapse">
     <Icon
       :size="18"
       :icon="collapse ? 'ant-design:menu-unfold-outlined' : 'ant-design:menu-fold-outlined'"

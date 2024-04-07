@@ -35,11 +35,11 @@ const close = async () => {
 }
 </script>
 <template>
-  <ElOverlay v-show="visible" @click="close">
+  <ElOverlay v-show="visible" @click.passive="close">
     <div class="w-full h-full flex justify-center items-center relative" @click="close">
       <div
         class="w-44px h-44px color-[#fff] bg-[var(--el-text-color-regular)] rounded-full border-[#fff] flex justify-center items-center cursor-pointer absolute top-40px right-40px"
-        @click="close"
+        @click.passive="close"
       >
         <Icon icon="ep:close" :size="24" />
       </div>

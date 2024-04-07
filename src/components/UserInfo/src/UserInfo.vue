@@ -51,13 +51,13 @@ const toDocument = () => {
     <template #dropdown>
       <ElDropdownMenu>
         <ElDropdownItem>
-          <div @click="toDocument">{{ t('common.document') }}</div>
+          <div @click.passive="toDocument">{{ t('common.document') }}</div>
         </ElDropdownItem>
         <ElDropdownItem divided>
-          <div @click="lockScreen">{{ t('lock.lockScreen') }}</div>
+          <div @click.passive="lockScreen">{{ t('lock.lockScreen') }}</div>
         </ElDropdownItem>
         <ElDropdownItem>
-          <div @click="loginOut">{{ t('common.loginOut') }}</div>
+          <div @click.passive="loginOut">{{ t('common.loginOut') }}</div>
         </ElDropdownItem>
       </ElDropdownMenu>
     </template>

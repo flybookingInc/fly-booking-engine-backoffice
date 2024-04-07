@@ -146,82 +146,82 @@ watch(
   <div :class="prefixCls">
     <div class="flex justify-between items-center">
       <span class="text-14px">{{ t('setting.breadcrumb') }}</span>
-      <ElSwitch v-model="breadcrumb" @change="breadcrumbChange" />
+      <ElSwitch v-model="breadcrumb" @change.passive="breadcrumbChange" />
     </div>
 
     <div class="flex justify-between items-center">
       <span class="text-14px">{{ t('setting.breadcrumbIcon') }}</span>
-      <ElSwitch v-model="breadcrumbIcon" @change="breadcrumbIconChange" />
+      <ElSwitch v-model="breadcrumbIcon" @change.passive="breadcrumbIconChange" />
     </div>
 
     <div class="flex justify-between items-center">
       <span class="text-14px">{{ t('setting.hamburgerIcon') }}</span>
-      <ElSwitch v-model="hamburger" @change="hamburgerChange" />
+      <ElSwitch v-model="hamburger" @change.passive="hamburgerChange" />
     </div>
 
     <div class="flex justify-between items-center">
       <span class="text-14px">{{ t('setting.screenfullIcon') }}</span>
-      <ElSwitch v-model="screenfull" @change="screenfullChange" />
+      <ElSwitch v-model="screenfull" @change.passive="screenfullChange" />
     </div>
 
     <div class="flex justify-between items-center">
       <span class="text-14px">{{ t('setting.sizeIcon') }}</span>
-      <ElSwitch v-model="size" @change="sizeChange" />
+      <ElSwitch v-model="size" @change.passive="sizeChange" />
     </div>
 
     <div class="flex justify-between items-center">
       <span class="text-14px">{{ t('setting.localeIcon') }}</span>
-      <ElSwitch v-model="locale" @change="localeChange" />
+      <ElSwitch v-model="locale" @change.passive="localeChange" />
     </div>
 
     <div class="flex justify-between items-center">
       <span class="text-14px">{{ t('setting.tagsView') }}</span>
-      <ElSwitch v-model="tagsView" @change="tagsViewChange" />
+      <ElSwitch v-model="tagsView" @change.passive="tagsViewChange" />
     </div>
 
     <div class="flex justify-between items-center">
       <span class="text-14px">{{ t('setting.tagsViewIcon') }}</span>
-      <ElSwitch v-model="tagsViewIcon" @change="tagsViewIconChange" />
+      <ElSwitch v-model="tagsViewIcon" @change.passive="tagsViewIconChange" />
     </div>
 
     <div class="flex justify-between items-center">
       <span class="text-14px">{{ t('setting.logo') }}</span>
-      <ElSwitch v-model="logo" @change="logoChange" />
+      <ElSwitch v-model="logo" @change.passive="logoChange" />
     </div>
 
     <div class="flex justify-between items-center">
       <span class="text-14px">{{ t('setting.uniqueOpened') }}</span>
-      <ElSwitch v-model="uniqueOpened" @change="uniqueOpenedChange" />
+      <ElSwitch v-model="uniqueOpened" @change.passive="uniqueOpenedChange" />
     </div>
 
     <div class="flex justify-between items-center">
       <span class="text-14px">{{ t('setting.fixedHeader') }}</span>
-      <ElSwitch v-model="fixedHeader" @change="fixedHeaderChange" />
+      <ElSwitch v-model="fixedHeader" @change.passive="fixedHeaderChange" />
     </div>
 
     <div class="flex justify-between items-center">
       <span class="text-14px">{{ t('setting.footer') }}</span>
-      <ElSwitch v-model="footer" @change="footerChange" />
+      <ElSwitch v-model="footer" @change.passive="footerChange" />
     </div>
 
     <div class="flex justify-between items-center">
       <span class="text-14px">{{ t('setting.greyMode') }}</span>
-      <ElSwitch v-model="greyMode" @change="greyModeChange" />
+      <ElSwitch v-model="greyMode" @change.passive="greyModeChange" />
     </div>
 
     <div class="flex justify-between items-center">
       <span class="text-14px">{{ t('setting.dynamicRouter') }}</span>
-      <ElSwitch v-model="dynamicRouter" @change="dynamicRouterChange" />
+      <ElSwitch v-model="dynamicRouter" @change.passive="dynamicRouterChange" />
     </div>
 
     <div class="flex justify-between items-center">
       <span class="text-14px">{{ t('setting.serverDynamicRouter') }}</span>
-      <ElSwitch v-model="serverDynamicRouter" @change="serverDynamicRouterChange" />
+      <ElSwitch v-model="serverDynamicRouter" @change.passive="serverDynamicRouterChange" />
     </div>
 
     <div class="flex justify-between items-center">
       <span class="text-14px">{{ t('setting.fixedMenu') }}</span>
-      <ElSwitch v-model="fixedMenu" @change="fixedMenuChange" />
+      <ElSwitch v-model="fixedMenu" @change.passive="fixedMenuChange" />
     </div>
   </div>
 </template>

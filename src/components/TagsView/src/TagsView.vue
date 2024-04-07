@@ -268,7 +268,7 @@ watch(
     <span
       :class="`${prefixCls}__tool ${prefixCls}__tool--first`"
       class="w-[var(--tags-view-height)] h-[var(--tags-view-height)] flex items-center justify-center cursor-pointer"
-      @click="move(-200)"
+      @click.passive="move(-200)"
     >
       <Icon
         icon="ep:d-arrow-left"
@@ -353,7 +353,7 @@ watch(
             <div>
               <router-link :ref="tagLinksRefs.set" :to="{ ...item }" custom v-slot="{ navigate }">
                 <div
-                  @click="navigate"
+                  @click.passive="navigate"
                   class="h-full flex justify-center items-center whitespace-nowrap pl-15px"
                 >
                   <Icon
@@ -385,7 +385,7 @@ watch(
     <span
       :class="`${prefixCls}__tool`"
       class="w-[var(--tags-view-height)] h-[var(--tags-view-height)] flex items-center justify-center cursor-pointer"
-      @click="move(200)"
+      @click.passive="move(200)"
     >
       <Icon
         icon="ep:d-arrow-right"
@@ -396,7 +396,7 @@ watch(
     <span
       :class="`${prefixCls}__tool`"
       class="w-[var(--tags-view-height)] h-[var(--tags-view-height)] flex items-center justify-center cursor-pointer"
-      @click="refreshSelectedTag(selectedTag)"
+      @click.passive="refreshSelectedTag(selectedTag)"
     >
       <Icon
         icon="ant-design:reload-outlined"

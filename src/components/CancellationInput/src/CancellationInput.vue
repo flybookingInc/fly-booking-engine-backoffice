@@ -128,13 +128,16 @@ const getPenaltyTypeOptions = () => {
             </ElRow>
           </ElCol>
           <ElCol :span="4">
-            <ElButton type="danger" class="ml-4" @click="removeDaysBeforeCheckinRules(index)">{{
-              t('common.delete_rule')
-            }}</ElButton>
+            <ElButton
+              type="danger"
+              class="ml-4"
+              @click.passive="removeDaysBeforeCheckinRules(index)"
+              >{{ t('common.delete_rule') }}</ElButton
+            >
           </ElCol>
         </ElRow>
       </div>
-      <ElButton type="primary" @click="addDaysBeforeCheckinRules()">{{
+      <ElButton type="primary" @click.passive="addDaysBeforeCheckinRules()">{{
         t('common.add_rule')
       }}</ElButton>
     </ElCard>
@@ -180,13 +183,15 @@ const getPenaltyTypeOptions = () => {
             </ElRow>
           </ElCol>
           <ElCol :span="4">
-            <ElButton type="danger" class="ml-4" @click="removeSpecificDateRules(index)">{{
+            <ElButton type="danger" class="ml-4" @click.passive="removeSpecificDateRules(index)">{{
               t('common.delete_rule')
             }}</ElButton>
           </ElCol>
         </ElRow>
       </div>
-      <ElButton type="primary" @click="addSpecificDateRules()">{{ t('common.add_rule') }}</ElButton>
+      <ElButton type="primary" @click.passive="addSpecificDateRules()">{{
+        t('common.add_rule')
+      }}</ElButton>
     </ElCard>
   </div>
 </template>

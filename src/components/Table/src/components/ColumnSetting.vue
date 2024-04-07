@@ -110,7 +110,7 @@ watch(
           <ElCheckbox
             v-model="checkAll"
             :indeterminate="isIndeterminate"
-            @change="handleCheckAllChange"
+            @change.passive="handleCheckAllChange"
           />
           <ElText class="ml-8px!">{{ checkColumns.length }} / {{ settingColumns?.length }}</ElText>
         </div>
@@ -126,7 +126,7 @@ watch(
           <ElCheckboxGroup
             ref="draggableWrap"
             v-model="checkColumns"
-            @change="handleCheckedColumnsChange"
+            @change.passive="handleCheckedColumnsChange"
           >
             <div
               v-for="item in settingColumns"
@@ -158,8 +158,8 @@ watch(
     </div>
     <template #footer>
       <div>
-        <BaseButton @click="restore">还原</BaseButton>
-        <BaseButton type="primary" @click="confirm">确定</BaseButton>
+        <BaseButton @click.passive="restore">还原</BaseButton>
+        <BaseButton type="primary" @click.passive="confirm">确定</BaseButton>
       </div>
     </template>
   </ElDrawer>

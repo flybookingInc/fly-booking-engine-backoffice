@@ -1,47 +1,52 @@
 <script setup lang="tsx">
-import { Form, FormSchema, CheckboxOption, SelectOption } from '@/components/Form'
+import { CheckboxOption, Form, FormSchema, SelectOption } from '@/components/Form'
 import { useForm } from '@/hooks/web/useForm'
-import { onBeforeMount, reactive } from 'vue'
 import { useValidator } from '@/hooks/web/useValidator'
+import { onBeforeMount, reactive, ref } from 'vue'
+// import { BaseButton } from '@/components/Button'
+import { deleteUploadPhotosApi, postRoomTypeApi } from '@/api/setting/roomType'
 import {
+  getAvailableFloorTypeApi,
+  getAvailablePillowFirmnessApi,
+  getAvailablePillowTypeApi,
+  getAvailableRoomBathRoomFacilityApi,
+  getAvailableRoomBedroomAndLaundryFacilityApi,
+  getAvailableRoomEntertainmentFacilityApi,
+  getAvailableRoomFacilityApi,
+  getAvailableRoomFamilyFacilityApi,
+  getAvailableRoomHeatingAndCoolingFacilityApi,
+  getAvailableRoomInternetAndOfficeFacilityApi,
+  getAvailableRoomKitchenAndDiningFacilityApi,
+  getAvailableRoomSafetyFacilityApi,
+  getAvailableRoomTypeStatusesApi,
+  getAvailableRoomViewApi,
+  getAvailableTvCastingApi,
+  getAvailableTvContentApi,
+  getAvailableTvResolutionApi,
+  getAvailableWifiAvailabilityApi,
+  getAvailableWiredInternetAvailabilityApi
+} from '@/api/system'
+import { useI18n } from '@/hooks/web/useI18n'
+import { usePropertyStore } from '@/store/modules/property'
+import { PostUploadPhotosResponse } from '@/types/api/roomType/postPhotos'
+import {
+  RoomEntertainmentFacilityEnum,
+  RoomInternetAndOfficeFacilityEnum,
+  WiFiSpecificationEnum
+} from '@/types/enums/dataStore'
+import type {
   BookingPolicy,
   CheckInOutPolicy,
   HotelDetails,
   PropertyPaymentMethodsCardType,
   PropertypaymentMethodBankTransfer,
   PropertypaymentMethodCash,
-  RoomTypeDetail
+  RoomTypeDetail,
+  RoomTypePhoto
 } from '@/types/stores/property'
-import {
-  getAvailableRoomTypeStatusesApi,
-  getAvailableTvResolutionApi,
-  getAvailableTvCastingApi,
-  getAvailableTvContentApi,
-  getAvailableFloorTypeApi,
-  getAvailableWifiAvailabilityApi,
-  getAvailableWiredInternetAvailabilityApi,
-  getAvailableRoomFacilityApi,
-  getAvailableRoomBathRoomFacilityApi,
-  getAvailableRoomEntertainmentFacilityApi,
-  getAvailableRoomInternetAndOfficeFacilityApi,
-  getAvailableRoomBedroomAndLaundryFacilityApi,
-  getAvailableRoomFamilyFacilityApi,
-  getAvailableRoomHeatingAndCoolingFacilityApi,
-  getAvailableRoomKitchenAndDiningFacilityApi,
-  getAvailableRoomSafetyFacilityApi,
-  getAvailableRoomViewApi,
-  getAvailablePillowTypeApi,
-  getAvailablePillowFirmnessApi
-} from '@/api/system'
-import { ElMessage } from 'element-plus'
-import { useI18n } from '@/hooks/web/useI18n'
-import { usePropertyStore } from '@/store/modules/property'
-import { postRoomTypeApi } from '@/api/setting/roomType'
-import {
-  RoomEntertainmentFacilityEnum,
-  RoomInternetAndOfficeFacilityEnum,
-  WiFiSpecificationEnum
-} from '@/types/enums/dataStore'
+import { Delete, Download, Plus, CaretLeft, CaretRight } from '@element-plus/icons-vue'
+import type { UploadFile, UploadFiles } from 'element-plus'
+import { ElIcon, ElMessage, ElMessageBox, ElTooltip } from 'element-plus'
 
 const { t } = useI18n()
 const { required } = useValidator()
@@ -58,6 +63,8 @@ const { formRegister, formMethods } = useForm()
 const { setValues, getFormData, getElFormExpose, setSchema } = formMethods
 const hotelDetails: HotelDetails = {} as HotelDetails
 const roomTypeDetails: RoomTypeDetail = {} as RoomTypeDetail
+// const photoUrl = ref('')
+const UPLOAD_PHOTO_LIMIT = 50
 const schema = reactive<FormSchema[]>([
   {
     field: 'status',
@@ -728,8 +735,121 @@ const schema = reactive<FormSchema[]>([
         } as CheckboxOption
       })
     }
+  },
+  {
+    field: 'RoomTypePhotoDivider',
+    label: t('router.views.roomType.propertyForm.RoomTypePhotoTitle'),
+    component: 'Divider'
+  },
+  {
+    field: 'roomTypePhoto',
+    // component: 'InputImage',
+    component: 'Upload',
+    colProps: {
+      span: 24
+    },
+    componentProps: {
+      limit: UPLOAD_PHOTO_LIMIT,
+      action: '/mock/roomType/uploadPhotos',
+      headers: {
+        'Cache-Control': 'public, max-age=3153600'
+        // 'Content-Type': 'multipart/form-data' // 'multipart/form-data' contentent-type will set automaticly
+      },
+      listType: 'picture-card',
+      data: { property_id: props.propertyId, room_type_id: props.roomTypeId },
+      multiple: true,
+      drag: true,
+      // onchange: async (_response, _uploadFile: UploadFile) => {
+      //   const formData = await getFormData()
+      // },
+      onSuccess: async (response: PostUploadPhotosResponse, _uploadFile: UploadFile) => {
+        const formData = await getFormData()
+        if (
+          !response.success ||
+          !response.data ||
+          !response.data.photoUrls ||
+          !Array.isArray(response.data.photoUrls)
+        )
+          return
+        if (formData.roomTypePhoto === undefined) formData.roomTypePhoto = []
+        response.data.photoUrls.forEach((url: string) => {
+          formData.roomTypePhoto.push({ image: url, thumb: url })
+        })
+        await setValues(formData)
+      },
+      // onRemove: async (uploadFile: UploadFile, _uploadFiles: UploadFiles) => {
+      //   const formData = await getFormData()
+      //   formData.roomTypePhoto = (formData.roomTypePhoto as RoomTypePhoto[]).filter((item) => {
+      //     item.image !== uploadFile.url
+      //   })
+      //   await setValues(formData)
+      //   console.log(await getFormData())
+      // },
+      // beforeRemove: (uploadFile: UploadFile, _uploadFiles: UploadFiles) => {
+      //   return ElMessageBox.confirm(`Cancel the transfer of ${uploadFile.name} ?`).then(
+      //     () => true,
+      //     () => false
+      //   )
+      // },
+      onExceed: (_uploadFile: UploadFile, _uploadFiles: UploadFiles) => {
+        ElMessage.warning(`僅允許上傳${UPLOAD_PHOTO_LIMIT}張圖片`)
+      },
+      slots: {
+        default: () => (
+          <ElIcon>
+            <Plus />
+          </ElIcon>
+        ),
+        file: (file: { file: UploadFile }) => (
+          <div>
+            <img class="el-upload-list__item-thumbnail" src={file.file?.url} />
+            <span class="el-upload-list__item-actions">
+              <span
+                class="el-upload-list__item-preview"
+                onClick={() => handleMovePhoto(file.file, -1)}
+              >
+                <ElIcon>
+                  <ElTooltip content={t('common.moveLeft')}>
+                    <CaretLeft />
+                  </ElTooltip>
+                </ElIcon>
+              </span>
+              {!disabled.value && (
+                <span class="el-upload-list__item-delete" onClick={() => handleDownload(file.file)}>
+                  <ElIcon>
+                    <Download />
+                  </ElIcon>
+                </span>
+              )}
+              {!disabled.value && (
+                <span
+                  class="el-upload-list__item-delete"
+                  onClick={() => handleRemovePhoto(file.file)}
+                >
+                  <ElIcon>
+                    <Delete />
+                  </ElIcon>
+                </span>
+              )}
+              <span
+                class="el-upload-list__item-preview"
+                onClick={() => handleMovePhoto(file.file, 1)}
+              >
+                <ElIcon>
+                  <ElTooltip content={t('common.moveRight')}>
+                    <CaretRight />
+                  </ElTooltip>
+                </ElIcon>
+              </span>
+            </span>
+          </div>
+        ),
+        tip: () => <div class="el-upload__tip">只允許 jpg/png 類型檔案,大小限制為 1MB 以內。</div>
+      }
+    }
   }
 ])
+const disabled = ref(false)
 let formMode: string = 'add'
 
 const rules = reactive({
@@ -755,6 +875,61 @@ onBeforeMount(async () => {
     console.log(err)
   }
 })
+
+const handleMovePhoto = async (file: UploadFile, step: number) => {
+  const photos: RoomTypePhoto[] = (await getFormData()).roomTypePhoto
+  const oldIndex = photos.findIndex((item) => item.image === file.url)
+  if (oldIndex === -1) return
+  const newIndex = oldIndex + step
+  if (newIndex < 0 || newIndex >= photos.length) return
+  const temp = photos[oldIndex]
+  photos[oldIndex] = photos[newIndex]
+  photos[newIndex] = temp
+  await setValues({ roomTypePhoto: photos })
+  // set roomTypePhoto fileList
+  setSchema([
+    {
+      field: 'roomTypePhoto',
+      path: 'componentProps.fileList',
+      value: photos.map((item) => {
+        return { name: item.image, url: item.image }
+      })
+    }
+  ])
+}
+
+const handleRemovePhoto = (file: UploadFile) => {
+  ElMessageBox.confirm(t('common.confirmDeleteText'), t('common.warning'), {
+    confirmButtonText: t('common.confirm'),
+    cancelButtonText: t('common.cancel'),
+    type: 'warning'
+  }).then(async () => {
+    if (!props.roomTypeId || !file.url) return
+    deleteUploadPhotosApi({
+      property_id: props.propertyId,
+      room_type_id: props.roomTypeId,
+      photo_url: file.url
+    }).then(async () => {
+      const photos: RoomTypePhoto[] = (await getFormData()).roomTypePhoto
+      const newPhotos = photos.filter((item) => item.image !== file.url)
+      await setValues({ roomTypePhoto: newPhotos })
+      // set roomTypePhoto fileList
+      setSchema([
+        {
+          field: 'roomTypePhoto',
+          path: 'componentProps.fileList',
+          value: newPhotos.map((item) => {
+            return { name: item.image, url: item.image }
+          })
+        }
+      ])
+    })
+  })
+}
+
+const handleDownload = (file: UploadFile) => {
+  console.log(file)
+}
 
 const submit = async () => {
   try {
@@ -892,7 +1067,6 @@ const updateFormDataToHotelDetails = async () => {
 const setFormValues = () => {
   if (!roomTypeDetails) return
   // set hidden fields
-  console.log('roomTypeDetails=', roomTypeDetails)
   if (
     roomTypeDetails.facilities.internet_and_office_facility.includes(
       RoomInternetAndOfficeFacilityEnum.WIFI
@@ -950,6 +1124,16 @@ const setFormValues = () => {
       }
     ])
   }
+  // set roomTypePhoto fileList
+  setSchema([
+    {
+      field: 'roomTypePhoto',
+      path: 'componentProps.fileList',
+      value: roomTypeDetails.photos.map((item) => {
+        return { name: item.image, url: item.image }
+      })
+    }
+  ])
   const formData = {
     // fulfill form
     status: roomTypeDetails.status,
@@ -989,7 +1173,8 @@ const setFormValues = () => {
     availableInternetAndOffice: roomTypeDetails.facilities.internet_and_office_facility,
     availableViewType: roomTypeDetails.view_types,
     availablePillowType: roomTypeDetails.pillow_types,
-    availablePillowFirmness: roomTypeDetails.pillow_firmness
+    availablePillowFirmness: roomTypeDetails.pillow_firmness,
+    roomTypePhoto: roomTypeDetails.photos
   }
   setValues(formData)
 }

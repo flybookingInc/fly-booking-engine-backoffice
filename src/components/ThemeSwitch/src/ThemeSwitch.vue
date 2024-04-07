@@ -39,7 +39,7 @@ const themeChange = (val: boolean) => {
     :active-color="blackColor"
     :active-icon="Sun"
     :inactive-icon="CrescentMoon"
-    @change="themeChange"
+    @change.passive="themeChange"
   />
 </template>
 

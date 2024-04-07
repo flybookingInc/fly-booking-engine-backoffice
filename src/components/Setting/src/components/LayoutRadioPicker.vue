@@ -22,7 +22,7 @@ const layout = computed(() => appStore.getLayout)
           'is-acitve': layout === 'classic'
         }
       ]"
-      @click="appStore.setLayout('classic')"
+      @click.passive="appStore.setLayout('classic')"
     ></div>
     <div
       :class="[
@@ -32,7 +32,7 @@ const layout = computed(() => appStore.getLayout)
           'is-acitve': layout === 'topLeft'
         }
       ]"
-      @click="appStore.setLayout('topLeft')"
+      @click.passive="appStore.setLayout('topLeft')"
     ></div>
     <div
       :class="[
@@ -42,7 +42,7 @@ const layout = computed(() => appStore.getLayout)
           'is-acitve': layout === 'top'
         }
       ]"
-      @click="appStore.setLayout('top')"
+      @click.passive="appStore.setLayout('top')"
     ></div>
     <div
       :class="[
@@ -52,7 +52,7 @@ const layout = computed(() => appStore.getLayout)
           'is-acitve': layout === 'cutMenu'
         }
       ]"
-      @click="appStore.setLayout('cutMenu')"
+      @click.passive="appStore.setLayout('cutMenu')"
     >
       <div class="absolute h-full w-[33%] top-0 left-[10%] bg-gray-200"></div>
     </div>

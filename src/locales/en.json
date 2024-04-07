@@ -1,6 +1,15 @@
 {
   "common": {
-    "back": "return"
+    "back": "return",
+    "confirmDeleteText": "confirm deletion?",
+    "moveLeft": "move to the left",
+    "moveRight": "move to the right",
+    "warning": "warn"
+  },
+  "component": {
+    "inputImage": {
+      "headtitle": "photo"
+    }
   },
   "router": {
     "table": "sheet",
@@ -113,6 +122,7 @@
       "roomType": {
         "propertyForm": {
           "RoomFacilityTitle": "equipment",
+          "RoomTypePhotoTitle": "Room photos",
           "ViewTypeTitle": "Window view"
         }
       },

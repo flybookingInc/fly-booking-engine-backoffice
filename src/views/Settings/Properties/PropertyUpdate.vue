@@ -28,10 +28,10 @@ const save = async () => {
     <PropertyForm ref="formRef" :property-id="propertyId" />
 
     <template #header>
-      <ElButton @click="go(-1)">
+      <ElButton @click.passive="go(-1)">
         {{ t('common.back') }}
       </ElButton>
-      <ElButton type="primary" :loading="loading" @click="save">
+      <ElButton type="primary" :loading="loading" @click.passive="save">
         {{ t('common.save') }}
       </ElButton>
     </template>

@@ -52,6 +52,7 @@
     "collapseDes": "展開和縮放菜單欄",
     "columnSetting": "列設置",
     "confirm": "確認",
+    "confirmDeleteText": "確認刪除？",
     "delCancel": "取消",
     "delMessage": "是否刪除所選中數據？",
     "delNoData": "請選擇需要刪除的數據",
@@ -75,6 +76,8 @@
     "loginOutMessage": "是否退出本系統？",
     "menu": "菜單",
     "menuDes": "以路由的結構渲染的菜單欄",
+    "moveLeft": "向左移動",
+    "moveRight": "向右移動",
     "nextLabel": "下一步",
     "no": "否",
     "ok": "確定",
@@ -96,12 +99,16 @@
     "tagsViewDes": "用於記錄路由歷史記錄",
     "tool": "工具",
     "toolDes": "用於設置定製系統",
+    "warning": "警告",
     "yes": "是"
   },
   "component": {
     "bedInput": {
       "bedType": "床型",
       "quantity": "數量"
+    },
+    "inputImage": {
+      "headtitle": "照片"
     }
   },
   "countToDemo": {
@@ -837,6 +844,7 @@
         "propertyForm": {
           "PillowTypeTitle": "枕頭",
           "RoomFacilityTitle": "設備",
+          "RoomTypePhotoTitle": "房型照片",
           "ViewTypeTitle": "窗景"
         }
       },

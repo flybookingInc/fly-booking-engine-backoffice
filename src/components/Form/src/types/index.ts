@@ -56,7 +56,8 @@ export enum ComponentNameEnum {
   UPLOAD = 'Upload',
   DYNAMIC_INPUT = 'DynamicInput',
   CANCELLATION_INPUT = 'CancellationInput',
-  BED_INPUT = 'BedInput'
+  BED_INPUT = 'BedInput',
+  INPUT_IMAGE = 'InputImage'
 }
 
 type CamelCaseComponentName = keyof typeof ComponentNameEnum extends infer K
@@ -162,7 +163,7 @@ export interface SelectOption {
 
 export interface SelectComponentProps extends Omit<Partial<ISelectProps>, 'options'> {
   /**
-   * 数据源的字段别名
+   * 數據源的字段別名
    */
   props?: {
     key?: string
@@ -319,7 +320,7 @@ export interface RadioOption {
 export interface RadioGroupComponentProps extends Partial<RadioGroupProps> {
   options?: RadioOption[]
   /**
-   * 数据源的字段别名
+   * 數據源的字段別名
    */
   props?: {
     label?: string
@@ -338,7 +339,7 @@ export interface RadioGroupComponentProps extends Partial<RadioGroupProps> {
 export interface RadioButtonComponentProps extends Partial<RadioButtonProps> {
   options?: RadioOption[]
   /**
-   * 数据源的字段别名
+   * 數據源的字段別名
    */
   props?: {
     label?: string
@@ -375,7 +376,7 @@ export interface CheckboxOption {
 export interface CheckboxGroupComponentProps extends Partial<CheckboxGroupProps> {
   options?: CheckboxOption[]
   /**
-   * 数据源的字段别名
+   * 數據源的字段別名
    */
   props?: {
     label?: string
@@ -555,6 +556,16 @@ export interface UploadComponentProps extends Partial<UploadProps> {
   style?: CSSProperties
 }
 
+export interface InputImageComponentProps extends Partial<UploadProps> {
+  slots?: {
+    default?: (...args: any[]) => JSX.Element | null
+    trigger?: (...args: any[]) => JSX.Element | null
+    tip?: (...args: any[]) => JSX.Element | null
+    file?: (...args: any[]) => JSX.Element | null
+  }
+  style?: CSSProperties
+}
+
 export interface TreeSelectComponentProps
   extends Omit<Partial<SelectComponentProps>, 'props' | 'on' | 'slots'> {
   data?: any[]
@@ -621,22 +632,22 @@ export interface TreeSelectComponentProps
 
 export interface FormSchema {
   /**
-   * 唯一标识
+   * 唯一標識
    */
   field: string
 
   /**
-   * 标题
+   * 標題
    */
   label?: string
 
   /**
-   * col组件属性
+   * col組件屬性
    */
   colProps?: ColProps
 
   /**
-   * 表单组件属性，具体可以查看element-plus文档
+   * 表單組件屬性，具體可以查看element-plus文檔
    */
   componentProps?:
     | InputComponentProps
@@ -661,15 +672,16 @@ export interface FormSchema {
     | DynamicInputComponentProps
     | CancellationInputComponentProps
     | BedInputComponentProps
+    | InputImageComponentProps
     | any
 
   /**
-   * formItem组件属性，具体可以查看element-plus文档
+   * formItem組件屬性，具體可以查看element-plus文檔
    */
   formItemProps?: FormItemProps
 
   /**
-   * 渲染的组件名称
+   * 渲染的組件名稱
    */
   component?: ComponentName
 
@@ -679,17 +691,17 @@ export interface FormSchema {
   value?: any
 
   /**
-   * 是否隐藏，如果为true，会连同值一同删除，类似v-if
+   * 是否隱藏，如果為true，會連同值一同刪除，類似v-if
    */
   remove?: boolean
 
   /**
-   * 样式隐藏，不会把值一同删掉，类似v-show
+   * 樣式隱藏，不會把值一同刪掉，類似v-show
    */
   hidden?: boolean
 
   /**
-   * @returns 远程加载下拉项
+   * @returns 遠程加載下拉項
    */
   optionApi?: any
 }

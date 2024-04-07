@@ -87,14 +87,14 @@ const handleLock = async () => {
     </div>
     <Form :is-col="false" :schema="schema" :rules="rules" @register="formRegister" />
     <template #footer>
-      <ElButton type="primary" @click="handleLock">{{ t('lock.lock') }}</ElButton>
+      <ElButton type="primary" @click.passive="handleLock">{{ t('lock.lock') }}</ElButton>
     </template>
   </Dialog>
 </template>
 
 <style lang="less" scoped>
 :global(.v-lock-dialog) {
-  @media (max-width: 767px) {
+  @media (width <= 767px) {
     max-width: calc(100vw - 16px);
   }
 }

@@ -25,6 +25,7 @@ import { Editor } from '@/components/Editor'
 import { DynamicInput } from '@/components/DynamicInput'
 import { CancellationInput } from '@/components/CancellationInput'
 import { BedInput } from '@/components/BedInput'
+import { InputImage } from '@/components/InputImage'
 import { ComponentName } from '../types'
 
 const componentMap: Recordable<Component, ComponentName> = {
@@ -53,7 +54,8 @@ const componentMap: Recordable<Component, ComponentName> = {
   Upload: ElUpload,
   DynamicInput: DynamicInput,
   CancellationInput: CancellationInput,
-  BedInput: BedInput
+  BedInput: BedInput,
+  InputImage: InputImage
 }
 
 export { componentMap }

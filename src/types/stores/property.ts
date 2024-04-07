@@ -35,10 +35,12 @@ import {
   PillowFirmnessEnum
 } from '@/types/enums/dataStore'
 
-export interface PropertyImage {
-  sequence: number // order of image
-  thumb: string // URL
+export interface BasePhoto {
   image: string // URL
+}
+
+export interface PropertyImage extends BasePhoto {
+  thumb: string // URL
 }
 
 export interface PropertyCurrency {
@@ -46,10 +48,8 @@ export interface PropertyCurrency {
   currency_position: BeforeAfterEnum
 }
 
-export interface PropertyAdditionalPhotos {
-  sequence: number
+export interface PropertyAdditionalPhotos extends BasePhoto {
   thumb: string // URL
-  image: string // URL
 }
 
 export interface PropertyAddress {
@@ -148,26 +148,22 @@ export interface RoomBed {
   quantity: number
 }
 
-interface packageDetailImage {
-  sequence: number // order of image
+interface PackageDetailImage extends BasePhoto {
   thumb: string // URL
-  image: string // URL
 }
 
-interface roomTypePhoto {
-  sequence: number
+export interface RoomTypePhoto extends BasePhoto {
   thumb: string // URL
-  image: string // URL
 }
 
-interface packageDetail {
+interface PackageDetail {
   code: string
   name: string
   description: string
   price: number
   price_unit: PriceUnitEnum
   quantity: number
-  image: packageDetailImage[]
+  image: PackageDetailImage[]
   is_included: boolean
 }
 
@@ -200,7 +196,7 @@ export interface RoomTypeDetail {
   hairdryer_type: string // 吹風機類型 ex: tescom 2200tw
   pillow_types: PillowTypeEnum[] // 可選枕頭類型
   pillow_firmness: PillowFirmnessEnum[] // 可選枕頭軟硬度
-  photos: roomTypePhoto[]
+  photos: RoomTypePhoto[]
   pms_room_type_id: string
   room_size: number // square meters
   room_type_id: string
@@ -229,7 +225,7 @@ export interface RatePlanDetail {
   max_children: number
   max_extra_beds: number
   max_infants: number
-  packages: packageDetail[]
+  packages: PackageDetail[]
   rate_plan_id: string
   rate_plan_name: string
   room_type_id: string

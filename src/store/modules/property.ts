@@ -1,11 +1,15 @@
 import { defineStore } from 'pinia'
 import { reactive, unref } from 'vue'
-import type { HotelDetails, RoomTypeDetail } from '@/types/stores/property'
+import type { HotelDetails, RoomTypeDetail, RatePlanDetail } from '@/types/stores/property'
 import { getPropertyApi, putPropertyApi } from '@/api/setting/property'
 import { GetPropertyRequest } from '@/types/api/property/getProperty'
 import { useUserStore } from '@/store/modules/user'
 import { getRoomTypeApi, getRoomTypesApi } from '@/api/setting/roomType'
 import { GetRoomTypeRequest } from '@/types/api/roomType/getRoomType'
+import { GetRoomTypesRequest } from '@/types/api/roomType/getRoomTypes'
+import { GetRatePlanRequest } from '@/types/api/ratePlan/getRatePlan'
+import { GetRatePlansRequest } from '@/types/api/ratePlan/getRatePlans'
+import { getRatePlansApi, getRatePlanApi } from '@/api/setting/ratePlan'
 export const usePropertyStore = defineStore('propertyStore', () => {
   const hotelDetails = reactive<HotelDetails>({} as HotelDetails)
 
@@ -73,11 +77,79 @@ export const usePropertyStore = defineStore('propertyStore', () => {
   const fetchRoomTypes = async (propertyId: string): Promise<RoomTypeDetail[]> => {
     const res = await getRoomTypesApi({
       property_id: propertyId
-    } as GetRoomTypeRequest)
+    } as GetRoomTypesRequest)
     if (res.status !== 200 && res.data) {
       throw new Error(res.data.message)
     }
     return res.data.data as RoomTypeDetail[]
+  }
+
+  /**
+   * add or replace the room type detail in the hotel details
+   * @param roomTypeDetail - The room type detail to add or replace.
+   */
+  const setRoomTypeDetail = (roomTypeDetail: RoomTypeDetail): void => {
+    const roomTypeIndex = hotelDetails.room_type_details.findIndex(
+      (roomType) => roomType.room_type_id === roomTypeDetail.room_type_id
+    )
+    if (roomTypeIndex === -1) {
+      hotelDetails.room_type_details.push(roomTypeDetail)
+    } else {
+      hotelDetails.room_type_details.splice(roomTypeIndex, 1, roomTypeDetail)
+    }
+  }
+
+  /**
+   * Fetch Detail of Rate Plan for a given property
+   * @param propertyId - The ID of the property.
+   * @returns A promise that resolves to an array of RatePlanDetail objects.
+   * @throws An error if the API response status is not 200 or if there is an error message in the response data.
+   */
+  const fetchRatePlans = async (propertyId: string): Promise<RatePlanDetail[]> => {
+    const res = await getRatePlansApi({
+      property_id: propertyId
+    } as GetRatePlansRequest)
+    if (res.status !== 200 && res.data) {
+      throw new Error(res.data.message)
+    }
+    return res.data.data as RatePlanDetail[]
+  }
+
+  /**
+   * Fetches the details of a specific rate plan for a given property.
+   *
+   * @param propertyId - The ID of the property.
+   * @param ratePlanId - The ID of the rate plan.
+   * @returns A promise that resolves to the rate plan detail.
+   * @throws An error if the API response status is not 200 or if there is an error message in the response data.
+   */
+  const fetchRatePlanDetail = async (
+    propertyId: string,
+    ratePlanId: string
+  ): Promise<RatePlanDetail> => {
+    const res = await getRatePlanApi({
+      property_id: propertyId,
+      rate_plan_id: ratePlanId
+    } as GetRatePlanRequest)
+    if (res.status !== 200 && res.data) {
+      throw new Error(res.data.message)
+    }
+    return res.data.data as RatePlanDetail
+  }
+
+  /**
+   * add or replace the rate plan detail in the hotel details
+   * @param ratePlanDetail - The rate plan detail to add or replace.
+   */
+  const setRatePlanDetail = (ratePlanDetail: RatePlanDetail): void => {
+    const ratePlanIndex = hotelDetails.rate_plan_details.findIndex(
+      (ratePlan) => ratePlan.rate_plan_id === ratePlanDetail.rate_plan_id
+    )
+    if (ratePlanIndex === -1) {
+      hotelDetails.rate_plan_details.push(ratePlanDetail)
+    } else {
+      hotelDetails.rate_plan_details.splice(ratePlanIndex, 1, ratePlanDetail)
+    }
   }
 
   return {
@@ -85,6 +157,10 @@ export const usePropertyStore = defineStore('propertyStore', () => {
     FetchHotelDetails,
     fetchRoomTypeDetail,
     fetchRoomTypes,
-    updateProperty
+    updateProperty,
+    setRoomTypeDetail,
+    fetchRatePlans,
+    fetchRatePlanDetail,
+    setRatePlanDetail
   }
 })

@@ -22,7 +22,10 @@ import {
   RoomBedroomAndLaundryFacilityEnum,
   RoomViewCodeEnum,
   PillowTypeEnum,
-  PillowFirmnessEnum
+  PillowFirmnessEnum,
+  RatePlanStatusEnum,
+  RatePlanAllowedEnum,
+  RatePlanIncludedEnum
 } from '@/types/enums/dataStore'
 import { LanguageCodeEnum } from '@/types/enums/languageCode'
 
@@ -173,5 +176,23 @@ export interface GetAvailablePillowTypeResponse {
 export interface GetAvailablePillowFirmnessResponse {
   success: boolean
   data?: PillowFirmnessEnum[]
+  message?: string
+}
+
+export interface GetAvailableRatePlanStatusResponse {
+  success: boolean
+  data?: RatePlanStatusEnum[]
+  message?: string
+}
+
+export interface GetAvailableRatePlanAllowedResponse {
+  success: boolean
+  data?: RatePlanAllowedEnum[]
+  message?: string
+}
+
+export interface GetAvailableRatePlanIncludedResponse {
+  success: boolean
+  data?: RatePlanIncludedEnum[]
   message?: string
 }

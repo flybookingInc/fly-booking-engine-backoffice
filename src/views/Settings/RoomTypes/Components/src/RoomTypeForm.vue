@@ -4,7 +4,7 @@ import { useForm } from '@/hooks/web/useForm'
 import { useValidator } from '@/hooks/web/useValidator'
 import { onBeforeMount, reactive, ref } from 'vue'
 // import { BaseButton } from '@/components/Button'
-import { deleteUploadPhotosApi, postRoomTypeApi } from '@/api/setting/roomType'
+import { deleteUploadPhotosApi, postRoomTypeApi, putRoomTypeApi } from '@/api/setting/roomType'
 import {
   getAvailableFloorTypeApi,
   getAvailablePillowFirmnessApi,
@@ -34,23 +34,15 @@ import {
   RoomInternetAndOfficeFacilityEnum,
   WiFiSpecificationEnum
 } from '@/types/enums/dataStore'
-import type {
-  BookingPolicy,
-  CheckInOutPolicy,
-  HotelDetails,
-  PropertyPaymentMethodsCardType,
-  PropertypaymentMethodBankTransfer,
-  PropertypaymentMethodCash,
-  RoomTypeDetail,
-  RoomTypePhoto
-} from '@/types/stores/property'
+import type { RoomTypeDetail, RoomTypePhoto } from '@/types/stores/property'
 import { Delete, Download, Plus, CaretLeft, CaretRight } from '@element-plus/icons-vue'
-import type { UploadFile, UploadFiles } from 'element-plus'
+import type { FormItemRule, UploadFile, UploadFiles } from 'element-plus'
 import { ElIcon, ElMessage, ElMessageBox, ElTooltip } from 'element-plus'
 
 const { t } = useI18n()
-const { required } = useValidator()
-const { updateProperty, fetchRoomTypeDetail } = usePropertyStore()
+const { required, positiveNumber } = useValidator()
+const { setRoomTypeDetail, fetchRoomTypeDetail } = usePropertyStore()
+const { hotelDetails } = usePropertyStore()
 
 interface Props {
   propertyId: string
@@ -61,12 +53,22 @@ const props = defineProps<Props>()
 
 const { formRegister, formMethods } = useForm()
 const { setValues, getFormData, getElFormExpose, setSchema } = formMethods
-const hotelDetails: HotelDetails = {} as HotelDetails
 const roomTypeDetails: RoomTypeDetail = {} as RoomTypeDetail
 // const photoUrl = ref('')
 const UPLOAD_PHOTO_LIMIT = 50
 const UPLOAD_PHOTO_SIZE_LIMIT = 1 // MB
 const schema = reactive<FormSchema[]>([
+  {
+    field: 'roomTypeName',
+    label: t('router.views.properties.propertyForm.roomTypeNameLabel'),
+    component: 'Input',
+    colProps: {
+      span: 12
+    },
+    formItemProps: {
+      rules: [required()]
+    }
+  },
   {
     field: 'status',
     label: t('router.views.properties.propertyForm.statusLabel'),
@@ -89,16 +91,17 @@ const schema = reactive<FormSchema[]>([
     }
   },
   {
-    field: 'pmsRoomTypeId',
-    label: t('router.views.properties.propertyForm.pmsRoomTypeIdLabel'),
+    field: 'roomTypeId',
+    label: t('router.views.properties.propertyForm.roomTypeIdLabel'),
     component: 'Input',
     colProps: {
       span: 12
-    }
+    },
+    hidden: true
   },
   {
-    field: 'roomTypeName',
-    label: t('router.views.properties.propertyForm.roomTypeNameLabel'),
+    field: 'pmsRoomTypeId',
+    label: t('router.views.properties.propertyForm.pmsRoomTypeIdLabel'),
     component: 'Input',
     colProps: {
       span: 12
@@ -115,6 +118,9 @@ const schema = reactive<FormSchema[]>([
     },
     colProps: {
       span: 12
+    },
+    formItemProps: {
+      rules: [required(), positiveNumber()]
     }
   },
   {
@@ -161,6 +167,9 @@ const schema = reactive<FormSchema[]>([
     colProps: {
       span: 24
     },
+    formItemProps: {
+      rules: [required()]
+    },
     componentProps: {
       'active-value': true,
       'inactivate-value': false,
@@ -199,10 +208,14 @@ const schema = reactive<FormSchema[]>([
     colProps: {
       span: 24
     },
+    formItemProps: {
+      rules: [required()]
+    },
     hidden: true,
     componentProps: {
       options: []
     },
+    value: false,
     optionApi: async () => {
       const res = await getAvailableWiredInternetAvailabilityApi()
       return (res.data.data || []).map((item) => {
@@ -219,6 +232,9 @@ const schema = reactive<FormSchema[]>([
     component: 'Switch',
     colProps: {
       span: 24
+    },
+    formItemProps: {
+      rules: [required()]
     },
     componentProps: {
       'active-value': true,
@@ -262,6 +278,9 @@ const schema = reactive<FormSchema[]>([
     component: 'CheckboxGroup',
     colProps: {
       span: 24
+    },
+    formItemProps: {
+      rules: [required()]
     },
     hidden: true,
     componentProps: {
@@ -310,6 +329,9 @@ const schema = reactive<FormSchema[]>([
     component: 'Switch',
     colProps: {
       span: 12
+    },
+    formItemProps: {
+      rules: [required()]
     },
     componentProps: {
       'active-value': true,
@@ -455,7 +477,9 @@ const schema = reactive<FormSchema[]>([
     colProps: {
       span: 24
     },
-    value: []
+    formItemProps: {
+      rules: [required()]
+    }
   },
   {
     field: 'floorTypeDivider',
@@ -508,6 +532,14 @@ const schema = reactive<FormSchema[]>([
     }
   },
   {
+    field: 'RoomFacilityNote',
+    label: t('router.views.roomType.propertyForm.RoomFacilityNoteTitle'),
+    component: 'DynamicInput',
+    colProps: {
+      span: 24
+    }
+  },
+  {
     field: 'availableBedroomAndLaundryFacility',
     label: t('router.views.properties.propertyForm.availableBedroomAndLaundryFacilityLabel'),
     component: 'CheckboxGroup',
@@ -525,6 +557,14 @@ const schema = reactive<FormSchema[]>([
           value: item
         } as CheckboxOption
       })
+    }
+  },
+  {
+    field: 'BedroomAndLaundryFacilityNote',
+    label: t('router.views.roomType.propertyForm.BedroomAndLaundryFacilityNoteTitle'),
+    component: 'DynamicInput',
+    colProps: {
+      span: 24
     }
   },
   {
@@ -548,6 +588,14 @@ const schema = reactive<FormSchema[]>([
     }
   },
   {
+    field: 'BathRoomFacilityNote',
+    label: t('router.views.roomType.propertyForm.BathRoomFacilityNoteTitle'),
+    component: 'DynamicInput',
+    colProps: {
+      span: 24
+    }
+  },
+  {
     field: 'availableHeatingAndCooling',
     label: t('router.views.properties.propertyForm.availableHeatingAndCoolingFacilityLabel'),
     component: 'CheckboxGroup',
@@ -565,6 +613,14 @@ const schema = reactive<FormSchema[]>([
           value: item
         } as CheckboxOption
       })
+    }
+  },
+  {
+    field: 'HeatingAndCoolingFacilityNote',
+    label: t('router.views.roomType.propertyForm.HeatingAndCoolingFacilityNoteTitle'),
+    component: 'DynamicInput',
+    colProps: {
+      span: 24
     }
   },
   {
@@ -588,6 +644,14 @@ const schema = reactive<FormSchema[]>([
     }
   },
   {
+    field: 'KitchenAndDiningFacilityNote',
+    label: t('router.views.roomType.propertyForm.HeatingAndCoolingFacilityNoteTitle'),
+    component: 'DynamicInput',
+    colProps: {
+      span: 24
+    }
+  },
+  {
     field: 'availableFamily',
     label: t('router.views.properties.propertyForm.availableFamilyFacilityLabel'),
     component: 'CheckboxGroup',
@@ -605,6 +669,14 @@ const schema = reactive<FormSchema[]>([
           value: item
         } as CheckboxOption
       })
+    }
+  },
+  {
+    field: 'FamilyFacilityNote',
+    label: t('router.views.roomType.propertyForm.FamilyFacilityNoteTitle'),
+    component: 'DynamicInput',
+    colProps: {
+      span: 24
     }
   },
   {
@@ -628,6 +700,14 @@ const schema = reactive<FormSchema[]>([
     }
   },
   {
+    field: 'EntertainmentFacilityNote',
+    label: t('router.views.roomType.propertyForm.EntertainmentFacilityNoteTitle'),
+    component: 'DynamicInput',
+    colProps: {
+      span: 24
+    }
+  },
+  {
     field: 'availableSafety',
     label: t('router.views.properties.propertyForm.availableSafetyFacilityLabel'),
     component: 'CheckboxGroup',
@@ -648,6 +728,14 @@ const schema = reactive<FormSchema[]>([
     }
   },
   {
+    field: 'SafetyFacilityNote',
+    label: t('router.views.roomType.propertyForm.SafetyFacilityNoteTitle'),
+    component: 'DynamicInput',
+    colProps: {
+      span: 24
+    }
+  },
+  {
     field: 'availableInternetAndOffice',
     label: t('router.views.properties.propertyForm.availableInternetAndOfficeFacilityLabel'),
     component: 'CheckboxGroup',
@@ -665,6 +753,14 @@ const schema = reactive<FormSchema[]>([
           value: item
         } as CheckboxOption
       })
+    }
+  },
+  {
+    field: 'InternetAndOfficeFacilityNote',
+    label: t('router.views.roomType.propertyForm.InternetAndOfficeFacilityNoteTitle'),
+    component: 'DynamicInput',
+    colProps: {
+      span: 24
     }
   },
   {
@@ -749,6 +845,9 @@ const schema = reactive<FormSchema[]>([
     colProps: {
       span: 24
     },
+    formItemProps: {
+      rules: [required()]
+    },
     componentProps: {
       limit: UPLOAD_PHOTO_LIMIT,
       action: '/mock/roomType/uploadPhotos',
@@ -828,7 +927,7 @@ const schema = reactive<FormSchema[]>([
           </div>
         ),
         tip: () => (
-          <div class="text-base">
+          <div>
             {t('settings.roomType.uploadPhotoSizeLimit', { size: UPLOAD_PHOTO_SIZE_LIMIT })}
           </div>
         )
@@ -839,16 +938,19 @@ const schema = reactive<FormSchema[]>([
 const disabled = ref(false)
 let formMode: string = 'add'
 
-const rules = reactive({
-  sequence: [required()],
-  status: [required()],
-  name: [required()],
-  price: [required()]
-})
+const rules = reactive<{
+  [key: string]: FormItemRule[]
+}>({})
+//   {
+//   roomSize: [required()],
+//   roomTypeName: [required()],
+//   name: [required()],
+//   price: [required()]
+// }
 
 /**
  * Executes the code block before the component is mounted.
- * If a propertyId is provided, it enters the update mode, loads hotel details using the usePropertyStore() function,
+ * If both propertyId and roomTypeId is provided, it enters the update mode, loads hotel details using the usePropertyStore() function,
  * and sets the form values using the setFormValues() function.
  */
 onBeforeMount(async () => {
@@ -927,19 +1029,28 @@ const submit = async () => {
     if (valid) {
       if (formMode === 'add') {
         // create new property
-        const data = (await getFormData()) as RoomTypeDetail // force convert to HotelDetails DataType
-        await updateFormDataToHotelDetails()
-        await postRoomTypeApi({ data: data })
-        ElMessage.success('新增成功')
+        const data = (await getRoomTypeDetailFromForm()) as Omit<RoomTypeDetail, 'room_type_id'>
+        const res = await postRoomTypeApi({ data: data })
+        if (!res.data.success || !res.data.data) {
+          ElMessage.error(t('common.createFailed'))
+          return
+        }
+        setRoomTypeDetail({ room_type_id: res.data.data.room_type_id, ...data }) // add data to store
+        ElMessage.success(t('common.createSuccessful'))
       } else {
         // update exist property
         if (!props.propertyId || !hotelDetails) {
           ElMessage.error(t('error.propertyIdIsNull'))
-          throw new Error('propertyId is null')
+          return
         }
-        await updateFormDataToHotelDetails()
-        await updateProperty(hotelDetails)
-        ElMessage.success('儲存成功')
+        const data = (await getRoomTypeDetailFromForm()) as RoomTypeDetail
+        const res = await putRoomTypeApi({ data: data, room_type_id: data.room_type_id })
+        if (!res.data.success) {
+          ElMessage.error(t('common.editFailed'))
+          return
+        }
+        setRoomTypeDetail(data) // // update data to store
+        ElMessage.success(t('common.editSuccessful'))
       }
     }
   } catch (err) {
@@ -947,107 +1058,61 @@ const submit = async () => {
   }
 }
 
-/**
- * Update propertyStore HotelDetails
- */
-const updateFormDataToHotelDetails = async () => {
-  const formData = await getFormData()
-
-  let bankTransfer: PropertypaymentMethodBankTransfer
-  let cash: PropertypaymentMethodCash
-  let creditCard: PropertyPaymentMethodsCardType
-  let bookingPolicy: BookingPolicy
-  let checkInOutPolicy: CheckInOutPolicy
-
-  bankTransfer = {
-    account_name: formData.accountName,
-    account_number: formData.accountNumber,
-    bank_code: formData.bankCode,
-    bank_name: formData.bankName,
-    branch_name: formData.branchName,
-    enabled: formData.enabledBankTransfer,
-    iban: formData.iban,
-    payment_type_id: 'bank_transfer',
-    routing_number: formData.routingNumber,
-    swift_code: formData.swiftCode
-  }
-  cash = {
-    enabled: formData.cashPayment,
-    payment_type_id: 'cash'
-  }
-  creditCard = {
-    available_card: formData.availableCreditCards,
-    enabled: formData.carditCardPayment,
-    payment_type_id: 'credit_card'
-  }
-  bookingPolicy = {
-    allow_previous_day_reservations: formData.allowPreviousDayReservations,
-    allow_same_day_reservations: formData.allowSameDayReservations,
-    previous_day_reservations_deadline: formData.previousDayReservationsDeadline,
-    same_day_reservations_deadline: formData.allowSameDayReservationsUntil
-  }
-  checkInOutPolicy = {
-    age_restrictions_notes: formData.ageRestrictionsNotes,
-    check_in_end_time: formData.checkInEndTime,
-    check_in_out_notes: formData.checkInOutNotes,
-    check_in_start_time: formData.checkInStartTime,
-    check_out_time: formData.checkOutTime,
-    early_check_in_allowed: formData.earlyCheckInAllowed,
-    early_check_in_type: formData.earlyCheckInChargedUnitType,
-    early_check_in_value: formData.earlyCheckInValue,
-    early_check_in_value_unit: formData.earlyCheckInChargedUnit,
-    late_check_out_allowed: formData.lateCheckOutAllowed,
-    late_check_out_type: formData.lateCheckOutChargedUnitType,
-    late_check_out_value: formData.lateCheckOutValue,
-    late_check_out_value_unit: formData.lateCheckOutChargedUnit,
-    minimum_checkin_age: formData.minimumCheckInAge
+const getRoomTypeDetailFromForm = async (): Promise<
+  RoomTypeDetail | Omit<RoomTypeDetail, 'room_type_id'>
+> => {
+  const data = await getFormData()
+  const facilities: RoomTypeDetail['facilities'] = {
+    internet_and_office_facility: data.availableInternetAndOffice || [],
+    internet_and_office_notes: data.InternetAndOfficeFacilityNote || [],
+    entertainment_facility: data.availableEntertainment || [],
+    entertainment_notes: data.EntertainmentFacilityNote || [],
+    room_facility: data.availableRoomFacility || [],
+    room_notes: data.RoomFacilityNote || [],
+    bedroom_and_laundry_facility: data.availableBedroomAndLaundryFacility || [],
+    bedroom_and_laundry_notes: data.BedroomAndLaundryFacilityNote || [],
+    bathroom_facility: data.availableBathRoomFacility || [],
+    bathroom_notes: data.BathRoomFacilityNote || [],
+    heating_and_cooling_facility: data.availableHeatingAndCooling || [],
+    heating_and_cooling_notes: data.HeatingAndCoolingFacilityNote || [],
+    kitchen_and_dining_facility: data.availableKitchenAndDining || [],
+    kitchen_and_dining_notes: data.KitchenAndDiningFacilityNote || [],
+    family_facility: data.availableFamily || [],
+    family_notes: data.FamilyFacilityNote || [],
+    safety_facility: data.availableSafety || [],
+    safety_notes: data.SafetyFacilityNote || []
   }
 
-  hotelDetails.address = {
-    address1: formData.address1,
-    address2: formData.address2,
-    city: formData.city,
-    country: formData.country,
-    latitude: formData.latitude,
-    longitude: formData.longitude,
-    state: formData.state,
-    zip: formData.zipCode
+  const roomTypeDetail: Omit<RoomTypeDetail, 'room_type_id'> = {
+    status: data.status,
+    pms_room_type_id: data.pmsRoomTypeId,
+    room_type_name: data.roomTypeName,
+    room_size: data.roomSize,
+    bath_set_brand: data.bathSetBrand || '',
+    hairdryer_type: data.hairdryerType || '',
+    internet_max_upload_speed: data.internetMaxUpoadSpeed,
+    internet_max_download_speed: data.internetMaxDownloadSpeed,
+    facilities: facilities || {},
+    view_types: data.availableViewType || [],
+    pillow_types: data.availablePillowType || [],
+    pillow_firmness: data.availablePillowFirmness || [],
+    photos: data.roomTypePhoto,
+    wifi_availability: data.wifiAvailability || [],
+    wifi_specifications: data.wifiSpecifications || [],
+    wired_internet_availability: data.wiredInternetAvailability || [],
+    tv_size: data.tvSize,
+    tv_resolution: data.tvResolution || [],
+    tv_casting: data.tvCasting || [],
+    tv_content: data.tvContent || [],
+    beds_included: data.bedsInclude || [],
+    floor_type: data.floorType || []
   }
-  hotelDetails.amenities = formData.amenities
-  hotelDetails.available_languages = formData.availableLanguages
-  hotelDetails.currency = {
-    currency_code: formData.currency,
-    currency_position: formData.currencyPosition
+  if (formMode !== 'add') {
+    return { room_type_id: data.roomTypeId, ...roomTypeDetail } as RoomTypeDetail
   }
-  hotelDetails.description = formData.description
-  hotelDetails.email = formData.email
-  hotelDetails.good_to_know = formData.goodToKnow
-  hotelDetails.payment = {
-    methods: {
-      bank_transfer: bankTransfer,
-      cash: cash,
-      credit_card: creditCard
-    }
-  }
-  hotelDetails.phone = formData.phone
-  hotelDetails.policy = {
-    booking_policy: bookingPolicy,
-    check_in_out_policy: checkInOutPolicy,
-    children_age_limit: formData.childrenAgeLimit,
-    default_cancellation_policy: formData.cancellationPolicies,
-    default_cancellation_policy_notes: formData.CancellationPolicyNotes,
-    infant_amenities_policy: formData.infantAmenitiesPolicy,
-    infants_age_limit: formData.infantsAgeLimit,
-    minimum_age_limit_for_children_accommodation: formData.minimumAgeLimitForChildrenAccommodation,
-    parking_policy: formData.parking,
-    pets_policy: formData.petsPolicy,
-    pets_policy_notes: formData.petsPolicyNote,
-    terms_and_conditions: formData.termsAndConditions
-  }
-  hotelDetails.property_id = formData.propertyId
-  hotelDetails.services = formData.services
-  hotelDetails.the_fine_print = formData.theFinePrint
+  return roomTypeDetail
 }
+
 /**
  * Set form values
  */
@@ -1112,18 +1177,11 @@ const setFormValues = () => {
     ])
   }
   // set roomTypePhoto fileList
-  setSchema([
-    {
-      field: 'roomTypePhoto',
-      path: 'componentProps.fileList',
-      value: roomTypeDetails.photos.map((item) => {
-        return { name: item.image, url: item.image }
-      })
-    }
-  ])
+  setRommTypePhotoSechema(roomTypeDetails.photos)
   const formData = {
     // fulfill form
     status: roomTypeDetails.status,
+    roomTypeId: props.roomTypeId || '',
     pmsRoomTypeId: roomTypeDetails.pms_room_type_id,
     roomTypeName: roomTypeDetails.room_type_name,
     roomSize: roomTypeDetails.room_size,

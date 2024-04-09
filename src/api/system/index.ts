@@ -24,7 +24,10 @@ import {
   GetAvailableRoomSafetyFacilityResponse,
   GetAvailableRoomViewResponse,
   GetAvailablePillowTypeResponse,
-  GetAvailablePillowFirmnessResponse
+  GetAvailablePillowFirmnessResponse,
+  GetAvailableRatePlanStatusResponse,
+  GetAvailableRatePlanAllowedResponse,
+  GetAvailableRatePlanIncludedResponse
 } from '@/types/api/system'
 import type { AxiosResponse } from 'axios'
 
@@ -172,4 +175,22 @@ export const getAvailablePillowFirmnessApi = (): Promise<
   AxiosResponse<GetAvailablePillowFirmnessResponse>
 > => {
   return request.get({ url: '/mock/system/getAvailablePillowFirmness' })
+}
+
+export const getAvailableRatePlanStatusApi = (): Promise<
+  AxiosResponse<GetAvailableRatePlanStatusResponse>
+> => {
+  return request.get({ url: '/mock/system/getAvailableRatePlanStatus' })
+}
+
+export const getAvailableRatePlanAllowedApi = (): Promise<
+  AxiosResponse<GetAvailableRatePlanAllowedResponse>
+> => {
+  return request.get({ url: '/mock/system/getAvailableRatePlanAllowed' })
+}
+
+export const getAvailableRatePlanIncludedApi = (): Promise<
+  AxiosResponse<GetAvailableRatePlanIncludedResponse>
+> => {
+  return request.get({ url: '/mock/system/getAvailableRatePlanIncluded' })
 }

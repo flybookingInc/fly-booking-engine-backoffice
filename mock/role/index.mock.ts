@@ -91,11 +91,70 @@ const adminList = [
             }
           },
           {
+            path: 'add',
+            name: 'RoomTypeAdd',
+            component: 'views/Settings/RoomTypes/RoomTypeAdd',
+            meta: {
+              title: t('router.views.roomTypeAdd.pageTitle'),
+              noCache: true,
+              affix: true,
+              noTagsView: true,
+              hidden: true
+            }
+          },
+          {
             path: 'update',
             name: 'RoomTypeUpdate',
             component: 'views/Settings/RoomTypes/RoomTypeUpdate',
             meta: {
               title: t('router.views.roomTypeUpdate.pageTitle'),
+              noCache: true,
+              affix: true,
+              noTagsView: true,
+              hidden: true
+            }
+          }
+        ]
+      },
+      {
+        path: 'ratePlans',
+        name: 'RatePlan',
+        component: '##',
+        redirect: '/settings/ratePlans/list',
+        meta: {
+          title: t('router.views.ratePlans.pageTitle')
+          // noCache: true,
+          // affix: true
+        },
+        children: [
+          {
+            path: 'list',
+            name: 'RatePlanList',
+            component: 'views/Settings/RatePlans/RatePlanList',
+            meta: {
+              title: t('router.views.ratePlanList.pageTitle'),
+              noCache: true,
+              affix: true
+            }
+          },
+          {
+            path: 'add',
+            name: 'RatePlanAdd',
+            component: 'views/Settings/RatePlans/RatePlanAdd',
+            meta: {
+              title: t('router.views.ratePlanAdd.pageTitle'),
+              noCache: true,
+              affix: true,
+              noTagsView: true,
+              hidden: true
+            }
+          },
+          {
+            path: 'update',
+            name: 'RatePlanUpdate',
+            component: 'views/Settings/RatePlans/RatePlanUpdate',
+            meta: {
+              title: t('router.views.ratePlanUpdate.pageTitle'),
               noCache: true,
               affix: true,
               noTagsView: true,

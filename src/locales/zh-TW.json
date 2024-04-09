@@ -17,6 +17,8 @@
     "columnSetting": "列設置",
     "confirm": "確認",
     "confirmDeleteText": "確認刪除？",
+    "createFailed": "新增失敗",
+    "createSuccessful": "新增成功",
     "delCancel": "取消",
     "delMessage": "是否刪除所選中數據？",
     "delNoData": "請選擇需要刪除的數據",
@@ -31,6 +33,8 @@
     "doneLabel": "結束",
     "download": "下載",
     "downloadFailed": "下載失敗",
+    "editFailed": "編輯失敗",
+    "editSuccessful": "編輯成功",
     "endTimeText": "結束時間",
     "expand": "展開",
     "fullscreen": "全屏",
@@ -47,6 +51,7 @@
     "nextLabel": "下一步",
     "no": "否",
     "ok": "確定",
+    "positiveNumber": "請輸入大於零的數字",
     "prevLabel": "上一步",
     "query": "查詢",
     "refresh": "刷新",
@@ -316,6 +321,23 @@
       "water": "水枕",
       "wool": "羊毛枕"
     },
+    "ratePlanAllowed": {
+      "children": "兒童",
+      "infant": "嬰兒",
+      "pets": "寵物",
+      "smoking": "吸菸"
+    },
+    "ratePlanIncluded": {
+      "breakfast": "早餐",
+      "dinner": "晚餐",
+      "lunch": "午餐",
+      "parking": "停車",
+      "tax": "稅金"
+    },
+    "ratePlanStatus": {
+      "active": "啟用",
+      "inactive": "停用"
+    },
     "roomTypeStatus": {
       "active": "啟用",
       "inactive": "停用"
@@ -534,19 +556,19 @@
           "allowSameDayReservationsUntilLabel": "允許當天預訂，直至今日何時",
           "amenitiesDividerTitle": "便利設施",
           "availableBabyFacilityLabel": "可用嬰兒設施",
-          "availableBathRoomFacilityLabel": "浴室",
-          "availableBedroomAndLaundryFacilityLabel": "臥房和洗滌",
+          "availableBathRoomFacilityLabel": "浴室設備",
+          "availableBedroomAndLaundryFacilityLabel": "臥房和洗滌設備",
           "availableCreditCardsLabel": "可使用的信用卡",
-          "availableEntertainmentFacilityLabel": "娛樂",
-          "availableFamilyFacilityLabel": "家庭",
+          "availableEntertainmentFacilityLabel": "娛樂設備",
+          "availableFamilyFacilityLabel": "親子設備",
           "availableFloorTypeLabel": "房間地板(可複選)",
-          "availableHeatingAndCoolingFacilityLabel": "冷熱空調",
-          "availableInternetAndOfficeFacilityLabel": "網路和辦公",
-          "availableKitchenAndDiningFacilityLabel": "廚房和用餐",
+          "availableHeatingAndCoolingFacilityLabel": "空調設備",
+          "availableInternetAndOfficeFacilityLabel": "網路和辦公設備",
+          "availableKitchenAndDiningFacilityLabel": "廚房和用餐設備",
           "availablePillowFirmnessLabel": "可選枕頭軟硬度",
           "availablePillowTypeLabel": "可選枕頭種類",
           "availableRoomFacilityLabel": "房間設備",
-          "availableSafetyFacilityLabel": "安全",
+          "availableSafetyFacilityLabel": "安全設備",
           "availableViewTypeLabel": "景色",
           "babyFacilityTitle": "嬰兒設備",
           "bankCodeLabel": "銀行代碼",
@@ -599,11 +621,15 @@
           "petsPolicyLabel": "寵物規定",
           "petsPolicyNoteLabel": "寵物規定須知",
           "petsTitle": "寵物",
+          "pmsRatePlanIdLabel": "PMS關聯方案ID",
           "pmsRoomTypeIdLabel": "PMS關聯房型ID",
           "policiesDividerTitle": "政策",
           "previousDayReservationsDeadlineLabel": "允許前一天的預訂，直到今日何時",
+          "ratePlanIdLabel": "方案ID",
+          "ratePlanNameLabel": "方案名稱",
           "roomSizeLabel": "房型面積",
           "roomSizeUnitLabel": "房間面積單位",
+          "roomTypeIdLabel": "房型ID",
           "roomTypeNameLabel": "房型名稱",
           "routingNumberLabel": "匯款路徑號碼",
           "servicesDividerTitle": "服務",
@@ -627,16 +653,39 @@
       "propertyUpdate": {
         "pageTitle": "編輯旅館"
       },
+      "ratePlanAdd": {
+        "pageTitle": "新增方案"
+      },
+      "ratePlanList": {
+        "pageTitle": "方案管理"
+      },
+      "ratePlanUpdate": {
+        "pageTitle": "修改方案"
+      },
+      "ratePlans": {
+        "pageTitle": "方案設定"
+      },
       "roles": {
         "pageTitle": "角色管理"
       },
       "roomType": {
         "propertyForm": {
+          "BathRoomFacilityNoteTitle": "浴室設備說明",
+          "BedroomAndLaundryFacilityNoteTitle": "臥房和洗滌設備說明",
+          "EntertainmentFacilityNoteTitle": "娛樂設備說明",
+          "FamilyFacilityNoteTitle": "親子設備說明",
+          "HeatingAndCoolingFacilityNoteTitle": "廚房和用餐設備說明",
+          "InternetAndOfficeFacilityNoteTitle": "網路和安全設備說明",
           "PillowTypeTitle": "枕頭",
+          "RoomFacilityNoteTitle": "房間設備說明",
           "RoomFacilityTitle": "設備",
           "RoomTypePhotoTitle": "房型照片",
+          "SafetyFacilityNoteTitle": "安全設備說明",
           "ViewTypeTitle": "窗景"
         }
+      },
+      "roomTypeAdd": {
+        "pageTitle": "新增房型"
       },
       "roomTypeList": {
         "pageTitle": "房型列表"
@@ -649,10 +698,12 @@
       },
       "settings": {
         "properties": {
-          "add_property": "添加",
+          "add_property": "新增",
           "propertyForm": {
             "currencyPositionLabel": "貨幣符號位置",
             "currencySymbolLabel": "貨幣符號",
+            "ratePlanAllowedLabel": "允許",
+            "ratePlanIncludedLabel": "包含",
             "tvCastingLabel": "支援投屏模式",
             "tvContentLabel": "電視內容",
             "tvResolutionLabel": "電視解析度",
@@ -660,7 +711,15 @@
           },
           "title": "房產清單"
         },
+        "ratePlansList": {
+          "add_ratePlan": "新增方案",
+          "ratePlanName": "方案名稱",
+          "roomTypeName": "房型",
+          "status": "狀態",
+          "title": "方案管理"
+        },
         "roomTypesList": {
+          "add_roomType": "新增房型",
           "roomTypeName": "房型名稱",
           "status": "房型狀態",
           "title": "房型設定"

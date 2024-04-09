@@ -18,7 +18,10 @@ import {
   RoomEntertainmentFacilityEnum,
   RoomViewCodeEnum,
   PillowTypeEnum,
-  PillowFirmnessEnum
+  PillowFirmnessEnum,
+  RatePlanStatusEnum,
+  RatePlanAllowedEnum,
+  RatePlanIncludedEnum
 } from '@/types/enums/dataStore'
 import { LanguageCodeEnum } from '@/types/enums/languageCode'
 
@@ -347,6 +350,36 @@ export default [
       return {
         success: true,
         data: Object.values(PillowFirmnessEnum)
+      }
+    }
+  },
+  {
+    url: '/mock/system/getAvailableRatePlanStatus',
+    method: 'get',
+    response: () => {
+      return {
+        success: true,
+        data: Object.values(RatePlanStatusEnum)
+      }
+    }
+  },
+  {
+    url: '/mock/system/getAvailableRatePlanAllowed',
+    method: 'get',
+    response: () => {
+      return {
+        success: true,
+        data: Object.values(RatePlanAllowedEnum)
+      }
+    }
+  },
+  {
+    url: '/mock/system/getAvailableRatePlanIncluded',
+    method: 'get',
+    response: () => {
+      return {
+        success: true,
+        data: Object.values(RatePlanIncludedEnum)
       }
     }
   }

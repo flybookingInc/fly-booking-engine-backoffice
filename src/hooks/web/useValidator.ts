@@ -1,56 +1,128 @@
 import { useI18n } from '@/hooks/web/useI18n'
+import { FormItemRule } from 'element-plus'
 
 const { t } = useI18n()
-
-type Callback = (error?: string | Error | undefined) => void
 
 interface LengthRange {
   min: number
   max: number
-  message: string
+  message?: string
 }
 
 export const useValidator = () => {
-  const required = (message?: string) => {
+  const required = (message?: string): FormItemRule => {
     return {
       required: true,
       message: message || t('common.required')
     }
   }
 
-  const lengthRange = (val: any, callback: Callback, options: LengthRange) => {
+  const lengthRange = (options: LengthRange): FormItemRule => {
     const { min, max, message } = options
-    if (val.length < min || val.length > max) {
-      callback(new Error(message))
-    } else {
-      callback()
+
+    return {
+      min,
+      max,
+      message: message || t('common.lengthRange', { min, max })
     }
   }
 
-  const notSpace = (val: any, callback: Callback, message: string) => {
-    // 用户名不能有空格
-    if (val.indexOf(' ') !== -1) {
-      callback(new Error(message))
-    } else {
-      callback()
+  const notSpace = (message?: string): FormItemRule => {
+    return {
+      validator: (_, val, callback) => {
+        if (val?.indexOf(' ') !== -1) {
+          callback(new Error(message || t('common.notSpace')))
+        } else {
+          callback()
+        }
+      }
     }
   }
 
-  const notSpecialCharacters = (val: any, callback: Callback, message: string) => {
-    // 密码不能是特殊字符
-    if (/[`~!@#$%^&*()_+<>?:"{},.\/;'[\]]/gi.test(val)) {
-      callback(new Error(message))
-    } else {
-      callback()
+  const notSpecialCharacters = (message?: string): FormItemRule => {
+    return {
+      validator: (_, val, callback) => {
+        if (/[`~!@#$%^&*()_+<>?:"{},.\/;'[\]]/gi.test(val)) {
+          callback(new Error(message || t('common.notSpecialCharacters')))
+        } else {
+          callback()
+        }
+      }
     }
   }
 
-  // 两个字符串是否想等
-  const isEqual = (val1: string, val2: string, callback: Callback, message: string) => {
-    if (val1 === val2) {
-      callback()
-    } else {
-      callback(new Error(message))
+  const phone = (message?: string): FormItemRule => {
+    return {
+      validator: (_, val, callback) => {
+        if (!val) return callback()
+        if (!/^1[3456789]\d{9}$/.test(val)) {
+          callback(new Error(message || '請輸入正確的手機號碼'))
+        } else {
+          callback()
+        }
+      }
+    }
+  }
+
+  const email = (message?: string): FormItemRule => {
+    return {
+      validator: (_, val, callback) => {
+        if (!val) return callback()
+        if (!/^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/.test(val)) {
+          callback(new Error(message || '請輸入正確的電子信箱'))
+        } else {
+          callback()
+        }
+      }
+    }
+  }
+
+  const maxlength = (max: number): FormItemRule => {
+    return {
+      max,
+      message: '長度不能超過' + max + '個字符'
+    }
+  }
+
+  const check = (message?: string): FormItemRule => {
+    return {
+      validator: (_, val, callback) => {
+        if (!val) {
+          callback(new Error(message || t('common.required')))
+        } else {
+          callback()
+        }
+      }
+    }
+  }
+
+  // 必須為數字
+  const number = (message?: string): FormItemRule => {
+    return {
+      validator: (_, val, callback) => {
+        if (!val) return callback()
+        if (!/^\d+$/.test(val)) {
+          callback(new Error(message || '請輸入數字'))
+        } else {
+          callback()
+        }
+      }
+    }
+  }
+
+  // 必須為大於零的數字
+  const positiveNumber = (message?: string): FormItemRule => {
+    return {
+      validator: (_, val, callback) => {
+        console.log(val)
+        if (!val) return callback()
+        if (!/^\d+$/.test(val) || Number(val) <= 0) {
+          const msg = t('common.positiveNumber')
+          callback(new Error(message || msg))
+        } else {
+          callback()
+        }
+      }
     }
   }
 
@@ -59,6 +131,11 @@ export const useValidator = () => {
     lengthRange,
     notSpace,
     notSpecialCharacters,
-    isEqual
+    phone,
+    email,
+    maxlength,
+    check,
+    number,
+    positiveNumber
   }
 }

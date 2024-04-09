@@ -27,7 +27,7 @@ import {
 import { RoomTypeDetail } from '@/types/stores/property'
 
 // mock hotelDetail Data
-const MockRoomTypeDetails: RoomTypeDetail[] = [
+export const MockRoomTypeDetails: RoomTypeDetail[] = [
   {
     wired_internet_availability: [WiredInternetAvailabilityEnum.WIRED_INTERNET_FREE_IN_ROOM],
     facilities: {

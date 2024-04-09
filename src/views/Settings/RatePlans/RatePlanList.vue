@@ -1,9 +1,9 @@
 <template>
-  <ContentWrap :title="t('router.views.settings.roomTypesList.title')">
+  <ContentWrap :title="t('router.views.settings.ratePlansList.title')">
     <ElRow>
       <ElCol :span="12">
         <BaseButton type="primary" @click.passive="addAction">{{
-          t('router.views.settings.roomTypesList.add_roomType')
+          t('router.views.settings.ratePlansList.add_ratePlan')
         }}</BaseButton>
       </ElCol>
       <ElCol :span="12">
@@ -32,7 +32,7 @@ import { ElSwitch, ElButton, ElMessage, ElSelectV2, ElRow, ElCol } from 'element
 import { Alignment } from 'element-plus/es/components/table-v2/src/constants'
 import { ref, watch, reactive, onMounted } from 'vue'
 import { useI18n } from '@/hooks/web/useI18n'
-import { RoomTypeListRowData } from '@/types/views/settings/roomType'
+import { RatePlanListRowData } from '@/types/views/settings/ratePlan'
 import { useRouter } from 'vue-router'
 import { HotelDetails } from '@/types/stores/property'
 import { getPropertiesApi } from '@/api/setting/property'
@@ -42,21 +42,25 @@ import { usePropertyStore } from '@/store/modules/property'
 const { push } = useRouter()
 const { t } = useI18n()
 const { currentPropertyId } = useUserStore()
-const { fetchRoomTypes } = usePropertyStore()
+const { fetchRatePlans, fetchRoomTypes } = usePropertyStore()
 const tableRef = ref<typeof Table>()
 const loading = ref(false)
 const selectPropertyId = ref<string>()
 const propertySelectOptions = ref<{ value: string; label: string }[]>([])
-const tableData = reactive<RoomTypeListRowData[]>([])
+const tableData = reactive<RatePlanListRowData[]>([])
 
 const columns: TableColumn[] = [
   {
+    field: 'ratePlanName',
+    label: t('router.views.settings.ratePlansList.ratePlanName')
+  },
+  {
     field: 'roomTypeName',
-    label: t('router.views.settings.roomTypesList.roomTypeName')
+    label: t('router.views.settings.ratePlansList.roomTypeName')
   },
   {
     field: 'status',
-    label: t('router.views.settings.roomTypesList.status'),
+    label: t('router.views.settings.ratePlansList.status'),
     align: Alignment.CENTER,
     slots: {
       default: (data: any) => {
@@ -104,24 +108,28 @@ const columns: TableColumn[] = [
 watch(selectPropertyId, async (newVal) => {
   if (newVal) {
     tableData.splice(0, tableData.length)
-    await getSelectedPropertyRoomTypeList()
+    await getSelectedPropertyRatePlanList()
   }
 })
 
-const getSelectedPropertyRoomTypeList = async () => {
+const getSelectedPropertyRatePlanList = async () => {
   if (!selectPropertyId.value) return
   loading.value = true
   try {
     const roomTypesDetail = await fetchRoomTypes(selectPropertyId.value)
-    roomTypesDetail.forEach((roomType) => {
+    const ratePlansDetail = await fetchRatePlans(selectPropertyId.value)
+    ratePlansDetail.forEach((ratePlan) => {
       tableData.push({
-        roomTypeId: roomType.room_type_id,
-        roomTypeName: roomType.room_type_name,
+        ratePlanId: ratePlan.room_type_id,
+        ratePlanName: ratePlan.rate_plan_name,
+        roomTypeName:
+          roomTypesDetail.find((roomType) => roomType.room_type_id === ratePlan.room_type_id)
+            ?.room_type_name || '',
         status: true
       })
     })
   } catch (err) {
-    ElMessage.error('取得房型列表失敗')
+    ElMessage.error('取得方案列表失敗')
   } finally {
     loading.value = false
   }
@@ -156,14 +164,14 @@ onMounted(async () => {
   }
 })
 
-const updateAction = (row: RoomTypeListRowData) => {
+const updateAction = (row: RatePlanListRowData) => {
   push(
-    `/settings/roomTypes/update?propertyId=${selectPropertyId.value}&roomTypeId=${row.roomTypeId}`
+    `/settings/ratePlans/update?propertyId=${selectPropertyId.value}&ratePlanId=${row.ratePlanId}`
   )
 }
 
 const addAction = () => {
-  push(`/settings/roomTypes/add?propertyId=${selectPropertyId.value}`)
+  push(`/settings/ratePlans/add?propertyId=${selectPropertyId.value}`)
 }
 </script>
-@/types/views/settings/property/roomType
+@/types/views/settings/property/ratePlan

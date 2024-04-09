@@ -796,3 +796,21 @@ export enum RoomEntertainmentFacilityEnum {
   THEME_ROOM = 'theme_room',
   TV = 'tv'
 }
+
+export enum RatePlanStatusEnum {
+  ACTIVE = 'active',
+  INACTIVE = 'inactive'
+}
+
+export enum RatePlanAllowedEnum {
+  PETS = 'pets',
+  SMOKING = 'smoking',
+  INFANTS = 'infants',
+  CHILDREN = 'children'
+}
+
+export enum RatePlanIncludedEnum {
+  BREAKFAST = 'breakfast',
+  LUNCH = 'lunch',
+  DINNER = 'dinner'
+}

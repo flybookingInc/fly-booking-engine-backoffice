@@ -32,7 +32,10 @@ import {
   RoomSafetyFacilityEnum,
   RoomEntertainmentFacilityEnum,
   WiredInternetAvailabilityEnum,
-  PillowFirmnessEnum
+  PillowFirmnessEnum,
+  RatePlanStatusEnum,
+  RatePlanAllowedEnum,
+  RatePlanIncludedEnum
 } from '@/types/enums/dataStore'
 
 export interface BasePhoto {
@@ -216,16 +219,17 @@ export interface RoomTypeDetail {
 
 export interface RatePlanDetail {
   cancellation_policy?: CancellationPolicy[] // 退訂政策，照天數排序，如果沒有退訂政策，則不會回傳此欄位，並使用旅館預設退訂政策
-  is_breakfast_included: boolean
-  is_children_allowed: boolean
-  is_infants_allowed: boolean
-  is_pets_allowed: boolean
-  is_smoking_allowed: boolean
+  allowed: RatePlanAllowedEnum[]
+  allowed_notes: string[]
+  included: RatePlanIncludedEnum[]
+  included_notes: string[]
   max_adults: number
   max_children: number
   max_extra_beds: number
   max_infants: number
   packages: PackageDetail[]
+  pms_rate_plan_id: string
+  status: RatePlanStatusEnum
   rate_plan_id: string
   rate_plan_name: string
   room_type_id: string
@@ -250,7 +254,7 @@ export interface HotelDetails {
   services: ServicesEnum[]
   good_to_know: string[]
   the_fine_print: string[]
-  rate_plan_details: { [roomTypeRatePlanId: string]: RatePlanDetail }
+  rate_plan_details: RatePlanDetail[]
   room_type_details: RoomTypeDetail[]
 }
 

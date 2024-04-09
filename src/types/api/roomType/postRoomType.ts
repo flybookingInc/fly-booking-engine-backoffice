@@ -1,7 +1,7 @@
 import { RoomTypeDetail } from '@/types/stores/property'
 
 export interface PostRoomTypeRequest {
-  data: RoomTypeDetail
+  data: Omit<RoomTypeDetail, 'room_type_id'>
 }
 
 export interface PostRoomTypeResponse {

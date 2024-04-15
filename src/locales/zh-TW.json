@@ -1,5 +1,6 @@
 {
   "common": {
+    "actions": "行動",
     "actived": "開啟中",
     "add": "添加",
     "add_bed_type": "新增床型",
@@ -19,12 +20,13 @@
     "confirmDeleteText": "確認刪除？",
     "createFailed": "新增失敗",
     "createSuccessful": "新增成功",
+    "deactived": "關閉中",
     "delCancel": "取消",
     "delMessage": "是否刪除所選中數據？",
     "delNoData": "請選擇需要刪除的數據",
     "delOk": "確定",
     "delSuccess": "刪除成功",
-    "delWarning": "提示",
+    "delWarning": "確定刪除?",
     "delete": "刪除",
     "delete_bed_type": "刪除此床型",
     "delete_line": "刪除行",
@@ -33,12 +35,14 @@
     "doneLabel": "結束",
     "download": "下載",
     "downloadFailed": "下載失敗",
+    "edit": "編輯",
     "editFailed": "編輯失敗",
     "editSuccessful": "編輯成功",
     "endTimeText": "結束時間",
     "expand": "展開",
+    "fetchDataFailed": "取得資料失敗",
     "fullscreen": "全屏",
-    "inactived": "關閉中",
+    "importSuccessful": "匯入成功",
     "inch": "吋",
     "inputText": "請輸入",
     "login": "登錄",
@@ -285,6 +289,7 @@
       "nl": "荷蘭語",
       "pt": "葡萄牙語",
       "ru": "俄語",
+      "th": "泰語",
       "tr": "土耳其語",
       "vi": "越南語",
       "zh": "中文",
@@ -323,7 +328,7 @@
     },
     "ratePlanAllowed": {
       "children": "兒童",
-      "infant": "嬰兒",
+      "infants": "嬰兒",
       "pets": "寵物",
       "smoking": "吸菸"
     },
@@ -335,8 +340,8 @@
       "tax": "稅金"
     },
     "ratePlanStatus": {
-      "active": "啟用",
-      "inactive": "停用"
+      "actived": "啟用",
+      "deactived": "停用"
     },
     "roomTypeStatus": {
       "active": "啟用",
@@ -433,9 +438,32 @@
       "wired_internet_paid_in_all_areas": "所有區域均提供付費有線網路連接",
       "wired_internet_paid_in_public_areas": "公共區域付費有線網路連接",
       "wired_internet_paid_in_room": "房間內有收費有線網絡"
+    },
+    "currency": {
+      "AUD": "澳幣",
+      "CAD": "加幣",
+      "CHF": "瑞士法郎",
+      "CNY": "人民幣",
+      "EUR": "歐元",
+      "GBP": "英鎊",
+      "HKD": "港幣",
+      "IDR": "印尼盾",
+      "INR": "印度盧比",
+      "JPY": "日圓",
+      "KRW": "韓元",
+      "MYR": "馬來西亞林吉特",
+      "NTD": "新台幣",
+      "PHP": "菲律賓比索",
+      "RUB": "俄羅斯盧布",
+      "SEK": "瑞典克朗",
+      "SGD": "新加坡元",
+      "THB": "泰銖",
+      "USD": "美國美元",
+      "VND": "越南盾"
     }
   },
   "error": {
+    "importFailed": "匯入失敗",
     "loginError": "登入錯誤",
     "loginErrorMessage": "電子郵件或密碼錯誤。",
     "logoutFail": "註銷失敗。",
@@ -630,6 +658,7 @@
           "roomSizeLabel": "房型面積",
           "roomSizeUnitLabel": "房間面積單位",
           "roomTypeIdLabel": "房型ID",
+          "roomTypeLabel": "房型",
           "roomTypeNameLabel": "房型名稱",
           "routingNumberLabel": "匯款路徑號碼",
           "servicesDividerTitle": "服務",
@@ -681,7 +710,13 @@
           "RoomFacilityTitle": "設備",
           "RoomTypePhotoTitle": "房型照片",
           "SafetyFacilityNoteTitle": "安全設備說明",
-          "ViewTypeTitle": "窗景"
+          "ViewTypeTitle": "窗景",
+          "maxAdultsLabel": "成人人數上限",
+          "maxChildrenLabel": "兒童人數上限",
+          "maxExtraBedsLabel": "加床數量上限",
+          "maxInfantsLabel": "嬰兒人數上限",
+          "ratePlanAllowedNoteTitle": "允許事項說明",
+          "ratePlanIncludedNoteTitle": "包含事項說明"
         }
       },
       "roomTypeAdd": {
@@ -720,6 +755,8 @@
         },
         "roomTypesList": {
           "add_roomType": "新增房型",
+          "importRatePlan": "從PMS匯入方案",
+          "import_roomType": "從PMS匯入房型",
           "roomTypeName": "房型名稱",
           "status": "房型狀態",
           "title": "房型設定"
@@ -766,7 +803,6 @@
   },
   "settings": {
     "property": {
-      "additional_photos": "附加照片",
       "address1": "第一行地址",
       "address2": "第二行地址",
       "amenities": "便利設施",
@@ -784,6 +820,7 @@
       "logitude": "經度",
       "name": "飯店名稱",
       "phone": "電話",
+      "pmsPropertyId": "PM關聯的ID",
       "property_id": "物業編號",
       "specificDateRule": "特定日期取消規則",
       "specificDateRuleDescription": "特定日期規則若和距離天數規則同時符合，以特定日期規則為主。",
@@ -813,28 +850,6 @@
       "restaurants": "餐廳",
       "smoking_area": "吸煙區",
       "spa": "溫泉"
-    },
-    "available_currency": {
-      "AUD": "澳幣",
-      "CAD": "加幣",
-      "CHF": "瑞士法郎",
-      "CNY": "人民幣",
-      "EUR": "歐元",
-      "GBP": "英鎊",
-      "HKD": "港幣",
-      "IDR": "印尼盾",
-      "INR": "印度盧比",
-      "JPY": "日圓",
-      "KRW": "韓元",
-      "MYR": "馬來西亞林吉特",
-      "NTD": "新台幣",
-      "PHP": "菲律賓比索",
-      "RUB": "俄羅斯盧布",
-      "SEK": "瑞典克朗",
-      "SGD": "新加坡元",
-      "THB": "泰銖",
-      "USD": "美國美元",
-      "VND": "越南盾"
     },
     "available_services": {
       "luggage_storage": "行李寄存",

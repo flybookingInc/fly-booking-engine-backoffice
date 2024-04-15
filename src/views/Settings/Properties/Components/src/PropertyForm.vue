@@ -87,6 +87,14 @@ const schema = reactive<FormSchema[]>([
     }
   },
   {
+    field: 'pmsPropertyId',
+    label: t('settings.property.pmsPropertyId'),
+    component: 'Input',
+    colProps: {
+      span: 12
+    }
+  },
+  {
     field: 'phone',
     label: t('settings.property.phone'),
     component: 'Input',
@@ -211,7 +219,7 @@ const schema = reactive<FormSchema[]>([
       const res = await getAvailableCurrenciesApi()
       return (res.data.data || []).map((currency) => {
         return {
-          label: t(`system.available_currency.${currency}`),
+          label: t(`enum.currency.${currency}`),
           value: currency
         } as SelectOption
       })
@@ -311,7 +319,7 @@ const schema = reactive<FormSchema[]>([
       'active-value': true,
       'inactivate-value': false,
       activeText: t('common.actived'),
-      inactivateText: t('common.inactived'),
+      inactivateText: t('common.deactived'),
       inlinePrompt: true,
       on: {
         change: async () => {
@@ -366,7 +374,7 @@ const schema = reactive<FormSchema[]>([
       'active-value': true,
       'inactivate-value': false,
       activeText: t('common.actived'),
-      inactivateText: t('common.inactived'),
+      inactivateText: t('common.deactived'),
       inlinePrompt: true,
       on: {
         change: async () => {
@@ -523,7 +531,7 @@ const schema = reactive<FormSchema[]>([
       'active-value': true,
       'inactivate-value': false,
       activeText: t('common.actived'),
-      inactivateText: t('common.inactived'),
+      inactivateText: t('common.deactived'),
       inlinePrompt: true,
       on: {
         change: async () => {
@@ -618,7 +626,7 @@ const schema = reactive<FormSchema[]>([
       'active-value': true,
       'inactivate-value': false,
       activeText: t('common.actived'),
-      inactivateText: t('common.inactived'),
+      inactivateText: t('common.deactived'),
       inlinePrompt: true,
       on: {
         change: async () => {
@@ -895,7 +903,7 @@ const schema = reactive<FormSchema[]>([
       'active-value': true,
       'inactivate-value': false,
       activeText: t('common.actived'),
-      inactivateText: t('common.inactived'),
+      inactivateText: t('common.deactived'),
       inlinePrompt: true
     }
   },
@@ -937,7 +945,7 @@ const schema = reactive<FormSchema[]>([
       'active-value': true,
       'inactivate-value': false,
       activeText: t('common.actived'),
-      inactivateText: t('common.inactived'),
+      inactivateText: t('common.deactived'),
       inlinePrompt: true
     }
   },
@@ -1022,7 +1030,7 @@ const schema = reactive<FormSchema[]>([
       'active-value': true,
       'inactivate-value': false,
       activeText: t('common.actived'),
-      inactivateText: t('common.inactived'),
+      inactivateText: t('common.deactived'),
       inlinePrompt: true
     }
   }
@@ -1134,7 +1142,6 @@ const updateFormDataToHotelDetails = async () => {
     late_check_out_value_unit: formData.lateCheckOutChargedUnit,
     minimum_checkin_age: formData.minimumCheckInAge
   }
-
   hotelDetails.address = {
     address1: formData.address1,
     address2: formData.address2,
@@ -1145,6 +1152,7 @@ const updateFormDataToHotelDetails = async () => {
     state: formData.state,
     zip: formData.zipCode
   }
+  hotelDetails.pms_property_id = formData.pmsPropertyId
   hotelDetails.amenities = formData.amenities
   hotelDetails.available_languages = formData.availableLanguages
   hotelDetails.currency = {
@@ -1188,6 +1196,7 @@ const setFormValues = () => {
   const formData = {
     // fulfill form
     propertyId: hotelDetails?.property_id,
+    pmsPropertyId: hotelDetails?.pms_property_id,
     name: hotelDetails?.name,
     description: hotelDetails?.description,
     phone: hotelDetails?.phone,
@@ -1252,7 +1261,6 @@ const setFormValues = () => {
     routingNumber: hotelDetails?.payment.methods.bank_transfer?.routing_number || '',
     swiftCode: hotelDetails?.payment.methods.bank_transfer?.swift_code || '',
     cashPayment: hotelDetails?.payment.methods.cash?.enabled || false
-    // additional_photos: hotelDetails?.additional_photos,
   }
   setValues(formData)
 }

@@ -4,12 +4,22 @@ import type { HotelDetails, RoomTypeDetail, RatePlanDetail } from '@/types/store
 import { getPropertyApi, putPropertyApi } from '@/api/setting/property'
 import { GetPropertyRequest } from '@/types/api/property/getProperty'
 import { useUserStore } from '@/store/modules/user'
-import { getRoomTypeApi, getRoomTypesApi } from '@/api/setting/roomType'
+import {
+  getRoomTypeApi,
+  getRoomTypesApi,
+  getPmsRoomTypesApi,
+  putRoomTypesApi
+} from '@/api/setting/roomType'
 import { GetRoomTypeRequest } from '@/types/api/roomType/getRoomType'
 import { GetRoomTypesRequest } from '@/types/api/roomType/getRoomTypes'
 import { GetRatePlanRequest } from '@/types/api/ratePlan/getRatePlan'
 import { GetRatePlansRequest } from '@/types/api/ratePlan/getRatePlans'
-import { getRatePlansApi, getRatePlanApi } from '@/api/setting/ratePlan'
+import {
+  getRatePlansApi,
+  getRatePlanApi,
+  getPmsRatePlansApi,
+  putRatePlansApi
+} from '@/api/setting/ratePlan'
 export const usePropertyStore = defineStore('propertyStore', () => {
   const hotelDetails = reactive<HotelDetails>({} as HotelDetails)
 
@@ -65,6 +75,28 @@ export const usePropertyStore = defineStore('propertyStore', () => {
       throw new Error(res.data.message)
     }
     return res.data.data as RoomTypeDetail
+  }
+
+  /**
+   * Import room type from PMS
+   * @param pmsPropertyId - The ID of the property in PMS.
+   */
+  const importRoomTypes = async (pmsPropertyId: string): Promise<void> => {
+    // 1. 從PMS取得房型資料
+    const res = await getPmsRoomTypesApi({ pms_property_id: pmsPropertyId })
+    if (res.status !== 200 || res.data.message || !res.data.data) {
+      throw new Error(res.data.message)
+    }
+    // 2. 將房型資料存入hotelDetails
+    const pmsRoomTypes = res.data.data
+    pmsRoomTypes?.forEach((roomType) => {
+      setRoomTypeDetail(roomType)
+    })
+    // 3. 更新database
+    await putRoomTypesApi({
+      data: hotelDetails.room_type_details,
+      property_id: hotelDetails.property_id
+    })
   }
 
   /**
@@ -137,6 +169,25 @@ export const usePropertyStore = defineStore('propertyStore', () => {
     return res.data.data as RatePlanDetail
   }
 
+  // Import Rate Plans from PMS
+  const importRatePlans = async (pmsPropertyId: string): Promise<void> => {
+    // 1. 從PMS取得Rate Plan資料
+    const res = await getPmsRatePlansApi({ pms_property_id: pmsPropertyId })
+    if (res.status !== 200 || res.data.message || !res.data.data) {
+      throw new Error(res.data.message)
+    }
+    // 2. 將Rate Plan資料存入hotelDetails
+    const pmsRatePlans = res.data.data
+    pmsRatePlans?.forEach((ratePlan) => {
+      setRatePlanDetail(ratePlan)
+    })
+    // 3. 更新database
+    await putRatePlansApi({
+      data: hotelDetails.rate_plan_details,
+      property_id: hotelDetails.property_id
+    })
+  }
+
   /**
    * add or replace the rate plan detail in the hotel details
    * @param ratePlanDetail - The rate plan detail to add or replace.
@@ -157,10 +208,12 @@ export const usePropertyStore = defineStore('propertyStore', () => {
     FetchHotelDetails,
     fetchRoomTypeDetail,
     fetchRoomTypes,
+    importRoomTypes,
     updateProperty,
     setRoomTypeDetail,
     fetchRatePlans,
     fetchRatePlanDetail,
-    setRatePlanDetail
+    setRatePlanDetail,
+    importRatePlans
   }
 })

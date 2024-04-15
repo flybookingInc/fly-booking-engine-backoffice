@@ -12,13 +12,13 @@ import {
 } from '@/api/system'
 import { useI18n } from '@/hooks/web/useI18n'
 import { usePropertyStore } from '@/store/modules/property'
-import type { RatePlanDetail } from '@/types/stores/property'
+import type { RatePlanDetail, RoomTypeDetail } from '@/types/stores/property'
 import type { FormItemRule } from 'element-plus'
 import { ElMessage } from 'element-plus'
 
 const { t } = useI18n()
 const { required } = useValidator()
-const { setRatePlanDetail, fetchRatePlanDetail } = usePropertyStore()
+const { setRatePlanDetail, fetchRatePlanDetail, fetchRoomTypes } = usePropertyStore()
 const { hotelDetails } = usePropertyStore()
 
 interface Props {
@@ -30,7 +30,7 @@ const props = defineProps<Props>()
 
 const { formRegister, formMethods } = useForm()
 const { setValues, getFormData, getElFormExpose } = formMethods
-const ratePlanDetails: RatePlanDetail = {} as RatePlanDetail
+const ratePlanDetail: RatePlanDetail = {} as RatePlanDetail
 // const photoUrl = ref('')
 const schema = reactive<FormSchema[]>([
   {
@@ -49,8 +49,7 @@ const schema = reactive<FormSchema[]>([
     label: t('router.views.properties.propertyForm.statusLabel'),
     component: 'SelectV2',
     componentProps: {
-      options: [],
-      clearable: false
+      options: []
     },
     formItemProps: {
       rules: [required()]
@@ -83,6 +82,26 @@ const schema = reactive<FormSchema[]>([
     }
   },
   {
+    field: 'roomTypeId',
+    label: t('router.views.properties.propertyForm.roomTypeLabel'),
+    component: 'SelectV2',
+    componentProps: {
+      options: []
+    },
+    formItemProps: {
+      rules: [required()]
+    },
+    optionApi: async () => {
+      const data = await fetchRoomTypes(props.propertyId)
+      return (data || []).map((roomType: RoomTypeDetail) => {
+        return {
+          label: roomType.room_type_name,
+          value: roomType.room_type_id
+        } as SelectOption
+      })
+    }
+  },
+  {
     field: 'allowed',
     label: t('router.views.settings.properties.propertyForm.ratePlanAllowedLabel'),
     colProps: {
@@ -94,7 +113,6 @@ const schema = reactive<FormSchema[]>([
       clearable: false,
       multiple: true
     },
-    hidden: true,
     optionApi: async () => {
       const res = await getAvailableRatePlanAllowedApi()
       if (res.data.data) {
@@ -105,6 +123,14 @@ const schema = reactive<FormSchema[]>([
           } as SelectOption
         })
       }
+    }
+  },
+  {
+    field: 'allowedNotes',
+    label: t('router.views.roomType.propertyForm.ratePlanAllowedNoteTitle'),
+    component: 'DynamicInput',
+    colProps: {
+      span: 24
     }
   },
   {
@@ -119,7 +145,6 @@ const schema = reactive<FormSchema[]>([
       clearable: false,
       multiple: true
     },
-    hidden: true,
     optionApi: async () => {
       const res = await getAvailableRatePlanIncludedApi()
       if (res.data.data) {
@@ -130,6 +155,58 @@ const schema = reactive<FormSchema[]>([
           } as SelectOption
         })
       }
+    }
+  },
+  {
+    field: 'includedNotes',
+    label: t('router.views.roomType.propertyForm.ratePlanIncludedNoteTitle'),
+    component: 'DynamicInput',
+    colProps: {
+      span: 24
+    }
+  },
+  {
+    field: 'maxAdults',
+    label: t('router.views.roomType.propertyForm.maxAdultsLabel'),
+    component: 'Input',
+    colProps: {
+      span: 12
+    },
+    formItemProps: {
+      rules: [required()]
+    }
+  },
+  {
+    field: 'maxChildren',
+    label: t('router.views.roomType.propertyForm.maxChildrenLabel'),
+    component: 'Input',
+    colProps: {
+      span: 12
+    },
+    formItemProps: {
+      rules: [required()]
+    }
+  },
+  {
+    field: 'maxInfants',
+    label: t('router.views.roomType.propertyForm.maxInfantsLabel'),
+    component: 'Input',
+    colProps: {
+      span: 12
+    },
+    formItemProps: {
+      rules: [required()]
+    }
+  },
+  {
+    field: 'maxExtraBeds',
+    label: t('router.views.roomType.propertyForm.maxExtraBedsLabel'),
+    component: 'Input',
+    colProps: {
+      span: 12
+    },
+    formItemProps: {
+      rules: [required()]
     }
   }
 ])
@@ -155,10 +232,10 @@ onBeforeMount(async () => {
   try {
     // update mode
     formMode = 'update'
-    Object.assign(ratePlanDetails, await fetchRatePlanDetail(props.propertyId, props.ratePlanId))
+    Object.assign(ratePlanDetail, await fetchRatePlanDetail(props.propertyId, props.ratePlanId))
     setFormValues()
   } catch (err) {
-    console.log(err)
+    ElMessage.error(t('common.fetchDataFailed'))
   }
 })
 
@@ -207,17 +284,17 @@ const getRatePlanDetailFromForm = async (): Promise<
   const ratePlanDetail: Omit<RatePlanDetail, 'rate_plan_id'> = {
     status: data.status,
     pms_rate_plan_id: data.pmsRatePlanId,
-    allowed: [],
-    included: [],
-    allowed_notes: [],
-    included_notes: [],
-    max_adults: 0,
-    max_children: 0,
-    max_extra_beds: 0,
-    max_infants: 0,
+    allowed: data.allowed,
+    included: data.included,
+    allowed_notes: data.allowedNotes,
+    included_notes: data.includedNotes,
+    max_adults: data.maxAdults,
+    max_children: data.maxChildren,
+    max_extra_beds: data.maxExtraBeds,
+    max_infants: data.maxInfants,
     packages: [],
-    rate_plan_name: '',
-    room_type_id: ''
+    rate_plan_name: data.ratePlanName,
+    room_type_id: data.roomTypeId
   }
   if (formMode !== 'add') {
     return { rate_plan_id: data.ratePlanId, ...ratePlanDetail } as RatePlanDetail
@@ -229,13 +306,22 @@ const getRatePlanDetailFromForm = async (): Promise<
  * Set form values
  */
 const setFormValues = () => {
-  if (!ratePlanDetails) return
+  if (!ratePlanDetail) return
   const formData = {
     // fulfill form
-    status: ratePlanDetails.status,
+    status: ratePlanDetail.status,
     ratePlanId: props.ratePlanId || '',
-    pmsRatePlanId: ratePlanDetails.pms_rate_plan_id,
-    ratePlanName: ratePlanDetails.rate_plan_name
+    roomTypeId: ratePlanDetail.room_type_id,
+    pmsRatePlanId: ratePlanDetail.pms_rate_plan_id,
+    ratePlanName: ratePlanDetail.rate_plan_name,
+    allowed: ratePlanDetail.allowed,
+    included: ratePlanDetail.included,
+    allowedNotes: ratePlanDetail.allowed_notes,
+    includedNotes: ratePlanDetail.included_notes,
+    maxAdults: ratePlanDetail.max_adults,
+    maxChildren: ratePlanDetail.max_children,
+    maxExtraBeds: ratePlanDetail.max_extra_beds,
+    maxInfants: ratePlanDetail.max_infants
   }
   setValues(formData)
 }

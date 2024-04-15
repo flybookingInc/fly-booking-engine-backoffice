@@ -171,56 +171,56 @@ interface PackageDetail {
 }
 
 export interface RoomTypeFacility {
-  room_facility: RoomFacilityEnum[]
-  room_notes: string[]
   bathroom_facility: RoomBathRoomFacilityEnum[]
   bathroom_notes: string[]
   bedroom_and_laundry_facility: RoomBedroomAndLaundryFacilityEnum[]
   bedroom_and_laundry_notes: string[]
+  entertainment_facility: RoomEntertainmentFacilityEnum[]
+  entertainment_notes: string[]
+  family_facility: RoomFamilyFacilityEnum[]
+  family_notes: string[]
   heating_and_cooling_facility: RoomHeatingAndCoolingFacilityEnum[]
   heating_and_cooling_notes: string[]
-  safety_facility: RoomSafetyFacilityEnum[]
-  safety_notes: string[]
   internet_and_office_facility: RoomInternetAndOfficeFacilityEnum[]
   internet_and_office_notes: string[]
   kitchen_and_dining_facility: RoomKitchenAndDiningFacilityEnum[]
   kitchen_and_dining_notes: string[]
-  family_facility: RoomFamilyFacilityEnum[]
-  family_notes: string[]
-  entertainment_facility: RoomEntertainmentFacilityEnum[]
-  entertainment_notes: string[]
+  room_facility: RoomFacilityEnum[]
+  room_notes: string[]
+  safety_facility: RoomSafetyFacilityEnum[]
+  safety_notes: string[]
 }
 
 export interface RoomTypeDetail {
-  facilities: RoomTypeFacility
-  bath_set_brand: string
+  bath_set_brand: string // 吹風機類型 ex: tescom 2200tw
   beds_included: RoomBed[]
+  facilities: RoomTypeFacility
   floor_type: FloorTypeEnum[] // 地板類型 地毯、塑膠地磚、木質地板、石材地板、大理石地板、瓷磚地板、水泥地板、SPC、其他
-  hairdryer_type: string // 吹風機類型 ex: tescom 2200tw
-  pillow_types: PillowTypeEnum[] // 可選枕頭類型
-  pillow_firmness: PillowFirmnessEnum[] // 可選枕頭軟硬度
+  hairdryer_type: string
+  internet_max_download_speed: number // Mbps
+  internet_max_upload_speed: number // Mbps
   photos: RoomTypePhoto[]
+  pillow_firmness: PillowFirmnessEnum[] // 可選枕頭軟硬度
+  pillow_types: PillowTypeEnum[] // 可選枕頭類型
   pms_room_type_id: string
   room_size: number // square meters
   room_type_id: string
   room_type_name: string
   status: RoomTypeStatusEnum
   tv_casting: TvCastingEnum[] // ex: chromecast, airplay, miracast, dlna, roku, fire tv, android tv, apple tv, tizen, webos, viera cast, netcast, viera connect, smartc
+  tv_content: TvContentEnum[] // ex: flat-screen tv, smart tv, cable tv, satellite tv, pay-per-view channels, streaming service
   tv_resolution: TvResolutionEnum // ex: 4k, 8k, 1080p, 720p, 480p
   tv_size: number // inches
-  tv_content: TvContentEnum[] // ex: flat-screen tv, smart tv, cable tv, satellite tv, pay-per-view channels, streaming service
   view_types: RoomViewCodeEnum[]
-  wifi_specifications: WiFiSpecificationEnum[] // ex: 802.11a, 802.11b, 802.11g, 802.11n, 802.11ac, 802.11ax, 802.11ad, 802.11ay, WiFi 4, WiFi 5, WiFi 6, WiFi 6E
   wifi_availability: WifiAvailabilityEnum[] // ex: wifi, wifi free, wifi paid, wifi free in all areas, wifi free in some areas, wifi paid in all areas, wifi paid in some areas
+  wifi_specifications: WiFiSpecificationEnum[] // ex: 802.11a, 802.11b, 802.11g, 802.11n, 802.11ac, 802.11ax, 802.11ad, 802.11ay, WiFi 4, WiFi 5, WiFi 6, WiFi 6E
   wired_internet_availability: WiredInternetAvailabilityEnum[] // ex: wired_internet_free_in_all_areas, wired_internet_free_in_room etc.
-  internet_max_download_speed: number // Mbps
-  internet_max_upload_speed: number // Mbps
 }
 
 export interface RatePlanDetail {
-  cancellation_policy?: CancellationPolicy[] // 退訂政策，照天數排序，如果沒有退訂政策，則不會回傳此欄位，並使用旅館預設退訂政策
   allowed: RatePlanAllowedEnum[]
   allowed_notes: string[]
+  cancellation_policy?: CancellationPolicy[] // 退訂政策，照天數排序，如果沒有退訂政策，則不會回傳此欄位，並使用旅館預設退訂政策
   included: RatePlanIncludedEnum[]
   included_notes: string[]
   max_adults: number
@@ -229,33 +229,32 @@ export interface RatePlanDetail {
   max_infants: number
   packages: PackageDetail[]
   pms_rate_plan_id: string
-  status: RatePlanStatusEnum
   rate_plan_id: string
   rate_plan_name: string
   room_type_id: string
+  status: RatePlanStatusEnum
 }
 
 // thie interface should be same as api response
 export interface HotelDetails {
-  hotel_id: string
-  property_id: string
-  name: string
-  image: PropertyImage[]
-  description: string
-  currency: PropertyCurrency
-  available_languages: LanguageCodeEnum[]
-  payment: PropertyPayment
-  additional_photos: PropertyAdditionalPhotos[]
-  phone: string
-  email: string
   address: PropertyAddress
-  policy: PropertyPolicy
   amenities: AmenitiesEnum[]
-  services: ServicesEnum[]
+  available_languages: LanguageCodeEnum[]
+  currency: PropertyCurrency
+  description: string
+  email: string
   good_to_know: string[]
-  the_fine_print: string[]
+  image: PropertyImage[]
+  name: string
+  payment: PropertyPayment
+  phone: string
+  pms_property_id: string
+  policy: PropertyPolicy
+  property_id: string
   rate_plan_details: RatePlanDetail[]
   room_type_details: RoomTypeDetail[]
+  services: ServicesEnum[]
+  the_fine_print: string[]
 }
 
 /**

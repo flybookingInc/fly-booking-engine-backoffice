@@ -84,23 +84,13 @@ const MockHotelDetail: HotelDetails = {
     AmenitiesEnum.SMOKING_AREA
   ],
   currency: {
-    currency_code: CurrencyCodeEnum.TWD,
+    currency_code: CurrencyCodeEnum.NTD,
     currency_position: BeforeAfterEnum.BEFORE
   },
   description: '打造一個適合居住的旅館。自在、寧靜為設計目的，低視覺衝擊、日然採光、綠色植栽圍繞。',
   email: 'fooyee.yonghe@gmail.com',
-  hotel_id: '217575',
+  pms_property_id: '217575',
   image: [
-    {
-      image: 'https://example.com',
-      thumb: 'https://example.com'
-    }
-  ],
-  additional_photos: [
-    {
-      image: 'https://example.com',
-      thumb: 'https://example.com'
-    },
     {
       image: 'https://example.com',
       thumb: 'https://example.com'

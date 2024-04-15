@@ -43,7 +43,7 @@ export const MockRatePlanDetails: RatePlanDetail[] = [
     pms_rate_plan_id: '1274032',
     max_children: 1,
     max_extra_beds: 0,
-    status: RatePlanStatusEnum.ACTIVE
+    status: RatePlanStatusEnum.ACTIVED
   },
   {
     allowed: [RatePlanAllowedEnum.CHILDREN, RatePlanAllowedEnum.INFANTS],
@@ -79,7 +79,7 @@ export const MockRatePlanDetails: RatePlanDetail[] = [
 
     max_children: 1,
     max_extra_beds: 0,
-    status: RatePlanStatusEnum.ACTIVE
+    status: RatePlanStatusEnum.ACTIVED
   },
   {
     allowed: [RatePlanAllowedEnum.CHILDREN, RatePlanAllowedEnum.INFANTS],
@@ -115,7 +115,7 @@ export const MockRatePlanDetails: RatePlanDetail[] = [
 
     max_children: 0,
     max_extra_beds: 0,
-    status: RatePlanStatusEnum.ACTIVE
+    status: RatePlanStatusEnum.ACTIVED
   },
   {
     allowed: [RatePlanAllowedEnum.CHILDREN, RatePlanAllowedEnum.INFANTS],
@@ -151,7 +151,7 @@ export const MockRatePlanDetails: RatePlanDetail[] = [
 
     max_children: 0,
     max_extra_beds: 0,
-    status: RatePlanStatusEnum.ACTIVE
+    status: RatePlanStatusEnum.ACTIVED
   },
   {
     allowed: [RatePlanAllowedEnum.CHILDREN, RatePlanAllowedEnum.INFANTS],
@@ -187,7 +187,7 @@ export const MockRatePlanDetails: RatePlanDetail[] = [
 
     max_children: 1,
     max_extra_beds: 0,
-    status: RatePlanStatusEnum.ACTIVE
+    status: RatePlanStatusEnum.ACTIVED
   },
   {
     allowed: [RatePlanAllowedEnum.CHILDREN, RatePlanAllowedEnum.INFANTS],
@@ -237,7 +237,7 @@ export const MockRatePlanDetails: RatePlanDetail[] = [
     max_children: 0,
 
     max_extra_beds: 0,
-    status: RatePlanStatusEnum.ACTIVE
+    status: RatePlanStatusEnum.ACTIVED
   },
   {
     allowed: [RatePlanAllowedEnum.CHILDREN, RatePlanAllowedEnum.INFANTS],
@@ -273,7 +273,7 @@ export const MockRatePlanDetails: RatePlanDetail[] = [
 
     max_children: 0,
     max_extra_beds: 0,
-    status: RatePlanStatusEnum.ACTIVE
+    status: RatePlanStatusEnum.ACTIVED
   },
   {
     allowed: [RatePlanAllowedEnum.CHILDREN, RatePlanAllowedEnum.INFANTS],
@@ -309,7 +309,7 @@ export const MockRatePlanDetails: RatePlanDetail[] = [
 
     max_children: 0,
     max_extra_beds: 0,
-    status: RatePlanStatusEnum.ACTIVE
+    status: RatePlanStatusEnum.ACTIVED
   },
   {
     allowed: [RatePlanAllowedEnum.CHILDREN, RatePlanAllowedEnum.INFANTS],
@@ -359,7 +359,7 @@ export const MockRatePlanDetails: RatePlanDetail[] = [
     pms_rate_plan_id: '1566774',
     max_children: 0,
     max_extra_beds: 0,
-    status: RatePlanStatusEnum.ACTIVE
+    status: RatePlanStatusEnum.ACTIVED
   }
 ]
 
@@ -380,7 +380,6 @@ export default [
     method: 'get',
     response: ({ query }) => {
       const { rate_plan_id } = query
-
       return {
         success: true,
         data: MockRatePlanDetails.find((item) => item.rate_plan_id === rate_plan_id)
@@ -389,6 +388,18 @@ export default [
   },
   {
     url: '/mock/ratePlan/putRatePlan',
+    method: 'put',
+    response: ({ query }) => {
+      const { data } = query
+
+      return {
+        success: true,
+        data: data
+      }
+    }
+  },
+  {
+    url: '/mock/ratePlan/putRatePlans',
     method: 'put',
     response: ({ query }) => {
       const { data } = query
@@ -412,24 +423,23 @@ export default [
     }
   },
   {
-    url: '/mock/ratePlan/uploadPhotos',
-    method: 'post',
-    response: () => {
+    url: '/mock/ratePlan/deleteRatePlan',
+    method: 'delete',
+    response: ({ query }) => {
+      const { rate_plan_id } = query
       return {
         success: true,
-        data: {
-          photoUrls: ['https://picsum.photos/536/354', 'https://picsum.photos/1024/960']
-        }
+        data: MockRatePlanDetails.find((item) => item.rate_plan_id === rate_plan_id)
       }
     }
   },
   {
-    url: '/mock/ratePlan/deletePhoto',
-    method: 'delete',
-    response: (query) => {
+    url: '/mock/ratePlan/getPmsRatePlans',
+    method: 'get',
+    response: () => {
       return {
         success: true,
-        data: query
+        data: MockRatePlanDetails
       }
     }
   }

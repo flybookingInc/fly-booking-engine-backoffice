@@ -597,85 +597,6 @@ export const MockRoomTypeDetails: RoomTypeDetail[] = [
       entertainment_facility: Object.values(RoomEntertainmentFacilityEnum),
       entertainment_notes: []
     },
-    pms_room_type_id: '474094',
-    bath_set_brand: '上山採藥',
-    beds_included: [
-      {
-        code: BedCodeEnum.DOUBLE,
-        quantity: 1
-      }
-    ],
-    floor_type: [FloorTypeEnum.SPC],
-    hairdryer_type: 'TESCOM 2200TW',
-    photos: [
-      {
-        image: 'https://h-img2.cloudbeds.com/217575/xjg3hoyu_featured~~640aaee494d31.jpg',
-        thumb: 'https://h-img2.cloudbeds.com/217575/xjg3hoyu_thumb~~640aaee4d02f7.jpg'
-      },
-      {
-        image: 'https://h-img3.cloudbeds.com/217575/7lfmrgxs_gallery~~640aaf015a0c6.jpg',
-        thumb: 'https://h-img1.cloudbeds.com/217575/7lfmrgxs_thumb~~640aaf019d144.jpg'
-      },
-      {
-        image: 'https://h-img1.cloudbeds.com/217575/dx4zxagv_gallery~~640aaf15698dc.jpg',
-        thumb: 'https://h-img2.cloudbeds.com/217575/dx4zxagv_thumb~~640aaf15a3cd7.jpg'
-      },
-      {
-        image: 'https://h-img3.cloudbeds.com/217575/vo4wxzv9_gallery~~640aaf39f36ca.jpg',
-        thumb: 'https://h-img2.cloudbeds.com/217575/vo4wxzv9_thumb~~640aaf3a447b3.jpg'
-      }
-    ],
-    pillow_types: [PillowTypeEnum.MEMORY_FOAM, PillowTypeEnum.COTTON],
-    pillow_firmness: [PillowFirmnessEnum.SOFT, PillowFirmnessEnum.MEDIUM, PillowFirmnessEnum.FIRM],
-    room_size: 24,
-
-    room_type_id: '431074',
-    room_type_name: 'Standard Double',
-    tv_casting: [TvCastingEnum.CHROMECAST, TvCastingEnum.AIRPLAY, TvCastingEnum.DLNA],
-    tv_content: [
-      TvContentEnum.NETFLIX_APP,
-      TvContentEnum.AMAZON_PRIME_VIDEO_APP,
-      TvContentEnum.APPLE_TV_APP,
-      TvContentEnum.DISNEY_PLUS_APP,
-      TvContentEnum.IQIYI_APP,
-      TvContentEnum.FREE_CABLE_TV,
-      TvContentEnum.FREE_MOVIES_ON_DEMAND,
-      TvContentEnum.FREE_PORN_MOVIES_ON_DEMAND
-    ],
-    tv_resolution: TvResolutionEnum._4K,
-    tv_size: 70,
-    view_types: [RoomViewCodeEnum.CITY_VIEW, RoomViewCodeEnum.PARTIAL_NO_VIEW],
-    internet_max_download_speed: 300,
-    internet_max_upload_speed: 300,
-    wifi_specifications: [WiFiSpecificationEnum.WIFI5, WiFiSpecificationEnum.WIFI4],
-    wifi_availability: [
-      WifiAvailabilityEnum.WIFI_FREE_IN_ROOM,
-      WifiAvailabilityEnum.WIFI_PAID_IN_PUBLIC_AREAS
-    ],
-    status: RoomTypeStatusEnum.ACTIVE
-  },
-  {
-    wired_internet_availability: [WiredInternetAvailabilityEnum.WIRED_INTERNET_FREE_IN_ROOM],
-    facilities: {
-      room_facility: Object.values(RoomFacilityEnum),
-      room_notes: [],
-      bathroom_facility: Object.values(RoomBathRoomFacilityEnum),
-      bathroom_notes: [],
-      bedroom_and_laundry_facility: Object.values(RoomBedroomAndLaundryFacilityEnum),
-      bedroom_and_laundry_notes: [],
-      heating_and_cooling_facility: Object.values(RoomHeatingAndCoolingFacilityEnum),
-      heating_and_cooling_notes: [],
-      safety_facility: Object.values(RoomSafetyFacilityEnum),
-      safety_notes: [],
-      internet_and_office_facility: Object.values(RoomInternetAndOfficeFacilityEnum),
-      internet_and_office_notes: [],
-      kitchen_and_dining_facility: Object.values(RoomKitchenAndDiningFacilityEnum),
-      kitchen_and_dining_notes: [],
-      family_facility: Object.values(RoomFamilyFacilityEnum),
-      family_notes: [],
-      entertainment_facility: Object.values(RoomEntertainmentFacilityEnum),
-      entertainment_notes: []
-    },
     pms_room_type_id: '513155',
     bath_set_brand: '上山採藥',
     beds_included: [
@@ -708,7 +629,7 @@ export const MockRoomTypeDetails: RoomTypeDetail[] = [
     pillow_firmness: [PillowFirmnessEnum.SOFT, PillowFirmnessEnum.MEDIUM, PillowFirmnessEnum.FIRM],
     room_size: 24,
 
-    room_type_id: '431074',
+    room_type_id: '513155',
     room_type_name: 'Standard Double',
     tv_casting: [TvCastingEnum.CHROMECAST, TvCastingEnum.AIRPLAY, TvCastingEnum.DLNA],
     tv_content: [
@@ -772,6 +693,18 @@ export default [
     }
   },
   {
+    url: '/mock/roomType/putRoomTypes',
+    method: 'put',
+    response: ({ query }) => {
+      const { data } = query
+
+      return {
+        success: true,
+        data: data
+      }
+    }
+  },
+  {
     url: '/mock/roomType/postRoomType',
     method: 'post',
     response: ({ query }) => {
@@ -802,6 +735,25 @@ export default [
       return {
         success: true,
         data: query
+      }
+    }
+  },
+  {
+    url: '/mock/roomType/getPmsRoomTypes',
+    method: 'get',
+    response: () => {
+      return {
+        success: true,
+        data: MockRoomTypeDetails
+      }
+    }
+  },
+  {
+    url: '/mock/roomType/deleteRoomType',
+    method: 'delete',
+    response: () => {
+      return {
+        success: true
       }
     }
   }

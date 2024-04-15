@@ -1030,7 +1030,7 @@ const submit = async () => {
       if (formMode === 'add') {
         // create new property
         const data = (await getRoomTypeDetailFromForm()) as Omit<RoomTypeDetail, 'room_type_id'>
-        const res = await postRoomTypeApi({ data: data })
+        const res = await postRoomTypeApi({ data: data, property_id: props.propertyId })
         if (!res.data.success || !res.data.data) {
           ElMessage.error(t('common.createFailed'))
           return
@@ -1044,7 +1044,11 @@ const submit = async () => {
           return
         }
         const data = (await getRoomTypeDetailFromForm()) as RoomTypeDetail
-        const res = await putRoomTypeApi({ data: data, room_type_id: data.room_type_id })
+        const res = await putRoomTypeApi({
+          data: data,
+          room_type_id: data.room_type_id,
+          property_id: props.propertyId
+        })
         if (!res.data.success) {
           ElMessage.error(t('common.editFailed'))
           return

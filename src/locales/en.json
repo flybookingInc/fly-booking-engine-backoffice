@@ -1,5 +1,6 @@
 {
   "common": {
+    "actions": "action",
     "actived": "Opening",
     "add": "Add to",
     "add_bed_type": "New bed type",
@@ -19,12 +20,13 @@
     "confirmDeleteText": "confirm deletion?",
     "createFailed": "Failed to add",
     "createSuccessful": "added successfully",
+    "deactived": "Closed",
     "delCancel": "Cancel",
     "delMessage": "Delete selected data?",
     "delNoData": "Please select the data to be deleted",
     "delOk": "Sure",
     "delSuccess": "successfully deleted",
-    "delWarning": "hint",
+    "delWarning": "confirm delete?",
     "delete": "delete",
     "delete_bed_type": "Delete this bed type",
     "delete_line": "Delete row",
@@ -33,12 +35,14 @@
     "doneLabel": "Finish",
     "download": "download",
     "downloadFailed": "download failed",
+    "edit": "edit",
     "editFailed": "Edit failed",
     "editSuccessful": "Edited successfully",
     "endTimeText": "End Time",
     "expand": "Expand",
+    "fetchDataFailed": "Failed to obtain data",
     "fullscreen": "full screen",
-    "inactived": "Closed",
+    "importSuccessful": "Import successful",
     "inch": "Inches",
     "inputText": "please enter",
     "login": "Log in",
@@ -322,8 +326,8 @@
       "wool": "wool pillow"
     },
     "ratePlanStatus": {
-      "active": "enable",
-      "inactive": "deactivate"
+      "actived": "actived",
+      "deactived": "deactivated"
     },
     "roomTypeStatus": {
       "active": "enable",
@@ -423,6 +427,7 @@
     }
   },
   "error": {
+    "importFailed": "Import failed",
     "loginError": "Login error",
     "loginErrorMessage": "Wrong email or password.",
     "logoutFail": "Logout failed.",
@@ -617,6 +622,7 @@
           "roomSizeLabel": "Room area",
           "roomSizeUnitLabel": "Room area unit",
           "roomTypeIdLabel": "Room type ID",
+          "roomTypeLabel": "Room type",
           "roomTypeNameLabel": "Room type name",
           "routingNumberLabel": "Remittance route number",
           "servicesDividerTitle": "Serve",
@@ -668,7 +674,13 @@
           "RoomFacilityTitle": "equipment",
           "RoomTypePhotoTitle": "Room photos",
           "SafetyFacilityNoteTitle": "Safety Equipment Instructions",
-          "ViewTypeTitle": "Window view"
+          "ViewTypeTitle": "Window view",
+          "maxAdultsLabel": "Maximum number of adults",
+          "maxChildrenLabel": "Maximum number of children",
+          "maxExtraBedsLabel": "Maximum number of extra beds",
+          "maxInfantsLabel": "Maximum number of infants",
+          "ratePlanAllowedNoteTitle": "Explanation of permitted matters",
+          "ratePlanIncludedNoteTitle": "Instructions for inclusion"
         }
       },
       "roomTypeAdd": {
@@ -707,6 +719,8 @@
         },
         "roomTypesList": {
           "add_roomType": "New room type",
+          "importRatePlan": "Import plans from PMS",
+          "import_roomType": "Import room types from PMS",
           "roomTypeName": "Room type name",
           "status": "Room type status",
           "title": "Room type settings"
@@ -753,7 +767,6 @@
   },
   "settings": {
     "property": {
-      "additional_photos": "Attach photos",
       "address1": "First line of address",
       "address2": "Second line of address",
       "amenities": "Conveniences",
@@ -771,6 +784,7 @@
       "logitude": "longitude",
       "name": "Hotel name",
       "phone": "Telephone",
+      "pmsPropertyId": "ID associated with PM",
       "property_id": "Property number",
       "specificDateRule": "Cancellation rules for specific dates",
       "specificDateRuleDescription": "If the specific date rule and the distance rule match at the same time, the specific date rule will take precedence.",

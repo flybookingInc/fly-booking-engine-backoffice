@@ -21,7 +21,8 @@ import {
   PillowFirmnessEnum,
   RatePlanStatusEnum,
   RatePlanAllowedEnum,
-  RatePlanIncludedEnum
+  RatePlanIncludedEnum,
+  CurrencyCodeEnum
 } from '@/types/enums/dataStore'
 import { LanguageCodeEnum } from '@/types/enums/languageCode'
 
@@ -56,14 +57,14 @@ const mockAvailableAmenities: string[] = [
   'spa'
 ]
 
-const mockAvailableCurrencies: { code: string; symbol: string }[] = [
-  { code: 'USD', symbol: '$' },
-  { code: 'CNY', symbol: '¥' },
-  { code: 'JPY', symbol: '¥' },
-  { code: 'EUR', symbol: '€' },
-  { code: 'GBP', symbol: '£' },
-  { code: 'NTD', symbol: 'NT$' }
-]
+// const mockAvailableCurrencies: { code: string; symbol: string }[] = [
+//   { code: 'USD', symbol: '$' },
+//   { code: 'CNY', symbol: '¥' },
+//   { code: 'JPY', symbol: '¥' },
+//   { code: 'EUR', symbol: '€' },
+//   { code: 'GBP', symbol: '£' },
+//   { code: 'NTD', symbol: 'NT$' }
+// ]
 
 const mockAvailableServices: string[] = [
   'luggage_storage',
@@ -129,7 +130,14 @@ export default [
     response: () => {
       return {
         success: true,
-        data: mockAvailableCurrencies
+        data: [
+          CurrencyCodeEnum.NTD,
+          CurrencyCodeEnum.USD,
+          CurrencyCodeEnum.JPY,
+          CurrencyCodeEnum.CNY,
+          CurrencyCodeEnum.EUR,
+          CurrencyCodeEnum.GBP
+        ]
       }
     }
   },

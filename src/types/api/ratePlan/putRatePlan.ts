@@ -1,3 +1,4 @@
+// 更新單個Rate Plan資料
 import { RatePlanDetail } from '@/types/stores/property'
 
 export interface PutRatePlanRequest {

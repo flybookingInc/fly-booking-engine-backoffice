@@ -5,11 +5,22 @@ import { PostRatePlanRequest, PostRatePlanResponse } from '@/types/api/ratePlan/
 import { PutRatePlanRequest, PutRatePlanResponse } from '@/types/api/ratePlan/putRatePlan'
 import { DeleteRatePlanRequest, DeleteRatePlanResponse } from '@/types/api/ratePlan/deleteRatePlan'
 import { GetRatePlansRequest, GetRatePlansResponse } from '@/types/api/ratePlan/getRatePlans'
+import {
+  GetPmsRatePlansRequest,
+  GetPmsRatePlansResponse
+} from '@/types/api/ratePlan/getPmsRatePlans'
+import { PutRatePlansRequest, PutRatePlansResponse } from '@/types/api/ratePlan/putRatePlans'
 
 export const getRatePlansApi = (
   data: GetRatePlansRequest
 ): Promise<AxiosResponse<GetRatePlansResponse>> => {
   return request.get({ url: '/mock/ratePlan/getRatePlans', params: data })
+}
+
+export const getPmsRatePlansApi = (
+  data: GetPmsRatePlansRequest
+): Promise<AxiosResponse<GetPmsRatePlansResponse>> => {
+  return request.get({ url: '/mock/ratePlan/getPmsRatePlans', params: data })
 }
 
 export const getRatePlanApi = (
@@ -28,6 +39,12 @@ export const putRatePlanApi = (
   data: PutRatePlanRequest
 ): Promise<AxiosResponse<PutRatePlanResponse>> => {
   return request.put({ url: '/mock/ratePlan/putRatePlan', data })
+}
+
+export const putRatePlansApi = (
+  data: PutRatePlansRequest
+): Promise<AxiosResponse<PutRatePlansResponse>> => {
+  return request.put({ url: '/mock/ratePlan/putRatePlans', data })
 }
 
 export const deleteRatePlanApi = (

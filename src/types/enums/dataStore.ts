@@ -206,6 +206,7 @@ export enum CurrencyCodeEnum {
   NIO = 'NIO',
   NOK = 'NOK',
   NPR = 'NPR',
+  NTD = 'NTD',
   NZD = 'NZD',
   OMR = 'OMR',
   PAB = 'PAB',
@@ -230,7 +231,6 @@ export enum CurrencyCodeEnum {
   TOP = 'TOP',
   TRY = 'TRY',
   TTD = 'TTD',
-  TWD = 'TWD',
   TZS = 'TZS',
   UAH = 'UAH',
   UGX = 'UGX',
@@ -558,6 +558,7 @@ export const CurrencySymbol = {
   NIO: 'C$',
   NOK: 'kr',
   NPR: 'रू',
+  NTD: 'NT$',
   NZD: 'NZ$',
   OMR: 'ر.ع.',
   PAB: 'B/.',
@@ -582,7 +583,6 @@ export const CurrencySymbol = {
   TOP: 'T$',
   TRY: '₺',
   TTD: 'TT$',
-  TWD: 'NT$',
   TZS: 'TSh',
   UAH: '₴',
   UGX: 'USh',
@@ -644,7 +644,7 @@ export enum WiredInternetAvailabilityEnum {
 
 export enum RoomTypeStatusEnum {
   ACTIVE = 'active',
-  INACTIVE = 'inactive'
+  DEACTIVE = 'deactive'
 }
 
 export enum RoomFacilityEnum {
@@ -798,8 +798,8 @@ export enum RoomEntertainmentFacilityEnum {
 }
 
 export enum RatePlanStatusEnum {
-  ACTIVE = 'active',
-  INACTIVE = 'inactive'
+  ACTIVED = 'actived',
+  DEACTIVED = 'deactived'
 }
 
 export enum RatePlanAllowedEnum {
@@ -812,5 +812,7 @@ export enum RatePlanAllowedEnum {
 export enum RatePlanIncludedEnum {
   BREAKFAST = 'breakfast',
   LUNCH = 'lunch',
-  DINNER = 'dinner'
+  DINNER = 'dinner',
+  PARKING = 'parking',
+  TAX = 'tax'
 }
